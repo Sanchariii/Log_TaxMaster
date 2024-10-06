@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group List</title>
+</head>
+<body>
+    <h1>Group List</h1>
+    <ul>
+        {% for group in groups %}
+            <li>{{ group.name }} - <a href="{% url 'group_update' group.pk %}">Edit</a> - <a href="{% url 'group_delete' group.pk %}">Delete</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'group_create' %}">Create New Group</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Tax Scheme</title>
+</head>
+<body>
+    <h1>New Tax Scheme</h1>
+    <table border="1">
+        <tr>
+            <th>Tax Slab</th>
+            <th>Tax Rate</th>
+        </tr>
+        {% for slab in tax_scheme %}
+        <tr>
+            <td>{{ slab.slab }}</td>
+            <td>{{ slab.rate }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

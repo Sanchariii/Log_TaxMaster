@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surcharge Tax Calculator</title>
+</head>
+<body>
+    <h1>Surcharge Tax Calculator</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Calculate Surcharge</button>
+    </form>
+    <h2>Surcharge Rates</h2>
+    <table border="1">
+        <tr>
+            <th>Income Slab</th>
+            <th>Surcharge Rate</th>
+        </tr>
+        {% for rate in surcharge_rates %}
+        <tr>
+            <td>{{ rate.slab }}</td>
+            <td>{{ rate.rate }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
