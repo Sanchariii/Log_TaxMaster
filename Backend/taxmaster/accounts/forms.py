@@ -24,6 +24,22 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if not first_name.isalpha():
+            raise forms.ValidationError('First name must contain only letters.')
+        if not first_name.isupper():
+            raise forms.ValidationError('First name must start with a capital letter.')
+        return first_name
+    
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if not last_name.isalpha():
+            raise forms.ValidationError('Last name must contain only letters.')
+        if not last_name.isupper():
+            raise forms.ValidationError('Last name must start with a capital letter.')
+        return last_name
+
     
     def clean_password(self):
         password = self.cleaned_data.get('password')

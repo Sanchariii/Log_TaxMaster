@@ -137,7 +137,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 # Load your local image
-favicon_path = "C:/Users/SRay5/OneDrive - Rockwell Automation, Inc/Desktop/TaxMaster/tax_favicon.jpg"
+favicon_path = "C:/Users/SRay5/OneDrive - Rockwell Automation, Inc/Desktop/TaxMaster/Templates/tax_favicon.jpg"
 def get_base64_image(image_path):
    with open(image_path, "rb") as img_file:
        return base64.b64encode(img_file.read()).decode()

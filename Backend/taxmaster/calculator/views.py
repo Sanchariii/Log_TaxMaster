@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .forms import UserDetailsForm, SurchargeForm
 from .models import UserDetails, TaxScheme, SurchargeRate
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+
 
 def calculate_tax(income, deductions, regime):
     taxable_income = income - deductions if regime == 'old' else income
@@ -14,19 +17,26 @@ def calculate_tax(income, deductions, regime):
             tax += (min(taxable_income, upper_limit) - lower_limit) * (slab.rate / 100)
     return tax
 
+
+
+@login_required
 def user_details_view(request):
     if request.method == 'POST':
         form = UserDetailsForm(request.POST)
         if form.is_valid():
-            user_details = form.save()
-            user_details.user = request.user
-            old_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'old')
-            new_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'new')
-            return render(request, 'calculator/results.html', {
-                'user_details': user_details,
-                'old_regime_tax': old_regime_tax,
-                'new_regime_tax': new_regime_tax,
-            })
+            user_details = form.save(commit=False)
+            if request.user.is_authenticated:
+                user_details.user = request.user
+                user_details.save()
+                old_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'old')
+                new_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'new')
+                return render(request, 'calculator/results.html', {
+                    'user_details': user_details,
+                    'old_regime_tax': old_regime_tax,
+                    'new_regime_tax': new_regime_tax,
+                })
+            else:
+                return HttpResponseForbidden("You must be logged in to submit details.")
     else:
         form = UserDetailsForm()
     return render(request, 'calculator/user_details.html', {'form': form})

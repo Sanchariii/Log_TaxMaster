@@ -12,7 +12,7 @@ class UserDetails(models.Model):
     incometype = models.CharField(max_length=255, null = True)
 
     def __str__(self):
-        return self.username
+        return self.user.username if self.user else "No User"
     
     class Meta:
         verbose_name_plural = "User Details"
@@ -45,7 +45,7 @@ class TaxCalculation(models.Model):
 @receiver(post_save, sender=UserDetails)
 def update_details_fields(sender, instance, created, **kwargs):
     if created:
-        instance.user = instance.user.username
+        # instance.user = instance.user.username
         instance.save()
 
 

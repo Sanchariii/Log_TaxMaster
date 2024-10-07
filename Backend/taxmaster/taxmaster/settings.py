@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'calculator',
+    # 'streamlit_django_integration',
 ]
 
 MIDDLEWARE = [
