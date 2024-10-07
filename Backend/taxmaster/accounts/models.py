@@ -21,8 +21,11 @@ class User(AbstractUser):
         related_name='account_user_permissions',  # Custom related name to avoid clash
         blank=True,
         help_text='Specific permissions for this user.',
+     
         verbose_name='user permissions',
     )
+    
+    
 # Base = declarative_base()
 
 # class User(Base):
@@ -33,5 +36,5 @@ class User(AbstractUser):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL) 
 def createAuthToken(sender, instance, created, **kwargs):
-    if created:
+    if created and instance.user:
         Token.objects.create(user = instance)
