@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'calculator',
+    'corsheaders',
     # 'streamlit_django_integration',
 ]
 
@@ -53,9 +54,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'taxmaster.urls'
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Or specify allowed origins
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8501",  # Streamlit default port
+#     "http://your-frontend-domain.com",
+# ]
 
 TEMPLATES = [
     {
