@@ -80,20 +80,34 @@ WSGI_APPLICATION = 'taxmaster.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+# Sanchariiiii
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'TaxMaster',
+#         'USER': '',  # Leave empty if using trusted connection
+#         'PASSWORD': '',  # Leave empty if using trusted connection
+#         'HOST': 'D7KJ7G3',  # Your SQL Server host
+#         'PORT': '',  # Default port can be left empty
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',
+#             'trusted_connection': 'yes',  # Use 'yes' for Windows Authentication
+#         },
+#     }
+# }
+
+# HIM
+
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'TaxMaster',
-        'USER': '',  # Leave empty if using trusted connection
-        'PASSWORD': '',  # Leave empty if using trusted connection
-        'HOST': 'D7KJ7G3',  # Your SQL Server host
-        'PORT': '',  # Default port can be left empty
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'trusted_connection': 'yes',  # Use 'yes' for Windows Authentication
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
