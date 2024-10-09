@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'calculator',
+    'appointment',
 ]
 
 MIDDLEWARE = [

@@ -11,5 +11,10 @@
     <p>Deductions: {{ user_details.deductions }}</p>
     <p>Old Regime Tax: {{ old_regime_tax }}</p>
     <p>New Regime Tax: {{ new_regime_tax }}</p>
+    <form action="{% url 'print_pdf' %}" method="get">
+        <input type="hidden" name="user_details_id" value="{{ user_details.id }}">
+        <button type="submit">Print as PDF</button>
+    </form>
+    
 </body>
 </html>

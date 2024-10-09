@@ -3,16 +3,18 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 class UserDetails(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     age = models.IntegerField()
     income = models.FloatField()
     deductions = models.FloatField()
     incometype = models.CharField(max_length=255, null = True)
+    month = models.DateField()
 
     def __str__(self):
-        return self.username if self.user else "No User"
+        return f"{self.user.username}'s tax details for {self.month.strftime('%B %Y')}"
     
     class Meta:
         verbose_name_plural = "User Details"
@@ -51,5 +53,16 @@ def update_details_fields(sender, instance, created, **kwargs):
         else:
             # Handle the case where user is None
             print("UserDetails instance has no associated user.")
+
+
+class UserRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requests")
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
