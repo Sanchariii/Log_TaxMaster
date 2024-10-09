@@ -14,15 +14,12 @@ class UserDetails(models.Model):
     month = models.DateField()
 
     def __str__(self):
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         return self.user.username if self.user else "No User"
-=======
-        return self.username if self.user else "No User"
->>>>>>> 515f9f2e029175813fa0bf1a72985dc812ec4efa
-=======
-        return f"{self.user.username}'s tax details for {self.month.strftime('%B %Y')}"
->>>>>>> ea72979f3fafaf65c8c7f5d2c0a04584d420c221
+
+
+        # return f"{self.user.username}'s tax details for {self.month.strftime('%B %Y')}"
+
     
     class Meta:
         verbose_name_plural = "User Details"
@@ -54,18 +51,13 @@ class TaxCalculation(models.Model):
 
 def update_details_fields(sender, instance, created, **kwargs):
     if created:
-<<<<<<< HEAD
-        # instance.user = instance.user.username
-        instance.save()
-=======
-        # Check if the user exists before accessing the username
         if instance.user:
             # You can perform actions here that depend on the user
             print(f"User: {instance.user.username}")
         else:
             # Handle the case where user is None
             print("UserDetails instance has no associated user.")
->>>>>>> 515f9f2e029175813fa0bf1a72985dc812ec4efa
+
 
 
 
