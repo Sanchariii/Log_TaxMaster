@@ -1,0 +1,19 @@
+<h2>Check Availability</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Check</button>
+</form>
+
+{% if available_slots is not None %}
+    <h3>Available Slots</h3>
+    {% if available_slots %}
+        <ul>
+            {% for slot in available_slots %}
+                <li>{{ slot.appointment_date }} - Advisor: {{ slot.tax_advisor }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No slots available for this date.</p>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tax Calculation Result</title>
+</head>
+<body>
+    <h2>Tax Calculation for {{ user_details.user.username }}</h2>
+    <p><strong>Income:</strong> {{ user_details.income }}</p>
+    <p><strong>Deductions:</strong> {{ user_details.deductions }}</p>
+    <p><strong>Old Regime Tax:</strong> ₹{{ old_regime_tax }}</p>
+    <p><strong>New Regime Tax:</strong> ₹{{ new_regime_tax }}</p>
+</body>
+</html>

@@ -1,9 +1,16 @@
-from django.shortcuts import render
 from .forms import UserDetailsForm, SurchargeForm
 from .models import UserDetails, TaxScheme, SurchargeRate
+<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
+=======
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+from .models import UserDetails, TaxCalculation
+from django.template.loader import get_template
+>>>>>>> ea72979f3fafaf65c8c7f5d2c0a04584d420c221
 
 def clean_and_convert(value):
     """Cleans and converts a given string value to float."""
@@ -119,5 +126,35 @@ def surcharge_tax_view(request):
             })
     else:
         form = SurchargeForm()
-
     return render(request, 'calculator/surcharge_tax.html', {'form': form, 'surcharge_rates': surcharge_rates})
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    response = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+def print_pdf_view(request):
+    user_details_id = request.GET.get('user_details_id')
+    user_details = get_object_or_404(UserDetails, id=user_details_id)
+    
+    # Fetch tax calculation results (you might already have this stored)
+    old_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'old')
+    new_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'new')
+
+    context = {
+        'user_details': user_details,
+        'old_regime_tax': old_regime_tax,
+        'new_regime_tax': new_regime_tax,
+    }
+    
+    # Render as PDF
+    pdf = render_to_pdf('calculator/results_pdf.html', context)
+    
+    return pdf
+
+
+

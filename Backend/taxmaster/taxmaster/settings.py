@@ -42,8 +42,12 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'calculator',
+<<<<<<< HEAD
     'corsheaders',
     # 'streamlit_django_integration',
+=======
+    'appointment',
+>>>>>>> ea72979f3fafaf65c8c7f5d2c0a04584d420c221
 ]
 
 MIDDLEWARE = [
