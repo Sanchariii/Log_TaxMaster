@@ -55,14 +55,6 @@ def update_details_fields(sender, instance, created, **kwargs):
             print("UserDetails instance has no associated user.")
 
 
-class UserRequest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requests")
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.EmailField(unique=True)
-    approved = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
 

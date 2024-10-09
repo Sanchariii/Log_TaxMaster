@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Appointment
-from .forms import AppointmentForm, AvailabilityCheckForm
+from .forms import AppointmentForm, AvailabilityCheckForm, AppointmentRequestForm
 from calculator.models import UserRequest
 
 # View for checking advisor availability
@@ -87,3 +87,44 @@ def create_appointment_view(request, user_request_id):
         'user_request': user_request,
         'tax_advisors': tax_advisors,
     })
+    
+    
+def request_appointment(request, advisor_id):
+    if request.method == 'POST':
+        form = AppointmentRequestForm(request.POST)
+        if form.is_valid():
+            requested_date = form.cleaned_data['requested_date']
+            advisor = User.objects.get(id=advisor_id)
+            UserRequest.objects.create(user=request.user, tax_advisor=advisor, requested_date=requested_date)
+            return redirect('appointment_request_sent')
+
+    else:
+        form = AppointmentRequestForm()
+
+    return render(request, 'appointments/request_appointment.html', {'form': form})
+
+
+def manage_requests_view(request):
+    if request.user.groups.filter(name='Tax Advisor').exists():
+        requests = UserRequest.objects.filter(tax_advisor=request.user, approved=False)
+        return render(request, 'appointments/manage_requests.html', {'requests': requests})
+    else:
+        return redirect('not_authorized')
+
+def approve_request(request, request_id):
+    user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
+    user_request.approved = True
+    user_request.save()
+    return redirect('manage_requests')
+
+def reject_request(request, request_id):
+    user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
+    user_request.delete()
+    return redirect('manage_requests')
+
+def advisor_appointments_view(request):
+    if request.user.groups.filter(name='Tax Advisor').exists():
+        approved_users = UserRequest.objects.filter(tax_advisor=request.user, approved=True)
+        return render(request, 'appointments/advisor_appointments.html', {'approved_users': approved_users})
+    else:
+        return redirect('not_authorized')
