@@ -7,13 +7,13 @@ class Appointment(models.Model):
     user_request = models.ForeignKey(
         UserRequest, 
         on_delete=models.CASCADE, 
-        related_name="user_request_appointments",  # Unique related_name,
-        null = True
+        related_name="user_request_appointments",  
+        null=True
     )
     tax_advisor = models.ForeignKey(
         User, 
         on_delete=models.CASCADE, 
-        related_name="advisor_appointments"  # Unique related_name
+        related_name="advisor_appointments"
     )
     appointment_date = models.DateTimeField()
     notes = models.TextField(blank=True, null=True)

@@ -20,3 +20,19 @@ class AvailabilityCheckForm(forms.Form):
         widget=forms.DateInput(attrs={'type': 'date'}),
         label="Select Date"
     )
+
+
+class AppointmentRequestForm(forms.ModelForm):
+    requested_date = forms.DateTimeField(
+        widget=forms.TextInput(attrs={'type': 'datetime-local'}),  # HTML5 input type for date and time
+        label='Requested Appointment Date'
+    )
+    notes = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4}),
+        required=False,
+        label='Additional Notes (Optional)'
+    )
+
+    class Meta:
+        model = Appointment
+        fields = ['requested_date', 'notes']

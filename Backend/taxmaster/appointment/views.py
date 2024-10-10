@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Appointment
 from .forms import AppointmentForm, AvailabilityCheckForm, AppointmentRequestForm
-from calculator.models import UserRequest
+from advisor.models import UserRequest
 
 # View for checking advisor availability
 from django.contrib.auth.decorators import login_required
@@ -90,19 +90,25 @@ def create_appointment_view(request, user_request_id):
     
     
 def request_appointment(request, advisor_id):
+    advisor = User.objects.get(id=advisor_id)
+
     if request.method == 'POST':
         form = AppointmentRequestForm(request.POST)
         if form.is_valid():
-            requested_date = form.cleaned_data['requested_date']
-            advisor = User.objects.get(id=advisor_id)
-            UserRequest.objects.create(user=request.user, tax_advisor=advisor, requested_date=requested_date)
-            return redirect('appointment_request_sent')
+            appointment = form.save(commit=False)
+            # Set the requesting user and the tax advisor
+            appointment.tax_advisor = advisor
+            appointment.user_request = UserRequest.objects.create(
+                user=request.user,
+                tax_advisor=advisor
+            )
+            appointment.save()
+            return redirect('appointment_request_sent')  # Redirect to success page
 
     else:
         form = AppointmentRequestForm()
 
-    return render(request, 'appointments/request_appointment.html', {'form': form})
-
+    return render(request, 'appointments/request_appointment.html', {'form': form, 'advisor': advisor})
 
 def manage_requests_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():

@@ -7,6 +7,8 @@ urlpatterns = [
     path('calculator/', include('calculator.urls')),
     path('accounts/', include('accounts.urls')),
     path('appointment/', include('appointment.urls')),
+    path('advisor/', include('advisor.urls')),
+    path('base/', include('base.urls')),
 ]
 
 

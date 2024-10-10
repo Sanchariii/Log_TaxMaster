@@ -36,5 +36,9 @@ class User(AbstractUser):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL) 
 def createAuthToken(sender, instance, created, **kwargs):
-    if created and instance.user:
+    if created:
         Token.objects.create(user = instance)
+        
+        
+        
+

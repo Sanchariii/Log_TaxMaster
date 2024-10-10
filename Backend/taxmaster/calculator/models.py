@@ -11,7 +11,7 @@ class UserDetails(models.Model):
     income = models.FloatField()
     deductions = models.FloatField()
     incometype = models.CharField(max_length=255, null = True)
-    month = models.DateField()
+    month = models.DateField(null=True)
 
     def __str__(self):
 

@@ -1,21 +1,22 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Task, Appointment
-# from streamlit_django_integration import st_django_component
-
-def hello_world(request):
-    return HttpResponse("Hello, World!")
+from appointment.models import Appointment
+from django.contrib.auth.decorators import login_required, user_passes_test
+from accounts.views import is_User_or_Advisor
+from advisor.models import UserRequest
+from django.db import models
 
 @login_required
 @user_passes_test(is_User_or_Advisor)
 def dashboard(request):
-    future_tasks = Task.objects.filter(due_date__gte=timezone.now(), assigned_to=request.user)
-    future_appointments = Appointment.objects.filter(start_time__gte=timezone.now(), attendees=request.user)
+    # Fetch the appointments either as a user or as a tax advisor
+    future_appointments = Appointment.objects.filter(
+        appointment_date__gte=timezone.now()
+    ).filter(models.Q(user_request__user=request.user) | models.Q(tax_advisor=request.user))
 
     context = {
-        'future_tasks': future_tasks,
         'future_appointments': future_appointments
     }
 
-    return render(request, 'dashboard.html', context)
+    return render(request, 'base/dashboard.html', context)

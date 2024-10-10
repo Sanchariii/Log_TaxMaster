@@ -1,16 +1,11 @@
 from .forms import UserDetailsForm, SurchargeForm
 from .models import UserDetails, TaxScheme, SurchargeRate
-<<<<<<< HEAD
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
-
-=======
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from .models import UserDetails, TaxCalculation
 from django.template.loader import get_template
->>>>>>> ea72979f3fafaf65c8c7f5d2c0a04584d420c221
+from django.contrib.auth.decorators import login_required
 
 def clean_and_convert(value):
     """Cleans and converts a given string value to float."""
@@ -50,28 +45,11 @@ def calculate_tax(income, deductions, regime):
     
     return tax
 
-
-
 @login_required
 def user_details_view(request):
     if request.method == 'POST':
         form = UserDetailsForm(request.POST)
         if form.is_valid():
-<<<<<<< HEAD
-            user_details = form.save(commit=False)
-            if request.user.is_authenticated:
-                user_details.user = request.user
-                user_details.save()
-                old_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'old')
-                new_regime_tax = calculate_tax(user_details.income, user_details.deductions, 'new')
-                return render(request, 'calculator/results.html', {
-                    'user_details': user_details,
-                    'old_regime_tax': old_regime_tax,
-                    'new_regime_tax': new_regime_tax,
-                })
-            else:
-                return HttpResponseForbidden("You must be logged in to submit details.")
-=======
             user_details = form.save()
             user_details.user = request.user
 
@@ -89,7 +67,6 @@ def user_details_view(request):
                 'old_regime_tax': old_regime_tax,
                 'new_regime_tax': new_regime_tax,
             })
->>>>>>> 515f9f2e029175813fa0bf1a72985dc812ec4efa
     else:
         form = UserDetailsForm()
     return render(request, 'calculator/user_details.html', {'form': form})

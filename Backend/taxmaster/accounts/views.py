@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from datetime import datetime, timedelta
 from django.utils.html import strip_tags
 from django.utils.encoding import force_bytes
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, User
 from django.core.exceptions import ValidationError
 from django.utils.http import urlsafe_base64_encode
@@ -97,11 +98,11 @@ class CustomLoginView(View):
         if user.is_superuser:
             next_url = '/calculator/'
         elif user.groups.filter(name='TaxAdvisor').exists():
-            next_url = '/dash/'
+            next_url = '/base/'
         elif user.groups.filter(name='Individual User').exists():
-            next_url = '/dash/'
+            next_url = '/base/'
         else:
-            next_url = '/'
+            next_url = '/calculator/'
         return redirect(next_url)
 
     def generate_otp(self):
@@ -154,39 +155,33 @@ def group_list_Admin(request):
 
 
 ############################# Signup ######################################################
+User = get_user_model()
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        email = form.data.get('email')
-
-        if User.objects.filter(email=email).exists():
-            form.add_error('email', 'A user with this email already exists.')
-        elif form.is_valid():
-            user = form.save(commit=False)
-            password = form.cleaned_data.get('password1')
-            user.set_password(password)
-            user.save()
         
-
-            username = form.cleaned_data.get('username')
+        if form.is_valid():
+            email = form.cleaned_data.get('email')  # Now safe to access cleaned_data
             
+            if User.objects.filter(email=email).exists():
+                form.add_error('email', 'A user with this email already exists.')
+            else:
+                user = form.save(commit=False)
+                password = form.cleaned_data.get('password1')
+                user.set_password(password)  # Set the password
+                user.save()  # Save the user instance
+                
+                username = form.cleaned_data.get('username')
+            
+                return redirect('user_details')  # Make sure user_details view is set up correctly
+        else:
+            messages.error(request, 'Please correct the errors below.')
 
-            # html_message = render_to_string(
-            #     'accounts/email_template.html',
-            #     {
-            #         'first_name': user.first_name,
-            #         'username': username,
-            #         'password': password,
-            #         'support_email': 'raysanchari930@gmail.com',
-            #         'login_url': 'http://localhost:8000/login/',
-            #     }
-            # )
-
-            return redirect('user_details')
     else:
         form = SignUpForm()
 
-    return render(request, 'accounts/signup.html', {'form': form}) 
+    return render(request, 'accounts/signup.html', {'form': form})
 
 ################################## Logout View ############################################################
 @login_required
