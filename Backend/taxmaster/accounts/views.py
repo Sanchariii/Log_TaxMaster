@@ -98,9 +98,9 @@ class CustomLoginView(View):
         if user.is_superuser:
             next_url = '/calculator/'
         elif user.groups.filter(name='TaxAdvisor').exists():
-            next_url = '/base/'
+            next_url = '/calculator/'
         elif user.groups.filter(name='Individual User').exists():
-            next_url = '/base/'
+            next_url = '/calculator/'
         else:
             next_url = '/calculator/'
         return redirect(next_url)
@@ -152,6 +152,25 @@ def group_list_Admin(request):
     groups = Group.objects.all()
     return render(request, 'accounts/group_list.html', {'groups': groups})
 
+def group_selection(request):
+    if request.method == 'POST':
+        form = GroupSelectionForm(request.POST)
+        if form.is_valid():
+            selected_group = form.cleaned_data['group']
+            user = request.user
+            user.groups.clear()  # Clear any existing groups
+            selected_group.user_set.add(user)  # Add the user to the selected group
+
+            # Redirect based on the group the user selected
+            if selected_group.name == 'Tax Advisor':
+                return redirect('appointment/user-details/')
+            elif selected_group.name == 'Individual User':
+                return redirect('appointment/user-details/')
+    else:
+        form = GroupSelectionForm()
+
+    return render(request, 'accounts/group_selection.html', {'form': form})
+
 
 
 ############################# Signup ######################################################
@@ -162,19 +181,21 @@ def signup(request):
         form = SignUpForm(request.POST)
         
         if form.is_valid():
-            email = form.cleaned_data.get('email')  # Now safe to access cleaned_data
+            email = form.cleaned_data.get('email')
             
             if User.objects.filter(email=email).exists():
                 form.add_error('email', 'A user with this email already exists.')
             else:
                 user = form.save(commit=False)
                 password = form.cleaned_data.get('password1')
-                user.set_password(password)  # Set the password
-                user.save()  # Save the user instance
+                user.set_password(password)
+                user.save()
                 
-                username = form.cleaned_data.get('username')
-            
-                return redirect('user_details')  # Make sure user_details view is set up correctly
+                # Automatically log in the user after signup
+                auth_login(request, user)
+
+                # Redirect to the group selection page
+                return redirect('group_selection')
         else:
             messages.error(request, 'Please correct the errors below.')
 

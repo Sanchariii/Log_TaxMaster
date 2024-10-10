@@ -2,13 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tax Calculation Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+    </style>
 </head>
 <body>
-    <h2>Tax Calculation for {{ user_details.user.username }}</h2>
-    <p><strong>Income:</strong> {{ user_details.income }}</p>
-    <p><strong>Deductions:</strong> {{ user_details.deductions }}</p>
-    <p><strong>Old Regime Tax:</strong> ₹{{ old_regime_tax }}</p>
-    <p><strong>New Regime Tax:</strong> ₹{{ new_regime_tax }}</p>
+    <h1>Tax Calculation Result</h1>
+
+    <!-- Display income, deductions, regime, and total tax -->
+    <p><strong>Income:</strong> ₹{{ income }}</p>
+    <p><strong>Deductions:</strong> ₹{{ deductions }}</p>
+    <p><strong>Old Tax Regime Tax:</strong> ₹{{ old_tax }}</p>
+    <p><strong>New Tax Regime Tax:</strong> ₹{{ new_tax }}</p>
+
+    {% if user_details %}
+        <p><strong>User:</strong> {{ user_details.user.username }}</p>
+        <p><strong>Income Type:</strong> {{ user_details.incometype }}</p>
+        <p><strong>Age:</strong> {{ user_details.age }}</p>
+    {% endif %}
 </body>
 </html>

@@ -1,19 +1,26 @@
-<h2>Check Availability</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Check</button>
-</form>
+<div class="container">
+    <h2>Check Availability</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.advisor.label_tag }}<br>
+            {{ form.advisor }}
+        </div>
+        <div class="form-group">
+            {{ form.date.label_tag }}<br>
+            {{ form.date }}
+        </div>
+        <button type="submit" class="btn btn-primary">Check Availability</button>
+    </form>
 
-{% if available_slots is not None %}
-    <h3>Available Slots</h3>
     {% if available_slots %}
+        <h3>Available Time Slots:</h3>
         <ul>
             {% for slot in available_slots %}
-                <li>{{ slot.appointment_date }} - Advisor: {{ slot.tax_advisor }}</li>
+                <li>{{ slot.strftime("%H:%M") }}</li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No slots available for this date.</p>
+        <p>No available slots for this date.</p>
     {% endif %}
-{% endif %}
+</div>

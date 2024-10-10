@@ -4,13 +4,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.password_validation import validate_password
 
 
-class GroupSelectionForm(forms.Form):
-    group = forms.ModelChoiceField(queryset=Group.objects.all(), empty_label="Select Group", required=True)
+from django import forms
+from django.contrib.auth.models import Group
 
-# class GroupForm(forms.ModelForm):
-#     class Meta:
-#         model = Group
-#         fields = ['name']
+class GroupSelectionForm(forms.Form):
+    group = forms.ModelChoiceField(
+        queryset=Group.objects.filter(name__in=['Tax Advisor', 'Individual User']),
+        widget=forms.RadioSelect,
+        empty_label=None,
+        label="Select Your Role"
+    )
+
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text='Required. Inform a valid email address.')

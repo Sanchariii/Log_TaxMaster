@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to TaxMaster</h1>
+    <p>Calculate your taxes easily with our calculator!</p>
+
+    <div>
+        <a href="{% url 'signup' %}">
+            <button>Sign Up</button>
+        </a>
+        <a href="{% url 'login' %}">
+            <button>Log In</button>
+        </a>
+    </div>
+
+    <a href="{% url 'tax_calculator' %}">Proceed to Tax Calculator</a>
+</body>
+</html>

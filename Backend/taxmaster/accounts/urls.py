@@ -10,6 +10,7 @@ from .views import (
     forgot_password,
     verify_otp,
     password_reset_confirm,
+    group_selection
 )
 
 urlpatterns = [
@@ -23,4 +24,5 @@ urlpatterns = [
     path('forgot_password/', forgot_password, name='forgot_password'),
     path('verify_otp/', verify_otp, name='verify_otp'),
     path('password_reset_confirm/', password_reset_confirm, name='password_reset_confirm'),
+    path('group-selection/', group_selection, name='group_selection'),
 ]

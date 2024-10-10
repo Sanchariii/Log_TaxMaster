@@ -6,5 +6,8 @@ urlpatterns = [
     path('book-appointment/', views.book_appointment, name='book_appointment'),
     path('available-dates/', views.available_dates_view, name='available_dates'),
     path('request-appointment/<int:advisor_id>/', views.request_appointment, name='request_appointment'),
+    path('request-already-submitted/', views.appointment_request_sent, name='appointment_request_already_submitted'),
+    path('approved/', views.approved_requests, name='approved_requests'),
+    path('appointment_request_sent/', views.appointment_request_sent, name='appointment_request_sent')
 ]
 
