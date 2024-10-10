@@ -1,20 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tax Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculation Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        a, button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a:hover, button:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Tax Calculation Results</h1>
-    <p>Name: {{ user_details.name }}</p>
-    <p>Age: {{ user_details.age }}</p>
-    <p>Income: {{ user_details.income }}</p>
-    <p>Deductions: {{ user_details.deductions }}</p>
-    <p>Old Regime Tax: {{ old_regime_tax }}</p>
-    <p>New Regime Tax: {{ new_regime_tax }}</p>
-    <form action="{% url 'print_pdf' %}" method="get">
+    <h1>Tax Calculation Result</h1>
+
+    <!-- Display income, deductions, regime, and total tax -->
+    <p><strong>Income:</strong> ₹{{ form.cleaned_data.income }}</p>
+    <p><strong>Deductions:</strong> ₹{{ form.cleaned_data.deductions }}</p>
+    <p><strong>Old Tax Regime Tax:</strong> ₹{{ old_tax }}</p>
+    <p><strong>New Tax Regime Tax:</strong> ₹{{ new_tax }}</p>
+
+    {% if user_details %}
+        <p><strong>User:</strong> {{ user_details.user.username }}</p>
+        <p><strong>Income Type:</strong> {{ user_details.incometype }}</p>
+        <p><strong>Age:</strong> {{ user_details.age }}</p>
+    {% endif %}
+
+    <!-- Link to calculate again -->
+    <a href="{% url 'tax_calculator' %}">Calculate Again</a>
+
+    <!-- Button to print the result as PDF -->
+    <form method="POST" action="{% url 'print_pdf' %}">
+        {% csrf_token %}
         <input type="hidden" name="user_details_id" value="{{ user_details.id }}">
-        <button type="submit">Print as PDF</button>
+        <input type="hidden" name="income" value="{{ income }}">
+        <input type="hidden" name="deductions" value="{{ deductions }}">
+        <button type="submit">Print in PDF</button>
     </form>
     
+    <!-- Display additional information for logged-in users -->
+    {% if user.is_authenticated %}
+    <h2>Suggestions for Old Tax Regime:</h2>
+    <ul>
+        {% for suggestion in old_suggestions %}
+            <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Suggestions for New Tax Regime:</h2>
+    <ul>
+        {% for suggestion in new_suggestions %}
+            <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
 </body>
 </html>

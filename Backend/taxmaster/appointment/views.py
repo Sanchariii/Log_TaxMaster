@@ -3,11 +3,11 @@ from django.utils import timezone
 from .models import Appointment
 from .forms import AppointmentForm, AvailabilityCheckForm, AppointmentRequestForm
 from advisor.models import UserRequest
-
-# View for checking advisor availability
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.contrib.auth.models import User
 
 
@@ -29,15 +29,30 @@ def available_dates_view(request):
         'available_dates': available_dates,
     })
 
+
 def check_availability(request):
-    available_slots = None
+    available_slots = []
     if request.method == "POST":
         form = AvailabilityCheckForm(request.POST)
         if form.is_valid():
             advisor = form.cleaned_data['advisor']
             date = form.cleaned_data['date']
-            # Query for appointments for the advisor on the given date
-            available_slots = Appointment.objects.filter(tax_advisor=advisor, appointment_date__date=date)
+            # Fetch all appointments for the advisor on the selected date
+            booked_slots = Appointment.objects.filter(
+                tax_advisor=advisor,
+                appointment_date__date=date
+            ).values_list('appointment_time', flat=True)  # Adjust field name if needed
+
+            # Define your working hours for the advisor
+            start_time = timezone.datetime.combine(date, timezone.datetime.min.time())
+            end_time = timezone.datetime.combine(date, timezone.datetime.max.time())
+            time_slots = [
+                start_time + timedelta(hours=i) for i in range(9, 17)  # Example: 9 AM to 5 PM
+            ]
+
+            # Filter available time slots by removing booked slots
+            available_slots = [slot for slot in time_slots if slot not in booked_slots]
+
     else:
         form = AvailabilityCheckForm()
 
@@ -45,7 +60,7 @@ def check_availability(request):
         'form': form,
         'available_slots': available_slots,
     })
-
+    
 # View for booking an appointment
 def book_appointment(request):
     if request.method == 'POST':
@@ -88,40 +103,90 @@ def create_appointment_view(request, user_request_id):
         'tax_advisors': tax_advisors,
     })
     
+def get_available_dates(advisor):
+    today = timezone.now().date()
+    # Example logic to get available dates for the next 30 days
+    available_dates = []
+    for i in range(30):  # Checking the next 30 days
+        date_to_check = today + timezone.timedelta(days=i)
+        # Check if there are any appointments for this date
+        appointments = Appointment.objects.filter(tax_advisor=advisor, appointment_date__date=date_to_check)
+        if not appointments.exists():  # If there are no appointments, this date is available
+            available_dates.append(date_to_check)
+    return available_dates    
+
     
 def request_appointment(request, advisor_id):
-    advisor = User.objects.get(id=advisor_id)
+    advisor = get_object_or_404(User, id=advisor_id)
+    available_dates = get_available_dates(advisor)
+    future_dates = [date for date in available_dates if date > timezone.now().date()]
+
+    form = AppointmentRequestForm(request.POST or None)
 
     if request.method == 'POST':
-        form = AppointmentRequestForm(request.POST)
         if form.is_valid():
+            print("Form is valid")
             appointment = form.save(commit=False)
-            # Set the requesting user and the tax advisor
             appointment.tax_advisor = advisor
-            appointment.user_request = UserRequest.objects.create(
+            appointment.appointment_date = form.cleaned_data['requested_date']  # Assign the requested date
+
+            # Check for existing user request based on email
+
+            # Create a new user request
+            UserRequest.objects.create(
                 user=request.user,
-                tax_advisor=advisor
+                tax_advisor=advisor,
+                first_name=request.user.first_name,
+                last_name=request.user.last_name,
+                email=request.user.email,
             )
+
             appointment.save()
-            return redirect('appointment_request_sent')  # Redirect to success page
+            print("Appointment saved, redirecting...")
+            return redirect('appointment_request_sent')  # Ensure this URL name is defined
+        else:
+            print("Form errors:", form.errors)  # Print validation errors
 
-    else:
-        form = AppointmentRequestForm()
+    return render(request, 'appointment/request_appointment.html', {
+        'form': form,
+        'advisor': advisor,
+        'available_dates': future_dates,
+    })
+    
+def appointment_request_already_submitted(request):
+    return render(request, 'appointment/appointment_request_already_submitted.html')
 
-    return render(request, 'appointments/request_appointment.html', {'form': form, 'advisor': advisor})
 
+def appointment_request_sent(request):
+    return render(request, 'appointment/appointment_request_sent.html')
+    
 def manage_requests_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():
         requests = UserRequest.objects.filter(tax_advisor=request.user, approved=False)
-        return render(request, 'appointments/manage_requests.html', {'requests': requests})
+        return render(request, 'appointment/manage_requests.html', {'requests': requests})
     else:
         return redirect('not_authorized')
+
+def approved_requests(request):
+    requests = UserRequest.objects.filter(user=request.user, approved=True)
+    return render(request, 'appointment/approved_requests.html', {'requests': requests})
 
 def approve_request(request, request_id):
     user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
     user_request.approved = True
     user_request.save()
+
+    send_mail(
+            'Your Appointment Request Has Been Approved',
+            f'Hello {user_request.first_name},\n\nYour appointment request with {user_request.tax_advisor.first_name} {user_request.tax_advisor.last_name} has been approved. Please check your account for more details.',
+            settings.DEFAULT_FROM_EMAIL,
+            [user_request.email],
+            fail_silently=False,
+        )
+
     return redirect('manage_requests')
+
+    
 
 def reject_request(request, request_id):
     user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)

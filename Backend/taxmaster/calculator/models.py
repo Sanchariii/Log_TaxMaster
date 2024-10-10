@@ -4,25 +4,19 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+from base.models import UserDetails
 
-class UserDetails(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    age = models.IntegerField()
-    income = models.FloatField()
-    deductions = models.FloatField()
-    incometype = models.CharField(max_length=255, null = True)
-    month = models.DateField(null=True)
+class TaxCalculator(models.Model):
+    REGIME_CHOICES = [
+        ('old', 'Old Regime'),
+        ('new', 'New Regime'),
+    ]
+
+    income = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Income')
+    deductions = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Deductions')
 
     def __str__(self):
-
-        return self.user.username if self.user else "No User"
-
-
-        # return f"{self.user.username}'s tax details for {self.month.strftime('%B %Y')}"
-
-    
-    class Meta:
-        verbose_name_plural = "User Details"
+        return f"TaxCalculator(income={self.income}, deductions={self.deductions})"
 
 class TaxScheme(models.Model):
     regime = models.CharField(max_length=10)  # 'old' or 'new'

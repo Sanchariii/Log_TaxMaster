@@ -1,0 +1,44 @@
+<html>
+    <body>
+        <div class="container">
+            <h2>Your Appointment Requests</h2>
+        
+            {% if requests %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Approved</th>
+                            <th>Actions</th>  <!-- Add a column for actions -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in requests %}
+                            <tr>
+                                <td>{{ request.first_name }}</td>
+                                <td>{{ request.last_name }}</td>
+                                <td>{{ request.email }}</td>
+                                <td>{{ request.approved|yesno:"Yes,No" }}</td>
+                                <td>
+                                    {% if not request.approved %}  <!-- Only show buttons if not approved -->
+                                        <a href="{% url 'approve_request' request.id %}" class="btn btn-success">Approve</a>
+                                        <a href="{% url 'reject_request' request.id %}" class="btn btn-danger">Reject</a>
+                                    {% else %}
+                                        <span class="text-success">Approved</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    You have no appointment requests at this time.
+                </div>
+            {% endif %}
+        </div>
+        
+    </body>
+</html>
