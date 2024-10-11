@@ -20,4 +20,6 @@ class Appointment(models.Model):
     confirmed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Appointment for {self.user_request.user.username} with {self.tax_advisor.username}"
+        if self.user_request and self.user_request.user:
+            return f"Appointment for {self.user_request.user.username} with {self.tax_advisor.username}"
+        return f"Appointment with {self.tax_advisor.username}"

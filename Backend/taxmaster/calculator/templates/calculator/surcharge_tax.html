@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Surcharge Tax Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surcharge Tax Rates</title>
 </head>
 <body>
-    <h2>Surcharge Rates</h2>
-    <table border="1">
-        <tr>
-            <th>Income Slab</th>
-            <th>Surcharge Rate</th>
-        </tr>
-        {% for rate in surcharge_rates %}
-        <tr>
-            <td>{{ rate.slab }}</td>
-            <td>{{ rate.rate }}%</td>
-        </tr>
-        {% endfor %}
-    </table>
+<h1>Surcharge Tax Rates</h1>
+<table>
+<thead>
+<tr>
+<th>Income Slab</th>
+<th>Surcharge Rate</th>
+</tr>
+</thead>
+<tbody>
+           {% for rate in surcharge_rates %}
+<tr>
+<td>{{ rate.income_slab }}</td>
+<td>{{ rate.surcharge_percentage }}%</td>
+</tr>
+           {% endfor %}
+</tbody>
+</table>
 </body>
 </html>

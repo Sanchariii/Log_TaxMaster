@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from datetime import datetime, timedelta
+from django.shortcuts import render, redirect
 from django.utils.html import strip_tags
 from django.utils.encoding import force_bytes
 from django.contrib.auth import get_user_model
@@ -21,7 +22,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth import logout,authenticate, login as auth_login
+from django.contrib.auth import get_user_model,logout,authenticate, login as auth_login
 from .forms import UsernamePasswordResetForm, OTPForm, SetNewPasswordForm
 from django.contrib.auth.decorators import login_required,user_passes_test
 from .forms import SignUpForm, UsernamePasswordResetForm, OTPForm, SetNewPasswordForm, LoginForm, GroupSelectionForm
@@ -62,10 +63,10 @@ class CustomLoginView(View):
         if 'otp_sent' in request.session and request.session['otp_sent']:
             otp = request.POST.get('otp')
             if otp and otp == request.session.get('otp'):
-                user = authenticate(username=request.session['username'], password=request.session['password'])
+                user = authenticate(username=request.session.pop('username'), password=request.session.pop('password'))
                 if user:
                     auth_login(request, user)
-                    request.session['otp_verified'] = True
+                    request.session.pop('otp_verified', None)
                     return self._redirect_user(user)
             # messages.error(request, 'Invalid OTP. Please try again.')
             return render(request, self.otp_template_name)
@@ -113,7 +114,8 @@ class CustomLoginView(View):
         """Sends OTP to the given email."""
         subject = 'Your OTP Code'
         message = f'Your OTP code is {otp}'
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], fail_silently=False)
+        from_email = 'raysanchari930@gmail.com'
+        send_mail(subject, message,from_email,  [email], fail_silently=False)
 
 
 # ############################# Manager Dashboard ######################################################
@@ -163,9 +165,9 @@ def group_selection(request):
 
             # Redirect based on the group the user selected
             if selected_group.name == 'Tax Advisor':
-                return redirect('appointment/user-details/')
+                return redirect('user_details')
             elif selected_group.name == 'Individual User':
-                return redirect('appointment/user-details/')
+                return redirect('user_details')
     else:
         form = GroupSelectionForm()
 
@@ -262,7 +264,7 @@ def verify_otp(request):
                 return redirect('forgot_password')
 
             otp_generated_at = datetime.fromisoformat(otp_generated_at)
-            now = timezone.now() 
+            now = timezone.now()
 
             if now - otp_generated_at > timedelta(minutes=1):
                 return redirect('forgot_password')
@@ -270,6 +272,9 @@ def verify_otp(request):
                 return redirect('password_reset_confirm')
             else:
                 form.add_error('otp', 'Invalid OTP. Please try again.')
+                show_resend_option = True
+        else:
+            show_resend_option = False
     else:
         form = OTPForm()
         otp_generated_at = request.session.get('otp_generated_at')
@@ -281,9 +286,24 @@ def verify_otp(request):
                 return redirect('forgot_password')
         else:
             remaining_time = 0
-    return render(request, 'registration/verify_otp.html', {'form': form, 'remaining_time': remaining_time})
+        show_resend_option = False
 
+    return render(request, 'accounts/otp.html', {
+        'form': form,
+        'remaining_time': remaining_time,
+        'show_resend_option': show_resend_option
+    })
 
+def resend_otp(request):
+    # Generate a new OTP using the method from CustomLoginView
+    custom_login_view = CustomLoginView()
+    new_otp = custom_login_view.generate_otp()
+    request.session['otp'] = new_otp
+    request.session['otp_generated_at'] = timezone.now().isoformat()
+    user_email = request.session.get('user_email')
+    if user_email:
+        custom_login_view.send_otp_via_email(user_email, new_otp)
+    return redirect('verify_otp')
 ################################## Reset Password #########################################################
 def password_reset_confirm(request):
     if request.method == 'POST':

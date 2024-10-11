@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import get_user_model
 
 
 from django import forms
@@ -35,6 +36,22 @@ class SignUpForm(UserCreationForm):
     #     if not first_name.isupper():
     #         raise forms.ValidationError('First name must start with a capital letter.')
     #     return first_name
+    
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if any(char.isdigit() for char in first_name):
+            raise forms.ValidationError('First name must not contain numbers.')
+        if not first_name[0].isupper():  
+            raise forms.ValidationError('First name must start with a capital letter.')
+        return first_name
+    
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if any(char.isdigit() for char in last_name):
+            raise forms.ValidationError('Last name must not contain numbers.')
+        if not last_name[0].isupper():  # Check if the first letter is uppercase
+            raise forms.ValidationError('Last name must start with a capital letter.')
+        return last_name
     
     # def clean_last_name(self):
     #     last_name = self.cleaned_data.get('last_name')

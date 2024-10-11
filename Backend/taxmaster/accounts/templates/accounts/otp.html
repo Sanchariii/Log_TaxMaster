@@ -11,6 +11,26 @@
         <input type="text" name="otp" id="otp" required>
         <button type="submit">Verify OTP</button>
     </form>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if show_resend_option %}
+        <p>Didn't receive the OTP? <a href="{% url 'resend_otp' %}">Resend OTP</a></p>
+    {% endif %}
+
     {% if messages %}
         <ul>
             {% for message in messages %}
