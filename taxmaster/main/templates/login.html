@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - TaxMaster</title>
+</head>
+<body>
+    <h1>Log In to TaxMaster</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Email"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+</html>

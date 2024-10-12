@@ -9,7 +9,7 @@ from django.db import models
 from .forms import UserDetailsForm
 from .models import UserDetails
 from decimal import Decimal
-from calculator.views import calculate_tax
+from calculator.views import calculate_tax_view
 
 def home_view(request):
     return render(request, 'base/home.html')

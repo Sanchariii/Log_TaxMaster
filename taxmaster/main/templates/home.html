@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TaxMaster</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="#why" class="nav-link">Why Use TaxMaster?</a>
+            <a href="#contacts" class="nav-link">Contacts</a>
+            <a href="#learn-more" class="nav-link">Learn More</a>
+        </div>
+        <div class="cta-buttons">
+            <a href="{% url 'register' %}" class="cta-button signup">Register</a>
+            <a href="{% url 'login' %}" class="cta-button login">Log In</a>
+        </div>
+    </div>
+    <div id="home" class="hero">
+        <div class="hero-text">
+            <h1>Welcome To TaxMaster!</h1>
+            <p>Simplify Your Taxes, Maximize Your Refunds.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'register' %}" class="hero-button get-started">Get Started</a>
+                <a href="#explore" class="hero-button explore-more">Explore More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://media.istockphoto.com/id/1364117721/vector/online-tax-filing-concept-businessman-filling-tax-form-documents-online-vector-illustration.jpg?s=612x612&w=0&k=20&c=ode3rxpIjUSBD-zROmt7pf5rmYX6FwLakG3jGzKhMwk=" alt="Hero Image">
+        </div>
+    </div>
+    <!-- Add more sections here -->
+</body>
+</html>
