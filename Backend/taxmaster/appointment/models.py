@@ -4,22 +4,35 @@ from advisor.models import UserRequest
 from django.contrib.auth.models import User
 
 class Appointment(models.Model):
-    user_request = models.ForeignKey(
-        UserRequest, 
+    
+    SLOT_CHOICES = [
+        ('morning', 'Morning'),
+        ('afternoon', 'Afternoon'),
+        ('evening', 'Evening'),
+    ]
+    
+    user = models.ForeignKey(
+        User, 
         on_delete=models.CASCADE, 
-        related_name="user_request_appointments",  
+        related_name="appointments",
         null=True
     )
+    
+    # user_request = models.ForeignKey(
+    #     UserRequest, 
+    #     on_delete=models.CASCADE, 
+    #     related_name="user_request_appointments",  
+    #     null=True
+    # )
     tax_advisor = models.ForeignKey(
         User, 
         on_delete=models.CASCADE, 
         related_name="advisor_appointments"
     )
-    appointment_date = models.DateTimeField()
+    appointment_date = models.DateField()
+    slot = models.CharField(max_length=10, choices=SLOT_CHOICES, null=True)
     notes = models.TextField(blank=True, null=True)
     confirmed = models.BooleanField(default=False)
 
     def __str__(self):
-        if self.user_request and self.user_request.user:
-            return f"Appointment for {self.user_request.user.username} with {self.tax_advisor.username}"
         return f"Appointment with {self.tax_advisor.username}"

@@ -14,8 +14,10 @@
     </form>
 
      <!-- Button to redirect to the tax advisor list page -->
+    {% if is_indivual_user %}
      <a href="{% url 'available_advisors_view' %}">
          <button type="button">Show Tax Advisors</button>
      </a>
+    {% endif %}
 </body>
 </html>

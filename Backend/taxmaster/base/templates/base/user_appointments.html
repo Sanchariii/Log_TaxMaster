@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Your Appointments</h1>
+        
+        <!-- Approved Appointments Section -->
+        <h2>Approved Appointments</h2>
+        <div class="list-group">
+            {% if approved_appointments %}
+                {% for appointment in approved_appointments %}
+                    <div class="list-group-item">
+                        <h5>Advisor: {{ appointment.tax_advisor.get_full_name }}</h5>
+                        <p>
+                            Date: {{ appointment.date }}<br>  <!-- Changed from appointment.appointment_date -->
+                            Slot: {{ appointment.slot }}<br>  <!-- Changed from appointment.get_slot_display -->
+                            Notes: No additional notes <!-- You may want to add notes later -->
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You have no approved appointments.</p>
+            {% endif %}
+        </div>
+        
+        <!-- Requested Appointments Section -->
+        <h2 class="mt-4">Requested Appointments</h2>
+        <div class="list-group">
+            {% if requested_appointments %}
+                {% for appointment in requested_appointments %}
+                    <div class="list-group-item">
+                        <h5>Advisor: {{ appointment.tax_advisor.get_full_name }}</h5>
+                        <p>
+                            Date: {{ appointment.date }}<br>  <!-- Changed from appointment.appointment_date -->
+                            Slot: {{ appointment.slot }}<br>  <!-- Changed from appointment.get_slot_display -->
+                            Status: Pending Approval<br>
+                            Notes: No additional notes <!-- You may want to add notes later -->
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You have no pending appointment requests.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -17,7 +17,9 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
-                        <th>Approved</th>
+                        <th>Tax Advisor</th>  <!-- New field for Tax Advisor -->
+                        <th>Requested Date</th> <!-- New field for Requested Date -->
+                        <th>Slot</th>          <!-- New field for Slot -->
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -27,14 +29,12 @@
                             <td>{{ request.first_name }}</td>
                             <td>{{ request.last_name }}</td>
                             <td>{{ request.email }}</td>
-                            <td>{{ request.approved|yesno:"Yes,No" }}</td>
+                            <td>{{ request.tax_advisor.username }}</td> <!-- Tax Advisor username -->
+                            <td>{{ request.date }}</td> <!-- Assuming you have a date field -->
+                            <td>{{ request.slot }}</td> <!-- Assuming you have a slot field -->
                             <td>
-                                {% if not request.approved %}
-                                    <a href="{% url 'approve_request' request.id %}" class="btn btn-success btn-sm">Approve</a>
-                                    <a href="{% url 'reject_request' request.id %}" class="btn btn-danger btn-sm">Reject</a>
-                                {% else %}
-                                    <span class="text-success">Approved</span>
-                                {% endif %}
+                                <a href="{% url 'approve_request' request.id %}" class="btn btn-success btn-sm">Approve</a>
+                                <a href="{% url 'reject_request' request.id %}" class="btn btn-danger btn-sm">Reject</a>
                             </td>
                         </tr>
                     {% endfor %}

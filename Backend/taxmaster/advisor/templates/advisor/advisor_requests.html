@@ -1,44 +1,50 @@
-<html>
-    <body>
-        <div class="container">
-            <h2>Your Appointment Requests</h2>
-        
-            {% if requests %}
-                <table class="table">
-                    <thead>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointment Requests</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Your Approved Appointments</h2>
+
+        {% if requests %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Tax Advisor</th>  <!-- Display Tax Advisor -->
+                        <th>Appointment Date</th> <!-- Display Date -->
+                        <th>Slot</th> <!-- Display Slot -->
+                        <th>Approved</th> <!-- Display Approval Status -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in requests %}
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Approved</th>
-                            <th>Actions</th>  <!-- Add a column for actions -->
+                            <td>{{ request.first_name }}</td>
+                            <td>{{ request.last_name }}</td>
+                            <td>{{ request.email }}</td>
+                            <td>{{ request.tax_advisor.username }}</td> <!-- Tax Advisor Username -->
+                            <td>{{ request.date }}</td> <!-- Appointment Date -->
+                            <td>{{ request.slot }}</td> <!-- Slot -->
+                            <td>{{ request.approved|yesno:"Yes,No" }}</td> <!-- Approved Status -->
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for request in requests %}
-                            <tr>
-                                <td>{{ request.first_name }}</td>
-                                <td>{{ request.last_name }}</td>
-                                <td>{{ request.email }}</td>
-                                <td>{{ request.approved|yesno:"Yes,No" }}</td>
-                                <td>
-                                    {% if not request.approved %}  <!-- Only show buttons if not approved -->
-                                        <a href="{% url 'approve_request' request.id %}" class="btn btn-success">Approve</a>
-                                        <a href="{% url 'reject_request' request.id %}" class="btn btn-danger">Reject</a>
-                                    {% else %}
-                                        <span class="text-success">Approved</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <div class="alert alert-info">
-                    You have no appointment requests at this time.
-                </div>
-            {% endif %}
-        </div>
-        
-    </body>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info">
+                You have no scheduled appointments at this time.
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

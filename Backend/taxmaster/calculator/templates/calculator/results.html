@@ -41,7 +41,7 @@
     <h1>Tax Calculation Result</h1>
 
     <!-- Display income, deductions, regime, and total tax -->
-    <p><strong>Income:</strong> ₹{{ form.cleaned_data.income }}</p>
+    <p><strong>Income:</strong> ₹{{ form.cleaned_data.total_income }}</p>
     <p><strong>Deductions:</strong> ₹{{ form.cleaned_data.deductions }}</p>
     <p><strong>Old Tax Regime Tax:</strong> ₹{{ old_tax }}</p>
     <p><strong>New Tax Regime Tax:</strong> ₹{{ new_tax }}</p>

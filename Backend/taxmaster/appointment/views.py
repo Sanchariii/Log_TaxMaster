@@ -103,21 +103,35 @@ def create_appointment_view(request, user_request_id):
         'tax_advisors': tax_advisors,
     })
     
+from datetime import timedelta
+from django.utils import timezone
+
 def get_available_dates(advisor):
-    today = timezone.now().date()
-    # Example logic to get available dates for the next 30 days
+    today = timezone.now().date()  # Current date
     available_dates = []
-    for i in range(30):  # Checking the next 30 days
-        date_to_check = today + timezone.timedelta(days=i)
-        # Check if there are any appointments for this date
-        appointments = Appointment.objects.filter(tax_advisor=advisor, appointment_date__date=date_to_check)
-        if not appointments.exists():  # If there are no appointments, this date is available
+    
+    # Check the availability for the next 30 days from today
+    for i in range(1, 31):  # Start from tomorrow (i=1), check for the next 30 days
+        date_to_check = today + timedelta(days=i)
+        
+        # Find appointments for the tax advisor on the date_to_check
+        appointments = Appointment.objects.filter(
+            tax_advisor=advisor,
+            appointment_date=date_to_check
+        )
+        
+        # If no appointments exist for the date, add it to available dates
+        if not appointments.exists():
             available_dates.append(date_to_check)
-    return available_dates    
+    
+    return available_dates
+
 
     
 def request_appointment(request, advisor_id):
     advisor = get_object_or_404(User, id=advisor_id)
+
+    # Get available future dates for the advisor (e.g., next 30 days)
     available_dates = get_available_dates(advisor)
     future_dates = [date for date in available_dates if date > timezone.now().date()]
 
@@ -126,22 +140,29 @@ def request_appointment(request, advisor_id):
     if request.method == 'POST':
         if form.is_valid():
             print("Form is valid")
+
+            # Create appointment but don't commit yet
             appointment = form.save(commit=False)
             appointment.tax_advisor = advisor
+            appointment.user = request.user  # Associate the appointment with the logged-in user
             appointment.appointment_date = form.cleaned_data['requested_date']  # Assign the requested date
+            appointment.slot = form.cleaned_data['slot']  # Assign the requested slot (make sure form has this field)
 
-            # Check for existing user request based on email
-
-            # Create a new user request
-            UserRequest.objects.create(
+            # Create a new UserRequest entry
+            user_request = UserRequest.objects.create(
                 user=request.user,
                 tax_advisor=advisor,
                 first_name=request.user.first_name,
                 last_name=request.user.last_name,
                 email=request.user.email,
+                slot=appointment.slot,  # Add slot to UserRequest model
+                date=appointment.appointment_date  # Add date to UserRequest model
             )
 
+            # Associate the appointment with the user request
+            appointment.user_request = user_request
             appointment.save()
+
             print("Appointment saved, redirecting...")
             return redirect('appointment_request_sent')  # Ensure this URL name is defined
         else:
@@ -199,3 +220,14 @@ def advisor_appointments_view(request):
         return render(request, 'appointments/advisor_appointments.html', {'approved_users': approved_users})
     else:
         return redirect('not_authorized')
+
+
+def user_appointments(request):
+    if request.user.is_authenticated:
+        appointments = Appointment.objects.filter(user=request.user)
+    else:
+        appointments = None
+
+    return render(request, 'appointment/user_appointments.html', {
+        'appointments': appointments
+    })

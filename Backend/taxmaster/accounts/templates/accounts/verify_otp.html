@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: red;
+        }
+        .message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verify OTP</h1>
+
+    {% if message %}
+        <p class="message">{{ message }}</p>
+    {% endif %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit">Verify OTP</button>
+    </form>
+
+    <!-- Resend OTP Button -->
+    <form method="POST" style="display:inline;">
+        {% csrf_token %}
+        <input type="hidden" name="resend_otp" value="true">
+        <button type="submit">Resend OTP</button>
+    </form>
+
+    {% if form.non_field_errors %}
+        <div class="error">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -20,7 +20,7 @@
                                 <h5 class="card-title">{{ advisor.get_full_name }}</h5>
                                 <p class="card-text">
                                     Email: {{ advisor.email }}<br>
-                                    Experience: {{ advisor.profile.experience }} years
+                                    Experience: {{ advisor.tax_advisor_profile.years_of_experience }} years
                                 </p>
                                 <a href="{% url 'request_appointment' advisor.id %}" class="btn btn-primary">Request Appointment</a>
                             </div>

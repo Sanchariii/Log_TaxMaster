@@ -1,5 +1,5 @@
 from .forms import TaxCalculatorForm
-from .models import UserDetails, TaxScheme, SurchargeRate
+from .models import TaxScheme, SurchargeRate
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from xhtml2pdf import pisa
@@ -63,13 +63,13 @@ def calculate_tax(income_type, total_income, net_income, deductions, regime, age
     
     # Calculate surcharge
     surcharge = Decimal('0.0')
-    if taxable_income > 5000000:
+    if taxable_income > 50000000:
         surcharge = tax * Decimal('0.37')
-    elif taxable_income > 2000000:
+    elif taxable_income > 20000000:
         surcharge = tax * Decimal('0.25')
-    elif taxable_income > 1000000:
+    elif taxable_income > 10000000:
         surcharge = tax * Decimal('0.15')
-    elif taxable_income > 500000:
+    elif taxable_income > 5000000:
         surcharge = tax * Decimal('0.10')
     
     tax += surcharge
@@ -87,20 +87,21 @@ def recommend_tax_regime(income, deductions, income_type, net_income, age_group)
        savings = old_tax - new_tax
        recommendation = f"New Tax Regime is recommended for you. It would save you ₹{savings:.2f} in taxes."
    return old_tax, new_tax, recommendation
+
 @login_required
 def tax_calculator_view(request):
    user = request.user
-   try:
-       user_details = UserDetails.objects.get(user=user)
-   except UserDetails.DoesNotExist:
-       return redirect('user_details')
+#    try:
+#        user_details = UserDetails.objects.get(user=user)
+#    except UserDetails.DoesNotExist:
+#        return redirect('user_details')
    if request.method == 'POST':
        form = TaxCalculatorForm(request.POST)
        if form.is_valid():
            income_type = form.cleaned_data['income_type']
            total_income = form.cleaned_data['total_income']
            net_income = form.cleaned_data['net_income']
-           regime = form.cleaned_data['regime']
+        #    regime = form.cleaned_data['regime']
            deductions = form.cleaned_data['deductions']
            age_group = form.cleaned_data['age_group']
            old_tax, new_tax, recommendation = recommend_tax_regime(total_income, deductions, income_type, net_income, age_group)
@@ -109,30 +110,36 @@ def tax_calculator_view(request):
                'old_tax': old_tax,
                'new_tax': new_tax,
                'recommendation': recommendation,
-               'user_details': user_details,
+            #    'user_details': user_details,
            }
            return render(request, 'calculator/results.html', context)
    else:
        form = TaxCalculatorForm()
    return render(request, 'calculator/tax_calculator.html', {'form': form})
+
 @login_required
 def old_tax_scheme_view(request):
    old_tax_scheme = TaxScheme.objects.filter(regime='old')
    return render(request, 'calculator/old_tax_scheme.html', {'tax_scheme': old_tax_scheme})
+
 @login_required
 def new_tax_scheme_view(request):
    new_tax_scheme = TaxScheme.objects.filter(regime='new')
    return render(request, 'calculator/new_tax_scheme.html', {'tax_scheme': new_tax_scheme})
+
 @login_required
 def surcharge_tax_view(request):
    surcharge_rates = SurchargeRate.objects.all()
    return render(request, 'calculator/surcharge_tax.html', {'surcharge_rates': surcharge_rates})
+
 def render_to_pdf(template_src, context_dict={}):
    template = get_template(template_src)
    html = template.render(context_dict)
    pdf = pisa.CreatePDF(html)
    return pdf
+
 logger = logging.getLogger('calculator')
+
 def print_pdf_view(request):
    if request.method == 'POST':
        user_details_id = request.POST.get('user_details_id')
@@ -140,9 +147,9 @@ def print_pdf_view(request):
        net_income = request.POST.get('net_income', '0')
        age_group = request.POST.get('age_group')
        deductions = request.POST.get('deductions')
-       if user_details_id is None:
-           return HttpResponseBadRequest("Missing parameters.")
-       user_details = get_object_or_404(UserDetails, id=user_details_id)
+    #    if user_details_id is None:
+    #        return HttpResponseBadRequest("Missing parameters.")
+    #    user_details = get_object_or_404(UserDetails, id=user_details_id)
        try:
            income_decimal = Decimal(income_type.replace(',', '').strip())
            deductions_decimal = Decimal(deductions.replace(',', '').strip())
@@ -152,7 +159,7 @@ def print_pdf_view(request):
        old_regime_tax = calculate_tax(income_type, income_decimal, net_income, deductions_decimal, 'old', age_group)
        new_regime_tax = calculate_tax(income_type, income_decimal, net_income, deductions_decimal, 'new', age_group)
        context = {
-           'user_details': user_details,
+        #    'user_details': user_details,
            'income': income_decimal,
            'deductions': deductions_decimal,
            'old_tax': old_regime_tax,

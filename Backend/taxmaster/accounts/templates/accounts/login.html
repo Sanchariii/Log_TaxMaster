@@ -10,6 +10,9 @@
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
+
+    <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+
     {% if messages %}
         <ul>
             {% for message in messages %}

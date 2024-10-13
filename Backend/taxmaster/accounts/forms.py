@@ -86,6 +86,13 @@ class UsernamePasswordResetForm(forms.Form):
     username = forms.CharField(max_length=150, required=True, label='Username')
 
 
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(
+        required=True,
+        label='Email Address',
+        help_text='Enter your registered email address.'
+    )
+
 ##################################          ###############################################
 class OTPForm(forms.Form):
     otp = forms.CharField(max_length=6, required=True, label='OTP')
