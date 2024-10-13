@@ -56,13 +56,13 @@
     <a href="{% url 'tax_calculator' %}">Calculate Again</a>
 
     <!-- Button to print the result as PDF -->
-    <form method="POST" action="{% url 'print_pdf' %}">
+    {% comment %} <form method="POST" action="{% url 'print_pdf' %}">
         {% csrf_token %}
         <input type="hidden" name="user_details_id" value="{{ user_details.id }}">
         <input type="hidden" name="income" value="{{ income }}">
         <input type="hidden" name="deductions" value="{{ deductions }}">
         <button type="submit">Print in PDF</button>
-    </form>
+    </form> {% endcomment %}
     
     <!-- Display additional information for logged-in users -->
     {% if user.is_authenticated %}

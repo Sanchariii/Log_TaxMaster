@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Request Sent</title>
+</head>
+<body>
+    <h1>Your Appointment Request Has Been Sent!</h1>
+    <p>Thank you for requesting an appointment. Your tax advisor will review your request and get back to you shortly.</p>
+    <a href="{% url 'dashboard' %}">Go to Dashboard</a>  <!-- Change this to your desired page -->
+</body>
+</html>
