@@ -1,26 +1,13 @@
 from django import forms
-from .models import TaxScheme, SurchargeRate, TaxCalculator
+# from .models import TaxScheme, SurchargeRate, TaxCalculator
     
-class TaxCalculatorForm(forms.ModelForm):
-    class Meta:
-        model = TaxCalculator
-        fields = ['income_type', 'age_group', 'total_income','net_income', 'deductions']
-        labels = {
-            'income_type': 'Type of Income',
-<<<<<<< HEAD
-            # 'regime': 'Tax Regime',
-=======
->>>>>>> ab96e54a51b3c42a5cec525bf726dad8c3f43f9e
-            'age_group': 'Age Group',
-            'total_income': 'Total Income',
-            'net_income': 'Net Income(for Business Income)',
-            'deductions': 'Deductions',
-        }
-        widgets = {
-           'income_type': forms.Select(attrs={'class': 'form-control'}),
-           'age_group': forms.Select(attrs={'class': 'form-control'}),
-           'total_income': forms.NumberInput(attrs={'class': 'form-control'}),
-           
-           'net_income': forms.NumberInput(attrs={'class': 'form-control'}),
-           'deductions': forms.NumberInput(attrs={'class': 'form-control'}),
-       }
+class TaxCalculatorForm(forms.Form):
+   AGE_GROUP_CHOICES = [
+       (1, 'Below 60 years'),
+       (2, 'Between 60 and 80 years'),
+       (3, 'Above 80 years'),
+   ]
+   age_group = forms.ChoiceField(choices=AGE_GROUP_CHOICES)
+   annual_income = forms.FloatField(label='Annual Income')
+   standard_deduction = forms.FloatField(label='Standard Deduction')
+   other_deductions = forms.FloatField(label='Other Deductions')

@@ -35,51 +35,65 @@
             padding: 10px;
             border-radius: 5px;
         }
+        .happy-message {
+            color: green;
+            font-weight: bold;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
     <h1>Tax Calculation Result</h1>
 
-    <!-- Display income, deductions, regime, and total tax -->
-    <p><strong>Income:</strong> ₹{{ form.cleaned_data.total_income }}</p>
-    <p><strong>Deductions:</strong> ₹{{ form.cleaned_data.deductions }}</p>
-    <p><strong>Old Tax Regime Tax:</strong> ₹{{ old_tax }}</p>
-    <p><strong>New Tax Regime Tax:</strong> ₹{{ new_tax }}</p>
+    <!-- Display user details -->
+    <p><strong>User:</strong> {{ user_name }}</p>
+    <p><strong>Age Slab:</strong> {{ age_slab }}</p>
 
-    {% if user_details %}
-        <p><strong>User:</strong> {{ user_details.user.username }}</p>
-        <p><strong>Income Type:</strong> {{ user_details.incometype }}</p>
-        <p><strong>Age:</strong> {{ user_details.age }}</p>
+    <!-- Display income, deductions, regime, and total tax -->
+    <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income }}</p>
+    <p><strong>Standard Deduction:</strong> ₹{{ form.cleaned_data.standard_deduction }}</p>
+    <p><strong>Other Deductions:</strong> ₹{{ form.cleaned_data.other_deductions }}</p>
+    <p><strong>Old Tax Regime Tax:</strong> ₹{{ tax_old_regime }}</p>
+    <p><strong>New Tax Regime Tax:</strong> ₹{{ tax_new_regime }}</p>
+    <p><strong>Best Regime:</strong> {{ best_regime }}</p>
+
+    {% if happy_message %}
+        <p class="happy-message">{{ happy_message }}</p>
+    {% endif %}
+
+    {% if suggestions %}
+        <h2>Suggestions:</h2>
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     <!-- Link to calculate again -->
     <a href="{% url 'tax_calculator' %}">Calculate Again</a>
 
+    <!-- Button to view tax slabs -->
+    <a href="{% url 'tax_slabs' %}">View Tax Slabs</a>
+
     <!-- Button to print the result as PDF -->
-    {% comment %} <form method="POST" action="{% url 'print_pdf' %}">
+    {% comment %} 
+    <form method="POST" action="{% url 'print_pdf' %}">
         {% csrf_token %}
         <input type="hidden" name="user_details_id" value="{{ user_details.id }}">
-        <input type="hidden" name="income" value="{{ income }}">
-        <input type="hidden" name="deductions" value="{{ deductions }}">
+        <input type="hidden" name="income" value="{{ form.cleaned_data.annual_income }}">
+        <input type="hidden" name="deductions" value="{{ form.cleaned_data.standard_deduction + form.cleaned_data.other_deductions }}">
         <button type="submit">Print in PDF</button>
-    </form> {% endcomment %}
+    </form> 
+    {% endcomment %}
     
-    <!-- Display additional information for logged-in users -->
-    {% if user.is_authenticated %}
-    <h2>Suggestions for Old Tax Regime:</h2>
-    <ul>
-        {% for suggestion in old_suggestions %}
-            <li>{{ suggestion }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Suggestions for New Tax Regime:</h2>
-    <ul>
-        {% for suggestion in new_suggestions %}
-            <li>{{ suggestion }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
+    <footer>
+        <p>Thank you for using <strong>TaxMaster!</strong></p>
+    </footer>
 </body>
 </html>
