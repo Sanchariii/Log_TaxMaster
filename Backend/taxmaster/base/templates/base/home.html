@@ -1,23 +1,179 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>TaxMaster</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Navbar styling */
+        .header {
+            background-color: #E5E4E2;
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 30px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            z-index: 999;
+        }
+        .nav-link {
+            color: #4a4a4a;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .nav-link:hover {
+            color: #BF40BF;
+        }
+        .nav-link.active {
+            color: #BF40BF;
+            font-weight: 600;
+        }
+        .cta-button {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .cta-button.signup {
+            background-color: black;
+            color: white;
+        }
+        .cta-button.login {
+            background-color: transparent;
+            color: black;
+        }
+        body {
+            padding-top: 130px;
+        }
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px 100px;
+        }
+        .hero-text {
+            max-width: 600px;
+        }
+        .hero-text h1 {
+            font-size: 55px;
+            line-height: 1.2;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .hero-text img.favicon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+        .hero-text p {
+            font-size: 18px;
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        .hero-buttons {
+            margin-top: 30px;
+        }
+        .hero-button {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+        .hero-button.get-started {
+            background-color: #CF9FFF;
+            color: white;
+        }
+        .hero-button.explore-more {
+            background-color: #e0e0e0;
+            color: black;
+        }
+        .responsive-hero-image {
+            width: 500px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .favicon {
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to TaxMaster</h1>
-    <p>Calculate your taxes easily with our calculator!</p>
-
-    <div>
-        <a href="{% url 'signup' %}">
-            <button>Sign Up</button>
-        </a>
-        <a href="{% url 'login' %}">
-            <button>Log In</button>
-        </a>
+    <!-- Navbar -->
+    <div class="header">
+        <div class="nav">
+            <a href="#home" class="nav-link" id="home-link">Home</a>
+            <a href="#why" class="nav-link" id="why-link">Why Use TaxMaster?</a>
+            <a href="#contacts" class="nav-link" id="contacts-link">Contacts</a>
+            <a href="#learn-more" class="nav-link" id="learn-more-link">Learn More</a>
+        </div>
+        <div class="cta-buttons">
+            <a href="{% url 'signup' %}" class="cta-button signup">Register</a>
+            <a href="{% url 'login' %}" class="cta-button login">Log In</a>
+        </div>
     </div>
 
-    
+    <!-- Hero Section -->
+    <div id="home" class="hero">
+        <div class="hero-text">
+            <h1>
+                <img src="{% static 'base/logo.png' %}" alt="Favicon" class="favicon"/>
+                Welcome To TaxMaster!
+            </h1>
+            <p>Simplify Your Taxes, Maximize Your Refunds.</p>
+            <div class="hero-buttons">
+                <a href="#getstarted" class="hero-button get-started">Get Started</a>
+                <a href="#explore" class="hero-button explore-more">Explore More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://media.istockphoto.com/id/1364117721/vector/online-tax-filing-concept-businessman-filling-tax-form-documents-online-vector-illustration.jpg?s=612x612&w=0&k=20&c=ode3rxpIjUSBD-zROmt7pf5rmYX6FwLakG3jGzKhMwk=" alt="Hero Image" class="responsive-hero-image">
+        </div>
+    </div>
+
+    <!-- Section 1 - Why Use TaxMaster -->
+    <div id="why" class="container mt-5 p-5 bg-light rounded shadow">
+        <h2 class="text-dark font-weight-bold mb-4">Why Use TaxMaster?</h2>
+        <p class="text-secondary"><strong class="text-primary">Tax!!!</strong> What's the first thing that comes to your mind when you hear the word "TAX"? Money, right? But how much?</p>
+        <p class="text-muted">This is a complicated question.</p>
+        <p class="text-muted">To know how much, you need to study our income tax rules and deal with a number of lengthy calculations.</p>
+        <p class="text-muted">Well, don't be intimidated by those lengthy calculations because <strong>TaxMaster</strong> is here for the rescue!</p>
+        <p class="text-muted">TaxMaster is a web-based portal for tax calculation that allows users of any age group to calculate their taxes based on their income without facing complexity.</p>
+        <ul class="text-muted">
+            <li>Accurate tax calculations</li>
+            <li>Solutions to minimize your taxes</li>
+            <li>Maximum privacy and security</li>
+        </ul>
+        <p class="text-muted">TaxMaster is here to simplify your tax experience!</p>
+    </div>
+
+    <!-- Section 2 - Contacts -->
+    <div id="contacts" class="container mt-5 p-5 text-center bg-secondary text-white rounded shadow">
+        <h2 class="font-weight-bold">Contact Us</h2>
+        <p class="lead">For more information, please reach out to us at:</p>
+        <p class="font-weight-bold text-primary">sanchari.ray@rockwellautomation.com</p>
+    </div>
+
+    <!-- Section 3 - Learn More -->
+    <div id="learn-more" class="container mt-5 p-5 bg-gradient rounded shadow">
+        <h2 class="text-dark font-weight-bold">Learn More</h2>
+        <p class="text-secondary">Discover how <strong>TaxMaster</strong> can help simplify your taxes and save you time.</p>
+        <p class="text-muted">Maximize your returns with our simple-to-use tools and enjoy a hassle-free experience!</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

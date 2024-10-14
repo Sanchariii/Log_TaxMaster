@@ -28,29 +28,6 @@ def dashboard(request):
     return render(request, 'base/dashboard.html', context)
 
 
-# @login_required
-# def user_details_view(request):
-#     user = request.user
-#     try:
-#         # Check if UserDetails already exists for the current user
-#         user_details = UserDetails.objects.get(user=user)
-#     except UserDetails.DoesNotExist:
-#         user_details = None  # No user details exist, we will create them if needed
-
-#     if request.method == 'POST':
-#         form = UserDetailsForm(request.POST, instance=user_details)  # Pass existing instance if available
-#         if form.is_valid():
-#             # If the form is valid, save or update the UserDetails instance
-#             user_details = form.save(commit=False)
-#             user_details.user = user  # Associate the current user
-#             user_details.save()  # Save the instance (create if new, update if exists)
-#             return redirect('tax_calculator')
-
-#     else:
-#         # Show the form, pre-filling if UserDetails already exists
-#         form = UserDetailsForm(instance=user_details)
-
-#     return render(request, 'base/user_details.html', {'form': form})
 
 
 def user_appointments_view(request):
@@ -65,3 +42,23 @@ def user_appointments_view(request):
     }
 
     return render(request, 'base/user_appointments.html', context)
+
+
+from django.shortcuts import render
+import base64
+
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+def home_view(request):
+    # favicon_path = "C:/Users/SRay5/OneDrive - Rockwell Automation, Inc/Desktop/TaxMaster/Frontend/tax_favicon.jpg"
+    # favicon_base64 = get_base64_image(favicon_path)
+
+    # # Pass favicon_base64 to the template context
+    # context = {
+    #     'favicon_base64': favicon_base64,
+    # }
+
+    return render(request, 'base/home.html')
+
