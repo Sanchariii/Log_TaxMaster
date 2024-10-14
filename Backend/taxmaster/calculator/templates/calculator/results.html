@@ -81,6 +81,18 @@
     <!-- Button to view tax slabs -->
     <a href="{% url 'tax_slabs' %}">View Tax Slabs</a>
 
+    <form method="POST" action="{% url 'tax_calculator_pdf' %}">
+        {% csrf_token %}
+        <!-- Pass the form data to the PDF generation view -->
+        <input type="hidden" name="annual_income" value="{{ form.annual_income.value }}">
+        <input type="hidden" name="age_group" value="{{ form.age_group.value }}">
+        <input type="hidden" name="standard_deduction" value="{{ form.standard_deduction.value }}">
+        <input type="hidden" name="other_deductions" value="{{ form.other_deductions.value }}">
+        <input type="hidden" name="selected_scheme" value="{{ selected_scheme }}">
+        <button type="submit">Print PDF</button>
+    </form>
+
+
     <!-- Button to print the result as PDF -->
     {% comment %} 
     <form method="POST" action="{% url 'print_pdf' %}">

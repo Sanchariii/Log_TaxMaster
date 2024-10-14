@@ -155,10 +155,87 @@ def tax_calculator_view(request):
                 'age_slab': age_slab,
                 'thank_you_message': "Thank you for using our tax calculator!"
             })
+            
      
     else:
         form = TaxCalculatorForm()
     return render(request, 'calculator/tax_calculator.html', {'form': form})
+
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.auth.decorators import login_required
+from decimal import Decimal
+
+@login_required
+def tax_calculator_pdf_view(request):
+    if request.method == 'POST':
+        # Extract form data from POST request
+        age_group = int(request.POST.get('age_group'))
+        income = Decimal(request.POST.get('annual_income'))
+        standard_deduction = Decimal(request.POST.get('standard_deduction'))
+        other_deductions = Decimal(request.POST.get('other_deductions'))
+        selected_scheme = request.POST.get('selected_scheme', 'both')
+
+        # Calculate taxes using the same logic
+        tax_old_regime, tax_new_regime = calculate_tax_view(income, standard_deduction, other_deductions, age_group)
+
+        # Determine the best regime
+        if tax_old_regime < tax_new_regime:
+            best_regime = "Old Regime"
+            suggestions = [
+                "Maximize your 80C deductions (up to Rs. 1.5 lakh) by investing in PPF, ELSS, NSC, or insurance.",
+                "Use 80D deduction for health insurance premiums (up to Rs. 50,000 for senior citizens).",
+                "Check eligibility for other deductions like 80E (education loan), 80EEA (home loan interest), and 80G (charitable donations)."
+            ]
+        elif tax_old_regime > tax_new_regime:
+            best_regime = "New Regime"
+            suggestions = [
+                "Since no deductions are allowed in the new regime, ensure your salary structure is tax-efficient.",
+                "Plan for the future by investing in tax-free bonds or tax-saving instruments outside the deduction realm."
+            ]
+        else:
+            best_regime = "Both Regimes yield the same tax amount."
+            suggestions = []
+
+        # Determine age slab
+        if age_group == 1:
+            age_slab = "Below 60"
+        elif age_group == 2:
+            age_slab = "60 to 79"
+        else:
+            age_slab = "80 and above"
+
+        happy_message = "Great news 🎉! You don't need to pay any tax this year!" if not suggestions else None
+
+        # Context to pass to the template
+        context = {
+            'tax_old_regime': tax_old_regime if selected_scheme in ['both', 'old'] else None,
+            'tax_new_regime': tax_new_regime if selected_scheme in ['both', 'new'] else None,
+            'best_regime': best_regime,
+            'suggestions': suggestions,
+            'happy_message': happy_message,
+            'user_name': request.user.username,
+            'age_slab': age_slab,
+            'thank_you_message': "Thank you for using our tax calculator!"
+        }
+
+        # Load the PDF template
+        template = get_template('calculator/pdf_results.html')
+        html = template.render(context)
+
+        # Create PDF response
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="Tax_Calculation_Results.pdf"'
+
+        # Generate PDF
+        pisa_status = pisa.CreatePDF(html, dest=response)
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return response
+    else:
+        return HttpResponseBadRequest("Invalid request")
+
 
 
 

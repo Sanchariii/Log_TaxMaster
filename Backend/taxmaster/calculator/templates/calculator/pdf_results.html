@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculation Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .summary {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .summary h2 {
+            color: #2980b9;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .summary p {
+            font-size: 18px;
+        }
+
+        .tax-details {
+            margin-bottom: 30px;
+        }
+
+        .tax-details h3 {
+            color: #27ae60;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tax-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tax-details table th,
+        .tax-details table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tax-details table th {
+            background-color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #dff0d8;
+            font-weight: bold;
+        }
+
+        .suggestions {
+            margin-top: 20px;
+        }
+
+        .suggestions h3 {
+            font-size: 20px;
+            color: #e74c3c;
+        }
+
+        .suggestions ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .suggestions ul li {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+
+        .btn-download {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .btn-download:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tax Calculation Results</h1>
+
+    <div class="summary">
+        <p><strong>Age Group:</strong> {{ age_slab }}</p>
+        <p><strong>Best Regime:</strong> {{ best_regime }}</p>
+    </div>
+
+    <div class="tax-details">
+        <h3>Tax Breakdown</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Regime</th>
+                <th>Tax Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if tax_old_regime %}
+                <tr>
+                    <td>Old Regime</td>
+                    <td>Rs. {{ tax_old_regime }}</td>
+                </tr>
+            {% endif %}
+            {% if tax_new_regime %}
+                <tr>
+                    <td>New Regime</td>
+                    <td>Rs. {{ tax_new_regime }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+        {% if happy_message %}
+        <p class="highlight">{{ happy_message }}</p>
+        {% endif %}
+    </div>
+
+    {% if suggestions %}
+    <div class="suggestions">
+        <h3>Recommendations to Reduce Your Tax</h3>
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
+
+<div class="footer">
+    <p>Thank you for using our tax calculator!</p>
+</div>
+
+</body>
+</html>
