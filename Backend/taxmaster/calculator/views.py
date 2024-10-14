@@ -127,7 +127,6 @@ def calculate_tax_view(request):
 
             return render(request, 'calculator/tax_result.html', context)
     else:
-<<<<<<< HEAD
         exemption_limit = Decimal('250000')
     
     tax = Decimal('0')
@@ -185,7 +184,6 @@ def recommend_tax_regime(income, deductions, income_type, net_income, age_group)
        savings = old_tax - new_tax
        recommendation = f"New Tax Regime is recommended for you. It would save you ₹{savings:.2f} in taxes."
    return old_tax, new_tax, recommendation
-=======
         form = TaxCalculatorForm()
 
     return render(request, 'calculator/tax_calculator.html', {'form': form})
@@ -227,7 +225,6 @@ def recommend_tax_regime(income, deductions, income_type, net_income, age_group)
     
     return old_tax, new_tax, recommendation
 
->>>>>>> ab96e54a51b3c42a5cec525bf726dad8c3f43f9e
 
 @login_required
 def tax_calculator_view(request):
@@ -258,11 +255,6 @@ def tax_calculator_view(request):
        form = TaxCalculatorForm()
    return render(request, 'calculator/tax_calculator.html', {'form': form})
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ab96e54a51b3c42a5cec525bf726dad8c3f43f9e
 @login_required
 def old_tax_scheme_view(request):
    old_tax_scheme = TaxScheme.objects.filter(regime='old')
@@ -286,7 +278,6 @@ def render_to_pdf(template_src, context_dict={}):
 
 logger = logging.getLogger('calculator')
 
-<<<<<<< HEAD
 def print_pdf_view(request):
    if request.method == 'POST':
        user_details_id = request.POST.get('user_details_id')
@@ -318,7 +309,6 @@ def print_pdf_view(request):
        response = HttpResponse(pdf, content_type='application/pdf')
        response['Content-Disposition'] = 'attachment; filename="tax_calculation_result.pdf"'
        return response
-=======
 
 
 # def print_pdf_view(request):
@@ -368,7 +358,6 @@ def calculate_tax_old_regime(income_type, age_group, gross_income, deductions_80
        age_based_slab = 250000  # for individuals below 60 years
    elif age_group == '60_80':
        age_based_slab = 300000  # for senior citizens (60-80 years)
->>>>>>> ab96e54a51b3c42a5cec525bf726dad8c3f43f9e
    else:
        age_based_slab = 500000  # for super senior citizens (above 80 years)
    if income_type == 'salaried':
