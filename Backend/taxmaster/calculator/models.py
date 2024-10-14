@@ -16,37 +16,7 @@ class UserInput(models.Model):
    def __str__(self):
        return f"User Input - Age Group: {self.age_group}, Income: {self.annual_income}"
 
-# class TaxCalculator(models.Model):
-#     INCOME_TYPE_CHOICES=[
-#         ('salarised', 'Salarised'),
-#         ('business', 'Business'),]
-        
-#     # REGIME_CHOICES = [
-#     #     ('old', 'Old Regime'),
-#     #     ('new', 'New Regime'),
-#     # ]
 
-#     AGE_CHOICES = [
-#         ('below_60', 'Below_60'),
-#         ('senior', '60 to 80'),
-#         ('super_senior', 'Above 80'),
-#     ]
-#     # user_details = models.ForeignKey(UserDetails, on_delete=models.CASCADE)
-#     income_type = models.CharField(max_length=10, choices=INCOME_TYPE_CHOICES, verbose_name='Income Type', null=True)
-#     # regime = models.CharField(max_length=10, choices=REGIME_CHOICES, verbose_name='Tax Regime', null=True)
-#     age_group = models.CharField(max_length=12, choices=AGE_CHOICES, verbose_name='Age Group', null=True)
-#     total_income = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Total Income', null=True)
-#     user_details = models.ForeignKey(UserDetails, on_delete=models.CASCADE)
-#     income_type = models.CharField(max_length=10, choices=INCOME_TYPE_CHOICES, verbose_name='Income Type')
-#     #regime = models.CharField(max_length=10, choices=REGIME_CHOICES, verbose_name='Tax Regime')
-#     age_group = models.CharField(max_length=12, choices=AGE_CHOICES, verbose_name='Age Group')
-#     total_income = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Total Income')
-#     net_income = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Net Income after Expenses', null=True, blank=True)
-#     income = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Income', null=True)
-#     deductions = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Deductions', default=0)
-
-#     def __str__(self):
-#         return f"{self.user_details.user.username} ({self.get_income_type_display()})"
 
 class TaxScheme(models.Model):
     regime = models.CharField(max_length=10)  # 'old' or 'new'
