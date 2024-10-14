@@ -8,6 +8,7 @@ class UserRequest(models.Model):
     last_name = models.CharField(max_length=150)
     email = models.EmailField()
     approved = models.BooleanField(default=False)
+    rejected = models.BooleanField(default=False)
     slot = models.CharField(max_length=100, null=True)  # Store the time slot as a string (can use choices)
     date = models.DateField(null=True)  # Store the appointment date
 

@@ -183,7 +183,7 @@ def appointment_request_sent(request):
     
 def manage_requests_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():
-        requests = UserRequest.objects.filter(tax_advisor=request.user, approved=False)
+        requests = UserRequest.objects.filter(tax_advisor=request.user, approved=False, rejected=False)
         return render(request, 'appointment/manage_requests.html', {'requests': requests})
     else:
         return redirect('not_authorized')
@@ -210,9 +210,20 @@ def approve_request(request, request_id):
     
 
 def reject_request(request, request_id):
-    user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
-    user_request.delete()
+    user_request = get_object_or_404(UserRequest, id=request_id, tax_advisor=request.user)
+    user_request.rejected = True
+    user_request.save()
+
+    send_mail(
+        'Your Appointment Request Has Been Rejected',
+        f'Hello {user_request.first_name},\n\nYour appointment request with {user_request.tax_advisor.first_name} {user_request.tax_advisor.last_name} has been rejected. Please check your account for more details.',
+        settings.DEFAULT_FROM_EMAIL,
+        [user_request.email],
+        fail_silently=False,
+    )
+
     return redirect('manage_requests')
+
 
 def advisor_appointments_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():

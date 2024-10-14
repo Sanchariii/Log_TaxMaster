@@ -22,15 +22,16 @@ def available_advisors_view(request):
     return render(request, 'advisor/available_advisors.html', {'advisors': advisors})
 
 def advisor_requests(request):
-    if request.user.groups.filter(name='Tax Advisor').exists():  # Check if user belongs to the 'TaxAdvisor' group
-        requests = UserRequest.objects.filter(tax_advisor=request.user)  # Show requests where the current user is the tax advisor
+    if request.user.groups.filter(name='Tax Advisor').exists():  # Check if user belongs to the 'Tax Advisor' group
+        # Show only requests where the current user is the tax advisor and either approved or rejected
+        requests = UserRequest.objects.filter(tax_advisor=request.user).filter(approved=True) | UserRequest.objects.filter(tax_advisor=request.user).filter(rejected=True)
     else:
         requests = None  # Handle case where the user is not a tax advisor
 
     return render(request, 'advisor/advisor_requests.html', {
         'requests': requests,
     })
-    
+
     
 # def tax_advisor_profile(request):
 #     # Try to get the user's profile or create a new one if it doesn't exist
