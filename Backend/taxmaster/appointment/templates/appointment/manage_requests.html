@@ -1,107 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Appointment Requests</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 28px;
-        }
-        .table thead th {
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-        }
-        .table tbody td {
-            text-align: center;
-        }
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-        .btn-success:hover {
-            background-color: #218838;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border-color: #bee5eb;
-            font-size: 18px;
-        }
-        .text-center {
-            text-align: center;
-        }
-</style>
-</head>
-<body>
-<div class="container">
-<h2>Your Appointment Requests</h2>
-        {% if requests %}
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Email</th>
-<th>Tax Advisor</th>
-<th>Requested Date</th>
-<th>Slot</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
-                    {% for request in requests %}
-<tr>
-<td>{{ request.first_name }}</td>
-<td>{{ request.last_name }}</td>
-<td>{{ request.email }}</td>
-<td>{{ request.tax_advisor.username }}</td>
-<td>{{ request.date }}</td>
-<td>{{ request.slot }}</td>
-<td>
-<a href="{% url 'approve_request'
-request.id
-%}" class="btn btn-success btn-sm">Approve</a>
-<a href="{% url 'reject_request'
-request.id
-%}" class="btn btn-danger btn-sm">Reject</a>
-</td>
-</tr>
-                    {% endfor %}
-</tbody>
-</table>
-        {% else %}
-<div class="alert alert-info text-center">
-                You have no appointment requests at this time.
-</div>
-        {% endif %}
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Manage Appointment Requests
+{% endblock %} 
+
+{% block individual_style %}
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <style>
+         body {
+         background-color: #f8f9fa;
+         font-family: 'Arial', sans-serif;
+         }
+         .container {
+         margin-top: 50px;
+         padding: 30px;
+         background-color: #ffffff;
+         border-radius: 10px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+         }
+         h2 {
+         color: #2c3e50;
+         margin-bottom: 30px;
+         text-align: center;
+         font-size: 28px;
+         }
+         .table thead th {
+         background-color: #3498db;
+         color: white;
+         text-align: center;
+         }
+         .table tbody td {
+         text-align: center;
+         }
+         .btn-success {
+         background-color: #28a745;
+         border: none;
+         transition: background-color 0.3s ease;
+         }
+         .btn-success:hover {
+         background-color: #218838;
+         }
+         .btn-danger {
+         background-color: #dc3545;
+         border: none;
+         transition: background-color 0.3s ease;
+         }
+         .btn-danger:hover {
+         background-color: #c82333;
+         }
+         .alert-info {
+         background-color: #d1ecf1;
+         color: #0c5460;
+         border-color: #bee5eb;
+         font-size: 18px;
+         }
+         .text-center {
+         text-align: center;
+         }
+      </style>
+{% endblock %}  
+
+{% block content %}
+   <body>
+      <div class="container">
+         <h2>Your Appointment Requests</h2>
+         {% if requests %}
+         <table class="table table-striped table-bordered">
+            <thead>
+               <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Tax Advisor</th>
+                  <th>Requested Date</th>
+                  <th>Slot</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for request in requests %}
+               <tr>
+                  <td>{{ request.first_name }}</td>
+                  <td>{{ request.last_name }}</td>
+                  <td>{{ request.email }}</td>
+                  <td>{{ request.tax_advisor.username }}</td>
+                  <td>{{ request.date }}</td>
+                  <td>{{ request.slot }}</td>
+                  <td>
+                     <a href="{% url 'approve_request'
+                        request.id
+                        %}" class="btn btn-success btn-sm">Approve</a>
+                     <a href="{% url 'reject_request'
+                        request.id
+                        %}" class="btn btn-danger btn-sm">Reject</a>
+                  </td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+         {% else %}
+         <div class="alert alert-info text-center">
+            You have no appointment requests at this time.
+         </div>
+         {% endif %}
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   </body>
+   {% endblock %}
