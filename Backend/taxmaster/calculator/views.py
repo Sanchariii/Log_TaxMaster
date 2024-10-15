@@ -10,18 +10,6 @@ from decimal import Decimal, InvalidOperation
 from django.http import HttpResponseBadRequest
 import logging
 
-
-def clean_and_convert(value):
-   value = value.replace('₹', '').replace('lakh', '').strip()
-   if value.startswith('Upto'):
-       value = value.replace('Upto', '').strip()
-   elif value.startswith('More than'):
-       value = value.replace('More than', '').strip()
-       return Decimal(value) * 100000 + Decimal('0.01')
-   return Decimal(value) * 100000 if value else Decimal('0.0')
-
-
-
 def calculate_surcharge(taxable_income, tax):
     """Calculate surcharge based on income thresholds."""
     surcharge = Decimal('0.0')
@@ -35,14 +23,18 @@ def calculate_surcharge(taxable_income, tax):
         surcharge = Decimal('0.37') * tax
     return surcharge
 
-def calculate_tax_view(income, standard_deduction, other_deductions, age_group):
+def calculate_tax_view(income, standard_deduction, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
     """Calculate tax for both regimes and apply surcharge and cess."""
     income = Decimal(income)
     standard_deduction = Decimal(standard_deduction)
-    other_deductions = Decimal(other_deductions)
+    deduction_80c = Decimal(deduction_80c or 0)
+    deduction_80d = Decimal(deduction_80d or 0)
+    deduction_80e = Decimal(deduction_80e or 0)
+    deduction_80eea = Decimal(deduction_80eea or 0)
+    deduction_80g = Decimal(deduction_80g or 0)
 
     def old_regime_tax():
-        taxable_income = income - standard_deduction - other_deductions
+        taxable_income = income - standard_deduction - deduction_80c - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
         tax = Decimal('0.0')
         if age_group == 1:  # Below 60 years
             if taxable_income <= 250000:
@@ -110,9 +102,13 @@ def tax_calculator_view(request):
             age_group = int(form.cleaned_data['age_group'])
             income = form.cleaned_data['annual_income']
             standard_deduction = form.cleaned_data['standard_deduction']
-            other_deductions = form.cleaned_data['other_deductions']
+            deduction_80c = form.cleaned_data.get('deduction_80c', 0)
+            deduction_80d = form.cleaned_data.get('deduction_80d', 0)
+            deduction_80e = form.cleaned_data.get('deduction_80e', 0)
+            deduction_80eea = form.cleaned_data.get('deduction_80eea', 0)
+            deduction_80g = form.cleaned_data.get('deduction_80g', 0)
             selected_scheme = request.POST.get('selected_scheme', 'both')
-            tax_old_regime, tax_new_regime = calculate_tax_view(income, standard_deduction, other_deductions, age_group)
+            tax_old_regime, tax_new_regime = calculate_tax_view(income, standard_deduction, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
             
             # Determine the best regime
             if tax_old_regime < tax_new_regime:
@@ -174,11 +170,17 @@ def tax_calculator_pdf_view(request):
         age_group = int(request.POST.get('age_group'))
         income = Decimal(request.POST.get('annual_income'))
         standard_deduction = Decimal(request.POST.get('standard_deduction'))
-        other_deductions = Decimal(request.POST.get('other_deductions'))
+        deduction_80c = Decimal(request.POST.get('deduction_80c', 0))
+        deduction_80d = Decimal(request.POST.get('deduction_80d', 0))
+        deduction_80e = Decimal(request.POST.get('deduction_80e', 0))
+        deduction_80eea = Decimal(request.POST.get('deduction_80eea', 0))
+        deduction_80g = Decimal(request.POST.get('deduction_80g', 0))
         selected_scheme = request.POST.get('selected_scheme', 'both')
 
         # Calculate taxes using the same logic
-        tax_old_regime, tax_new_regime = calculate_tax_view(income, standard_deduction, other_deductions, age_group)
+        tax_old_regime, tax_new_regime = calculate_tax_view(
+            income, standard_deduction, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group
+        )
 
         # Determine the best regime
         if tax_old_regime < tax_new_regime:
@@ -235,9 +237,6 @@ def tax_calculator_pdf_view(request):
         return response
     else:
         return HttpResponseBadRequest("Invalid request")
-
-
-
 
 def tax_slabs_view(request):
     return render(request, 'calculator/tax_slabs.html')
