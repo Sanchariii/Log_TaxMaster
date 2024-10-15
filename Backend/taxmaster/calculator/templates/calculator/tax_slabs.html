@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tax Slabs</title>
+{% extends 'base.html' %}
+
+{% block title %}
+    Tax Slabs
+{% endblock %} 
+{% block individual_style %}
+
 <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -69,7 +70,9 @@
             padding: 20px;
         }
 </style>
-</head>
+{% endblock %}  
+
+{% block content %}
 <body>
 <div class="container">
 <h1>Tax Slabs</h1>
@@ -134,4 +137,4 @@
 <a href="{% url 'tax_calculator' %}">Back to Calculator</a>
 </div>
 </body>
-</html>
+{% endblock %}
