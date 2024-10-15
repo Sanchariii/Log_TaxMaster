@@ -1,126 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tax Calculator</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Tax Calculator
+{% endblock %} 
+{% block individual_style %}
 <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #673AB7;
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        input[type="number"], button {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 100%;
-        }
-        button[type="submit"] {
-            background-color: #673AB7;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        button[type="submit"]:hover {
-            background-color: #5e35b1;
-            transform: scale(1.05);
-        }
-        .services {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        .services button {
-            background-color: #D1C4E9;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .services button:hover {
-            background-color: #B39DDB;
-            transform: scale(1.05);
-        }
-        .footer-buttons {
-            margin-top: 50px;
-            text-align: center;
-        }
-        .footer-buttons button {
-            background-color: #673AB7;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .footer-buttons button:hover {
-            background-color: #5e35b1;
-            transform: scale(1.05);
-        }
+    .tax-calculator body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    }
+    .tax-calculator .container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .tax-calculator h1 {
+    color: #673AB7;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    }
+    .tax-calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    }
+    .tax-calculator label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+    .tax-calculator input[type="number"], button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    }
+    .tax-calculator button[type="submit"] {
+    background-color: #d7bde2;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .tax-calculator button[type="submit"]:hover {
+    background-color: #5e35b1;
+    transform: scale(1.05);
+    }
+    .tax-calculator .services {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    }
+    .tax-calculator .services button {
+    background-color: #D1C4E9;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .tax-calculator .services button:hover {
+    background-color: #B39DDB;
+    transform: scale(1.05);
+    }
+    .tax-calculator .footer-buttons {
+    margin-top: 50px;
+    text-align: center;
+    }
+    .tax-calculator .footer-buttons button {
+    background-color: #d7bde2;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .tax-calculator x.footer-buttons button:hover {
+    background-color: #5e35b1;
+    transform: scale(1.05);
+    }
+    .tax-calculator a.hero-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:#d65cad; /* Bootstrap btn-primary background */
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .tax-calculator a.hero-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        transform: scale(1.05);
+    }
 </style>
-</head>
+{% endblock %}  
+{% block content %}
 <body>
-<div class="container">
-<h1>Income Tax Calculator</h1>
-<form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-<button type="submit">Calculate Tax</button>
-</form>
-<!-- Optional button for individual users -->
-        {% if is_indivual_user %}
-<div class="footer-buttons">
-<a href="{% url 'available_advisors_view' %}">
-<button type="button">Show Tax Advisors</button>
-</a>
-</div>
-        {% endif %}
-<hr>
-<!-- Additional Services -->
-<div class="services">
-<button type="button" onclick="showTaxSchemes()">Check Tax Schemes</button>
-<button type="button" onclick="generatePDF()">Generate PDF</button>
-<button type="button" onclick="contactConsultants()">Contact Tax Consultants</button>
-</div>
-</div>
-<script>
-        function showTaxSchemes() {
-            alert('Details about various tax schemes...');
-        }
-        function generatePDF() {
-            alert('PDF generation functionality...');
-        }
-        function contactConsultants() {
-            alert('Contact details for tax consultants...');
-        }
-</script>
+   <div class="tax-calculator">
+   <div class="container">
+    <img src="{% static 'human_favicon.png' %}" alt="Tax Calculator Image" height="100px">
+
+      <h1>Income Tax Calculator</h1>
+      <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button type="submit">Calculate Tax</button>
+      </form>
+      <!-- Optional button for individual users -->
+      {% if is_indivual_user %}
+      <div class="footer-buttons">
+         <a href="{% url 'available_advisors_view' %}">
+         <button type="button">Show Tax Advisors</button>
+         </a>
+      </div>
+      {% endif %}
+      <hr>
+      <!-- Additional Services -->
+      <div class="services">
+        <a href="{% url 'tax_slabs' %}" class="hero-button explore-more">Check Tax Schemes</a>
+         {% comment %} <button type="button" onclick="showTaxSchemes()">Check Tax Schemes</button> {% endcomment %}
+        <a href="{% url 'tax_calculator_pdf' %}" class="hero-button explore-more">Generate PDF</a>
+        <a href="{% url 'available_advisors_view' %}" class="hero-button explore-more">Contact Tax Consultants</a>
+      </div>
+   </div>
+   <script>
+      function showTaxSchemes() {
+          alert('Details about various tax schemes...');
+      }
+      function generatePDF() {
+          alert('PDF generation functionality...');
+      }
+      function contactConsultants() {
+          alert('Contact details for tax consultants...');
+      }
+   </script>
 </body>
-</html>
+{% endblock %}

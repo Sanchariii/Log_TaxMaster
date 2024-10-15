@@ -50,7 +50,7 @@ def is_Admin(user):
 class CustomLoginView(View):
     form_class = AuthenticationForm
     template_name = 'accounts/login.html'
-    otp_template_name = 'accounts/otp.html' 
+    otp_template_name = 'accounts/otp.html'
 
     def get(self, request):
         if 'otp_verified' in request.session and request.session['otp_verified']:
@@ -60,39 +60,42 @@ class CustomLoginView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
+        # Check if OTP has been sent
         if 'otp_sent' in request.session and request.session['otp_sent']:
             otp = request.POST.get('otp')
+            print(f"OTP entered: {otp}")  # Debugging print
+            print(f"Stored OTP: {request.session.get('otp')}")  # Debugging print
             if otp and otp == request.session.get('otp'):
                 user = authenticate(username=request.session.pop('username'), password=request.session.pop('password'))
                 if user:
                     auth_login(request, user)
-                    request.session.pop('otp_verified', None)
+                    request.session.pop('otp_sent', None)
+                    request.session['otp_verified'] = True
                     return self._redirect_user(user)
-            # messages.error(request, 'Invalid OTP. Please try again.')
-            return render(request, self.otp_template_name)
+                else:
+                    print("User authentication failed.")  # Debugging print
+                    return self._render_error(request, "User authentication failed. Please try again.")
+            else:
+                print("Invalid OTP entered.")  # Debugging print
+                return self._render_error(request, "Invalid OTP. Please try again.", template=self.otp_template_name)
 
+        # Process the login form
         form = self.form_class(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            password = form.cleaned_data.get('password')
-            try:
-                validate_password(password, user)
-            except ValidationError as e:
-                form.add_error('password', e)
-                return render(request, self.template_name, {'form': form})
-
+            print(f"Authenticated user: {user.username}")  # Debugging print
             request.session['username'] = form.cleaned_data.get('username')
             request.session['password'] = form.cleaned_data.get('password')
             otp = self.generate_otp()
             request.session['otp'] = otp
             request.session['otp_sent'] = True
             self.send_otp_via_email(user.email, otp)
-            # messages.info(request, 'An OTP has been sent to your email. Please enter it to continue.')
+            print(f"OTP sent to: {user.email}")  # Debugging print
             return render(request, self.otp_template_name)
         else:
-            messages.error(request, 'Invalid username or password.')
-
-        return render(request, self.template_name, {'form': form})
+            print("Invalid form submission.")  # Debugging print
+            print("Form errors:", form.errors)  # Print form errors for debugging
+            return render(request, self.template_name, {'form': form})
 
     def _redirect_user(self, user):
         """Redirects user based on their group."""
@@ -115,7 +118,8 @@ class CustomLoginView(View):
         subject = 'Your OTP Code'
         message = f'Your OTP code is {otp}'
         from_email = 'raysanchari930@gmail.com'
-        send_mail(subject, message,from_email,  [email], fail_silently=False)
+        send_mail(subject, message, from_email, [email], fail_silently=False)
+
 
 
 ############################# Dividing Groups #########################################################

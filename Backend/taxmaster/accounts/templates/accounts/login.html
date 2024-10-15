@@ -1,104 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<style>
-        body {
-            background-color: #f0f4f7;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            max-width: 400px;
-            margin-top: 50px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .header-container {
-            background-color: #E6E6FA;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .header-container h1 {
-            color: #2e3b4e;
-            font-size: 28px;
-            font-weight: bold;
-            margin: 0;
-        }
-        .forgot-password-container {
-            text-align: right;
-            margin-bottom: 10px;
-        }
-        .footer-container {
-            background-color: #f7f9fc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .form-control {
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-        .btn-custom {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-        .custom-checkbox {
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-</style>
-</head>
-<body>
-<div class="container">
-<div class="header-container">
-<h1>Log In</h1>
-</div>
-<form method="post">
-<input type="text" class="form-control" placeholder="Your Name" name="name" required>
-<input type="password" class="form-control" placeholder="Password" name="password" required>
-<div class="forgot-password-container">
-<a href="#">Forgot Password?</a>
-</div>
-<div class="custom-checkbox">
-<input type="checkbox" name="remember_me"> Remember me
-</div>
-<button type="submit" class="btn btn-custom">Log in</button>
-</form>
-<div class="footer-container">
-<p>Not an Existing User? <a href="#">Create an account</a></p>
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Login Page</title>
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+         body {
+         background-color: #f0f4f7;
+         font-family: 'Arial', sans-serif;
+         }
+         .container {
+         max-width: 400px;
+         margin-top: 50px;
+         background-color: white;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+         }
+         .header-container {
+         background-color: #E6E6FA;
+         padding: 15px;
+         border-radius: 10px;
+         margin-bottom: 20px;
+         text-align: center;
+         }
+         .header-container h1 {
+         color: #2e3b4e;
+         font-size: 28px;
+         font-weight: bold;
+         margin: 0;
+         }
+         .forgot-password-container {
+         text-align: right;
+         margin-bottom: 10px;
+         }
+         .footer-container {
+         background-color: #f7f9fc;
+         padding: 15px;
+         border-radius: 10px;
+         margin-top: 20px;
+         text-align: center;
+         }
+         .form-control {
+         border: 1px solid #ccc;
+         padding: 10px;
+         font-size: 16px;
+         border-radius: 5px;
+         width: 100%;
+         margin-bottom: 15px;
+         }
+         .btn-custom {
+         background-color: #007BFF;
+         color: white;
+         padding: 10px;
+         font-size: 16px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         width: 100%;
+         margin-top: 10px;
+         }
+         .btn-custom:hover {
+         background-color: #0056b3;
+         }
+         .custom-checkbox {
+         margin-top: 10px;
+         font-size: 16px;
+         }
+         a {
+         color: #007BFF;
+         text-decoration: none;
+         }
+         a:hover {
+         text-decoration: underline;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <div class="header-container">
+            <h1>Log In</h1>
+         </div>
+         <form method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" placeholder="Username" name="username" required>
+            <input type="password" class="form-control" placeholder="Password" name="password" required>
+            <div class="forgot-password-container">
+               <a href="#">Forgot Password?</a>
+            </div>
+            <div class="custom-checkbox">
+               <input type="checkbox" name="remember_me"> Remember me
+            </div>
+            <button type="submit" class="btn btn-custom">Log in</button>
+         </form>
+         <div class="footer-container">
+            <p>Not an Existing User? <a href="#">Create an account</a></p>
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
 </html>

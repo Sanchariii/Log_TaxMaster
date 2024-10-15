@@ -1,106 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Appointment Requests</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-        body {
+{% extends 'base.html' %}
+
+{% block title %}
+    Your Appointment Requests 
+{% endblock %} 
+
+{% block individual_style %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
             background-color: #f7f9fc;
             font-family: 'Arial', sans-serif;
-        }
-        .container {
+            }
+            .container {
             background-color: white;
             padding: 30px;
             margin-top: 50px;
             border-radius: 15px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
-        }
-        h2 {
+            }
+            h2 {
             color: #4a4a4a;
             text-align: center;
             margin-bottom: 30px;
             font-weight: bold;
-        }
-        table {
+            }
+            table {
             margin-top: 20px;
             width: 100%;
             border-collapse: collapse;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        th {
+            }
+            th {
             background-color: #007bff;
             color: white;
             font-weight: bold;
             padding: 12px;
             text-align: center;
             border: 1px solid #dee2e6;
-        }
-        td {
+            }
+            td {
             padding: 12px;
             text-align: center;
             border: 1px solid #dee2e6;
-        }
-        tbody tr:hover {
+            }
+            tbody tr:hover {
             background-color: #f1f1f1;
             cursor: pointer;
             transition: background-color 0.3s ease;
-        }
-        .alert {
+            }
+            .alert {
             text-align: center;
             padding: 20px;
             margin-top: 20px;
             border-radius: 10px;
-        }
-        @keyframes fadeIn {
+            }
+            @keyframes fadeIn {
             from {
-                opacity: 0;
+            opacity: 0;
             }
             to {
-                opacity: 1;
+            opacity: 1;
             }
-        }
-</style>
-</head>
-<body>
-<div class="container">
-<h2>Your Approved Appointments</h2>
-        {% if requests %}
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Email</th>
-<th>Tax Advisor</th> <!-- Display Tax Advisor -->
-<th>Appointment Date</th> <!-- Display Date -->
-<th>Slot</th> <!-- Display Slot -->
-<th>Approved</th> <!-- Display Approval Status -->
-</tr>
-</thead>
-<tbody>
-                    {% for request in requests %}
-<tr>
-<td>{{ request.first_name }}</td>
-<td>{{ request.last_name }}</td>
-<td>{{ request.email }}</td>
-<td>{{ request.tax_advisor.username }}</td> <!-- Tax Advisor Username -->
-<td>{{ request.date }}</td> <!-- Appointment Date -->
-<td>{{ request.slot }}</td> <!-- Slot -->
-<td>{{ request.approved|yesno:"Yes,No" }}</td> <!-- Approved Status -->
-</tr>
-                    {% endfor %}
-</tbody>
-</table>
-        {% else %}
-<div class="alert alert-info">
-                You have no scheduled appointments at this time.
-</div>
-        {% endif %}
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+            }
+        </style>        
+{% endblock %}  
+
+
+{% block content %}
+   <body>
+      <div class="container">
+         <h2>Your Seen Appointment Requests</h2>
+         {% if requests %}
+         <table class="table table-striped table-bordered">
+            <thead>
+               <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Tax Advisor</th>
+                  <!-- Display Tax Advisor -->
+                  <th>Appointment Date</th>
+                  <!-- Display Date -->
+                  <th>Slot</th>
+                  <!-- Display Slot -->
+                  <th>Approved</th>
+                  <!-- Display Approval Status -->
+               </tr>
+            </thead>
+            <tbody>
+               {% for request in requests %}
+               <tr>
+                  <td>{{ request.first_name }}</td>
+                  <td>{{ request.last_name }}</td>
+                  <td>{{ request.email }}</td>
+                  <td>{{ request.tax_advisor.username }}</td>
+                  <!-- Tax Advisor Username -->
+                  <td>{{ request.date }}</td>
+                  <!-- Appointment Date -->
+                  <td>{{ request.slot }}</td>
+                  <!-- Slot -->
+                  <td>{{ request.approved|yesno:"Yes,No" }}</td>
+                  <!-- Approved Status -->
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+         {% else %}
+         <div class="alert alert-info">
+            You have no scheduled appointments at this time.
+         </div>
+         {% endif %}
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   </body>
+{% endblock %}
