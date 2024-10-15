@@ -1,91 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>OTP Verification</title>
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-      <style>
-         body {
-         background-color: #f0f4f7;
-         font-family: 'Arial', sans-serif;
-         }
-         .container {
-         max-width: 400px;
-         margin-top: 50px;
-         background-color: white;
-         padding: 20px;
-         border-radius: 10px;
-         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-         }
-         .header-container {
-         background-color: #E6E6FA;
-         padding: 15px;
-         border-radius: 10px;
-         margin-bottom: 20px;
-         text-align: center;
-         }
-         .header-container h1 {
-         color: #2e3b4e;
-         font-size: 28px;
-         font-weight: bold;
-         margin: 0;
-         }
-         .footer-container {
-         background-color: #f7f9fc;
-         padding: 15px;
-         border-radius: 10px;
-         margin-top: 20px;
-         text-align: center;
-         }
-         .form-control {
-         border: 1px solid #ccc;
-         padding: 10px;
-         font-size: 16px;
-         border-radius: 5px;
-         width: 100%;
-         margin-bottom: 15px;
-         }
-         .btn-custom {
-         background-color: #007BFF;
-         color: white;
-         padding: 10px;
-         font-size: 16px;
-         border: none;
-         border-radius: 5px;
-         cursor: pointer;
-         width: 100%;
-         margin-top: 10px;
-         }
-         .btn-custom:hover {
-         background-color: #0056b3;
-         }
-         a {
-         color: #007BFF;
-         text-decoration: none;
-         }
-         a:hover {
-         text-decoration: underline;
-         }
-      </style>
-   </head>
-   <body>
-      <div class="container">
-         <div class="header-container">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f7;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin-top: 80px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .header-container {
+            background-color: #E6E6FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .header-container h1 {
+            color: #4A5568;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .form-control {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn-custom {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .footer-container {
+            background-color: #f7f9fc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer-container p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
             <h1>OTP Verification</h1>
-         </div>
-         <form method="post">
+        </div>
+        <form method="post">
             {% csrf_token %}
             <p class="text-center">An OTP has been sent to your email. Please enter it below:</p>
             <input type="text" class="form-control" name="otp" placeholder="Enter OTP" required>
             <button type="submit" class="btn btn-custom">Verify OTP</button>
-         </form>
-         <div class="footer-container">
+        </form>
+        <div class="footer-container">
             <p>If you didn't receive the OTP, <a href="#">Resend OTP</a></p>
-         </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   </body>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
