@@ -94,7 +94,7 @@ def calculate_tax_view(income, standard_deduction, deduction_80c, deduction_80d,
 
 
 
-# @login_required
+@login_required
 def tax_calculator_view(request):
     if request.method == 'POST':
         form = TaxCalculatorForm(request.POST)
@@ -149,7 +149,7 @@ def tax_calculator_view(request):
                 'selected_scheme': selected_scheme,
                 'user_name': request.user.username,
                 'age_slab': age_slab,
-                'thank_you_message': "Thank you for using our tax calculator!"
+                'thank_you_message': "Thank you for using TaxMaster!"
             })
             
      
@@ -163,7 +163,7 @@ from xhtml2pdf import pisa
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
-# @login_required
+@login_required
 def tax_calculator_pdf_view(request):
     if request.method == 'POST':
         # Extract form data from POST request

@@ -123,13 +123,13 @@ class CustomLoginView(View):
 
 
 ############################# Dividing Groups #########################################################
-# @login_required
+@login_required
 @user_passes_test(is_User_or_Advisor)
 def group_list(request):
     groups = Group.objects.all()
     return render(request, 'accounts/group_list.html', {'groups': groups})
 
-# @login_required
+@login_required
 @user_passes_test(is_Admin)
 def group_list_Admin(request):
     groups = Group.objects.all()
@@ -240,7 +240,7 @@ def verify_signup_otp(request):
     return render(request, 'accounts/verify_otp.html', {'form': form})
 
 ################################## Logout View ############################################################
-# @login_required
+@login_required
 def logout_view(request):
     
     logout(request)

@@ -4,78 +4,87 @@
 {% endblock %} 
 
 {% block individual_style %}
-
         <style>
         body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        color: #2c3e50;
-        margin: 0;
-        padding: 20px;
-        max-width: 800px;
-        margin: 40px auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        background-color: #fff;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #fff;
         }
         h1 {
-        font-size: 2em;
-        color: #3498db;
-        margin-bottom: 20px;
-        text-align: center;
+            font-size: 2em;
+            color: #3498db;
+            margin-bottom: 20px;
+            text-align: center;
         }
         p {
-        font-size: 1.1em;
-        margin: 10px 0;
+            font-size: 1.1em;
+            margin: 10px 0;
         }
         a, button {
-        margin-top: 20px;
-        display: inline-block;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #3498db;
-        color: white;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         a:hover, button:hover {
-        background-color: #2980b9;
-        transform: scale(1.05);
+            background-color: #2980b9;
+            transform: scale(1.05);
         }
         ul {
-        list-style-type: disc;
-        background-color: #f1f1f1;
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 20px;
+            list-style-type: disc;
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
         li {
-        margin: 5px 0;
+            margin: 5px 0;
         }
         .happy-message {
-        color: #28a745;
-        font-weight: bold;
-        margin: 20px 0;
-        font-size: 1.2em;
-        text-align: center;
+            color: #28a745;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.2em;
+            text-align: center;
         }
         footer {
-        margin-top: 40px;
-        text-align: center;
-        font-size: 1.2em;
-        color: #7f8c8d;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #7f8c8d;
         }
         .tax-details p {
-        font-weight: bold;
+            font-weight: bold;
         }
-</style>
+        .deduction-details {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .deduction-title {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #3498db;
+        }
+        </style>
 {% endblock %}  
 
 {% block content %}
-
-        <body>
+    <body>
         <h1>Tax Calculation Result</h1>
         <!-- Display user details -->
         <p><strong>User:</strong> {{ user_name }}</p>
@@ -84,7 +93,14 @@
         <div class="tax-details">
             <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income }}</p>
             <p><strong>Standard Deduction:</strong> ₹{{ form.cleaned_data.standard_deduction }}</p>
-            <p><strong>Other Deductions:</strong> ₹{{ form.cleaned_data.other_deductions }}</p>
+            <div class="deduction-details">
+                <p class="deduction-title">Other Deductions:</p>
+                <p><strong>80C:</strong> ₹{{ form.cleaned_data.deduction_80c }}</p>
+                <p><strong>80D:</strong> ₹{{ form.cleaned_data.deduction_80d }}</p>
+                <p><strong>80E:</strong> ₹{{ form.cleaned_data.deduction_80e }}</p>
+                <p><strong>80EEA:</strong> ₹{{ form.cleaned_data.deduction_80eea }}</p>
+                <p><strong>80G:</strong> ₹{{ form.cleaned_data.deduction_80g }}</p>
+            </div>
             <p><strong>Old Tax Regime Tax:</strong> ₹{{ tax_old_regime }}</p>
             <p><strong>New Tax Regime Tax:</strong> ₹{{ tax_new_regime }}</p>
             <p><strong>Best Regime:</strong> {{ best_regime }}</p>
@@ -110,7 +126,11 @@
             <input type="hidden" name="annual_income" value="{{ form.annual_income.value }}">
             <input type="hidden" name="age_group" value="{{ form.age_group.value }}">
             <input type="hidden" name="standard_deduction" value="{{ form.standard_deduction.value }}">
-            <input type="hidden" name="other_deductions" value="{{ form.other_deductions.value }}">
+            <input type="hidden" name="deduction_80c" value="{{ form.cleaned_data.deduction_80c }}">
+            <input type="hidden" name="deduction_80d" value="{{ form.cleaned_data.deduction_80d }}">
+            <input type="hidden" name="deduction_80e" value="{{ form.cleaned_data.deduction_80e }}">
+            <input type="hidden" name="deduction_80eea" value="{{ form.cleaned_data.deduction_80eea }}">
+            <input type="hidden" name="deduction_80g" value="{{ form.cleaned_data.deduction_80g }}">
             <input type="hidden" name="selected_scheme" value="{{ selected_scheme }}">
             <button type="submit">Print PDF</button>
         </form>
