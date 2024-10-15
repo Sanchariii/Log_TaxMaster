@@ -1,101 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Slabs</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Slabs</title>
+<style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #2c3e50;
+            margin: 0;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #fff;
         }
         h1 {
-            color: #2c3e50;
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 1.5em;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            padding: 10px;
+            padding: 15px;
             text-align: left;
         }
         th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-    </style>
+        td {
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+        .container {
+            padding: 20px;
+        }
+</style>
 </head>
 <body>
-    <h1>Tax Slabs</h1>
-
-    <h2>Old Regime</h2>
-    <table>
-        <tr>
-            <th>Income Range</th>
-            <th>Tax Rate</th>
-        </tr>
-        <tr>
-            <td>Up to ₹2,50,000</td>
-            <td>Nil</td>
-        </tr>
-        <tr>
-            <td>₹2,50,001 to ₹5,00,000</td>
-            <td>5%</td>
-        </tr>
-        <tr>
-            <td>₹5,00,001 to ₹10,00,000</td>
-            <td>20%</td>
-        </tr>
-        <tr>
-            <td>Above ₹10,00,000</td>
-            <td>30%</td>
-        </tr>
-    </table>
-
-    <h2>New Regime</h2>
-    <table>
-        <tr>
-            <th>Income Range</th>
-            <th>Tax Rate</th>
-        </tr>
-        <tr>
-            <td>Up to ₹2,50,000</td>
-            <td>Nil</td>
-        </tr>
-        <tr>
-            <td>₹2,50,001 to ₹5,00,000</td>
-            <td>5%</td>
-        </tr>
-        <tr>
-            <td>₹5,00,001 to ₹7,50,000</td>
-            <td>10%</td>
-        </tr>
-        <tr>
-            <td>₹7,50,001 to ₹10,00,000</td>
-            <td>15%</td>
-        </tr>
-        <tr>
-            <td>₹10,00,001 to ₹12,50,000</td>
-            <td>20%</td>
-        </tr>
-        <tr>
-            <td>₹12,50,001 to ₹15,00,000</td>
-            <td>25%</td>
-        </tr>
-        <tr>
-            <td>Above ₹15,00,000</td>
-            <td>30%</td>
-        </tr>
-    </table>
-
-    <a href="{% url 'tax_calculator' %}">Back to Calculator</a>
+<div class="container">
+<h1>Tax Slabs</h1>
+<h2>Old Regime</h2>
+<table>
+<tr>
+<th>Income Range</th>
+<th>Tax Rate</th>
+</tr>
+<tr>
+<td>Up to ₹2,50,000</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td>₹2,50,001 to ₹5,00,000</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>₹5,00,001 to ₹10,00,000</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>Above ₹10,00,000</td>
+<td>30%</td>
+</tr>
+</table>
+<h2>New Regime</h2>
+<table>
+<tr>
+<th>Income Range</th>
+<th>Tax Rate</th>
+</tr>
+<tr>
+<td>Up to ₹2,50,000</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td>₹2,50,001 to ₹5,00,000</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>₹5,00,001 to ₹7,50,000</td>
+<td>10%</td>
+</tr>
+<tr>
+<td>₹7,50,001 to ₹10,00,000</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>₹10,00,001 to ₹12,50,000</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>₹12,50,001 to ₹15,00,000</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>Above ₹15,00,000</td>
+<td>30%</td>
+</tr>
+</table>
+<a href="{% url 'tax_calculator' %}">Back to Calculator</a>
+</div>
 </body>
 </html>

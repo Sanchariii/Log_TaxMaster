@@ -102,7 +102,7 @@ def calculate_tax_view(income, standard_deduction, other_deductions, age_group):
 
 
 
-@login_required
+# @login_required
 def tax_calculator_view(request):
     if request.method == 'POST':
         form = TaxCalculatorForm(request.POST)
@@ -167,7 +167,7 @@ from xhtml2pdf import pisa
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
-@login_required
+# @login_required
 def tax_calculator_pdf_view(request):
     if request.method == 'POST':
         # Extract form data from POST request

@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 
 
-@login_required
+# @login_required
 def available_dates_view(request):
     # Check if the user is in the 'Tax Advisor' group
     is_tax_advisor = request.user.groups.filter(name='Tax Advisor').exists()
@@ -75,7 +75,7 @@ def book_appointment(request):
 
     return render(request, 'appointment/book_appointment.html', {'form': form})
 
-@login_required
+# @login_required
 def create_appointment_view(request, user_request_id):
     user_request = UserRequest.objects.get(id=user_request_id)
     

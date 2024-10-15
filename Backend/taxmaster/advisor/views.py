@@ -21,6 +21,8 @@ def available_advisors_view(request):
     
     return render(request, 'advisor/available_advisors.html', {'advisors': advisors})
 
+
+
 def advisor_requests(request):
     if request.user.groups.filter(name='Tax Advisor').exists():  # Check if user belongs to the 'Tax Advisor' group
         # Show only requests where the current user is the tax advisor and either approved or rejected
@@ -33,21 +35,7 @@ def advisor_requests(request):
     })
 
     
-# def tax_advisor_profile(request):
-#     # Try to get the user's profile or create a new one if it doesn't exist
-#     profile, created = TaxAdvisorProfile.objects.get_or_create(user=request.user)
 
-#     if request.method == 'POST':
-#         form = TaxAdvisorProfileForm(request.POST, instance=profile)  # Use the existing profile
-#         if form.is_valid():
-#             profile = form.save(commit=False)
-#             profile.user = request.user  # Ensure it's associated with the logged-in user
-#             profile.save()  # Save the profile
-#             return redirect('profile_success')  # Redirect to success page
-#     else:
-#         form = TaxAdvisorProfileForm(instance=profile)  # Populate the form with the existing profile
-
-#     return render(request, 'advisor/tax_advisor_profile.html', {'form': form})
 
 def tax_advisor_profile(request, user_id):
     user = get_object_or_404(User, id=user_id)  # Fetch the user based on user_id
