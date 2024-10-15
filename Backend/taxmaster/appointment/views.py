@@ -130,6 +130,7 @@ def get_available_dates(advisor):
     
 def request_appointment(request, advisor_id):
     advisor = get_object_or_404(User, id=advisor_id)
+    print(f"Advisor ID: {advisor.id}, Username: {advisor.username}")
 
     # Get available future dates for the advisor (e.g., next 30 days)
     available_dates = get_available_dates(advisor)

@@ -1,9 +1,9 @@
 <html>
     <body>
-        {% comment %} <div class="container">
+        <div class="container">
             <h2>Request an Appointment with {{ advisor.username }}</h2>
             
-            <form method="post" id="appointment-form">
+            <form method="POST" action="{% url 'request_appointment' advisor.id %}">
                 {% csrf_token %}
                 
                 <div class="form-group">
@@ -29,11 +29,6 @@
                     No available dates for this advisor after today.
                 </div>
             {% endif %}
-        </div> {% endcomment %}
-        <form method="POST" action="{% url 'request_appointment' advisor.id %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Request Appointment</button>
-        </form>
+        </div>
     </body>
 </html>
