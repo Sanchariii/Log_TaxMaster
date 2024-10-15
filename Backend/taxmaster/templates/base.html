@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tax Advisor Portal{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px;
+        }
+        .nav-item {
+            margin-right: 30px; 
+        }
+        .nav-item {
+            margin-right: 30px; 
+        }
+        .nav-link {
+            color: #eea0f2;
+        }
+        .nav-link-custom {
+            background-color: #ebb9ed; /* Background color */
+            color: #ffffff; /* Text color */
+            padding: 10px 15px; /* Padding to mimic button */
+            border-radius: 0.25rem; /* Rounded corners */
+            transition: background-color 0.2s ease; /* Smooth transition */
+            font-weight: bold; /* Bold text */
+
+        }
+        .nav-link-custom:hover {
+            background-color: #d593e4; /* Slightly darker shade on hover */
+            color: #ffffff; /* Ensure text color remains white */
+        }
+        .btn-danger {
+            color: #ffffff; /* Ensure text color for btn-danger is white */
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{% static 'base/tax_favicon.jpg' %}" alt="Favicon" class="favicon" style="width: 30px; height: 30px;"/> <!-- Adjust size as needed -->
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"> <!-- Added ml-auto here -->
+                    {% if is_indivual_user %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="{% url 'available_advisors_view' %}">Available Advisors</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="{% url 'tax_calculator' %}">Calculate Taxes</a> <!-- Replace 'calculate_taxes' with your actual URL name -->
+                    </li>
+                    {% if is_taxadvisor %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="{% url 'advisor_requests' %}">Seen Requests</a>
+                        </li>
+                    {% endif %}
+
+                    {% if is_taxadvisor %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="{% url 'manage_requests' %}">Requests</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="{% url 'tax_slabs' %}">Tax Slabs  </a>
+                    </li>
+
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#">Tax Advisor Profile</a> <!-- Link to actual URL -->
+                    </li> {% endcomment %}
+                    <li class="nav-item mr-3">
+                        <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block individual_style %}
+
+    {% endblock %}
+
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Main content will be inserted here -->
+        {% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
