@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Approved Appointment Requests</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Approved Appointment Requests</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+        body {
+            background-color: #f4f7fc;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 18px;
+        }
+        li {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: left;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        a:active {
+            background-color: #004494;
+        }
+</style>
 </head>
 <body>
-    <h1>Your Approved Appointment Requests</h1>
-    
-    {% if requests %}
-        <ul>
-            {% for request in requests %}
-                <li>
-                    Appointment with {{ request.tax_advisor.first_name }} {{ request.tax_advisor.last_name }} - Approved
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>You have no approved appointment requests.</p>
-    {% endif %}
-    
-    <a href="{% url 'home' %}">Go back to home</a>
+<div class="container">
+<h1>Your Approved Appointment Requests</h1>
+        {% if requests %}
+<ul>
+                {% for request in requests %}
+<li>
+                        Appointment with {{ request.tax_advisor.first_name }} {{ request.tax_advisor.last_name }} - Approved
+</li>
+                {% endfor %}
+</ul>
+        {% else %}
+<p>You have no approved appointment requests.</p>
+        {% endif %}
+<a href="{% url 'home' %}">Go back to home</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -29,13 +29,6 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
-    # def clean_first_name(self):
-    #     first_name = self.cleaned_data.get('first_name')
-    #     if not first_name.isalpha():
-    #         raise forms.ValidationError('First name must contain only letters.')
-    #     if not first_name.isupper():
-    #         raise forms.ValidationError('First name must start with a capital letter.')
-    #     return first_name
     
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
@@ -52,14 +45,6 @@ class SignUpForm(UserCreationForm):
         if not last_name[0].isupper():  # Check if the first letter is uppercase
             raise forms.ValidationError('Last name must start with a capital letter.')
         return last_name
-    
-    # def clean_last_name(self):
-    #     last_name = self.cleaned_data.get('last_name')
-    #     if not last_name.isalpha():
-    #         raise forms.ValidationError('Last name must contain only letters.')
-    #     if not last_name.isupper():
-    #         raise forms.ValidationError('Last name must start with a capital letter.')
-    #     return last_name
 
     
     def clean_password(self):
@@ -95,7 +80,7 @@ class ForgotPasswordForm(forms.Form):
 
 ##################################          ###############################################
 class OTPForm(forms.Form):
-    otp = forms.CharField(max_length=6, required=True, label='OTP')
+    otp = forms.CharField(max_length=6, required=True, help_text='Enter the OTP sent to your email.')
 
 
 ##################################          ################################################
