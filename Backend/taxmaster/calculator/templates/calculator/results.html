@@ -5,7 +5,7 @@
 
 {% block individual_style %}
         <style>
-        body {
+        .tax-calculation-result body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             color: #2c3e50;
@@ -17,17 +17,17 @@
             border-radius: 10px;
             background-color: #fff;
         }
-        h1 {
+        .tax-calculation-result h1 {
             font-size: 2em;
             color: #3498db;
             margin-bottom: 20px;
             text-align: center;
         }
-        p {
+        .tax-calculation-result p {
             font-size: 1.1em;
             margin: 10px 0;
         }
-        a, button {
+        .tax-calculation-result a, button {
             margin-top: 20px;
             display: inline-block;
             padding: 10px 20px;
@@ -39,43 +39,43 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        a:hover, button:hover {
+        .tax-calculation-result a:hover, button:hover {
             background-color: #2980b9;
             transform: scale(1.05);
         }
-        ul {
+        .tax-calculation-result ul {
             list-style-type: disc;
             background-color: #f1f1f1;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
         }
-        li {
+        .tax-calculation-result li {
             margin: 5px 0;
         }
-        .happy-message {
+        .tax-calculation-result .happy-message {
             color: #28a745;
             font-weight: bold;
             margin: 20px 0;
             font-size: 1.2em;
             text-align: center;
         }
-        footer {
+        .tax-calculation-result footer {
             margin-top: 40px;
             text-align: center;
             font-size: 1.2em;
             color: #7f8c8d;
         }
-        .tax-details p {
+        .tax-calculation-result .tax-details p {
             font-weight: bold;
         }
-        .deduction-details {
+        .tax-calculation-result .deduction-details {
             background-color: #f1f1f1;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
         }
-        .deduction-title {
+        .tax-calculation-result .deduction-title {
             font-size: 1.2em;
             margin-top: 10px;
             color: #3498db;
@@ -85,22 +85,23 @@
 
 {% block content %}
     <body>
+        <div class="tax-calculation-result">
         <h1>Tax Calculation Result</h1>
         <!-- Display user details -->
         <p><strong>User:</strong> {{ user_name }}</p>
         <p><strong>Age Slab:</strong> {{ age_slab }}</p>
         <!-- Display income, deductions, regime, and total tax -->
         <div class="tax-details">
-            <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income }}</p>
+            <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income|default:0 }}</p>
             <p><strong>Standard Deduction(Old Regime):</strong> ₹{{ standard_deduction_old }}</p>
             <p><strong>Standard Deduction(New Regime):</strong> ₹{{ standard_deduction_new }}</p>
             <div class="deduction-details">
                 <p class="deduction-title">Other Deductions:</p>
-                <p><strong>80C:</strong> ₹{{ form.cleaned_data.deduction_80c }}</p>
-                <p><strong>80D:</strong> ₹{{ form.cleaned_data.deduction_80d }}</p>
-                <p><strong>80E:</strong> ₹{{ form.cleaned_data.deduction_80e }}</p>
-                <p><strong>80EEA:</strong> ₹{{ form.cleaned_data.deduction_80eea }}</p>
-                <p><strong>80G:</strong> ₹{{ form.cleaned_data.deduction_80g }}</p>
+                <p><strong>80C:</strong> ₹{{ form.cleaned_data.deduction_80c|default:0 }}</p>
+                <p><strong>80D:</strong> ₹{{ form.cleaned_data.deduction_80d|default:0 }}</p>
+                <p><strong>80E:</strong> ₹{{ form.cleaned_data.deduction_80e|default:0 }}</p>
+                <p><strong>80EEA:</strong> ₹{{ form.cleaned_data.deduction_80eea|default:0 }}</p>
+                <p><strong>80G:</strong> ₹{{ form.cleaned_data.deduction_80g|default:0 }}</p>
             </div>
             <p><strong>Old Tax Regime Tax:</strong> ₹{{ tax_old_regime }}</p>
             <p><strong>New Tax Regime Tax:</strong> ₹{{ tax_new_regime }}</p>
@@ -139,5 +140,7 @@
         <footer>
             <p>Thank you for using <strong>TaxMaster!</strong></p>
         </footer>
+    </div>
     </body>
+
 {% endblock %}

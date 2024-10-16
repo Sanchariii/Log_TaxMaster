@@ -126,12 +126,30 @@ class CustomLoginView(View):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
+    def render_error(self, form=None, error_message=None, template=None):
+        """Render form with error message."""
+        context = {'form': form} if form else {}
+        if error_message:
+            context['error_message'] = error_message
+        template = template if template else self.template_name
+        return render(self.request, template, context)
+
     def post(self, request):
         # Check if OTP has been sent
         if 'otp_sent' in request.session and request.session['otp_sent']:
+            if 'resend_otp' in request.POST:
+                # Logic to resend OTP
+                new_otp = self.generate_otp()
+                user_email = request.session.get('email')  # Retrieve email from session
+                if user_email:
+                    self.send_otp_via_email(user_email, new_otp)
+                    request.session['otp'] = new_otp
+                    request.session.modified = True  # Mark the session as modified
+                    return render(request, self.otp_template_name, {'message': 'A new OTP has been sent to your email.'})
+                else:
+                    return self.render_error(error_message="Email not found in session.", template=self.otp_template_name)
+
             otp = request.POST.get('otp')
-            print(f"OTP entered: {otp}")  # Debugging print
-            print(f"Stored OTP: {request.session.get('otp')}")  # Debugging print
             if otp and otp == request.session.get('otp'):
                 log_it("login successful")
                 user = authenticate(username=request.session.pop('username'), password=request.session.pop('password'))
@@ -141,31 +159,27 @@ class CustomLoginView(View):
                     request.session['otp_verified'] = True
                     return self._redirect_user(user)
                 else:
-                    print("User authentication failed.")  # Debugging print
-                    return self._render_error(request, "User authentication failed. Please try again.")
+                    return self.render_error(error_message="User authentication failed. Please try again.", template=self.otp_template_name)
             else:
-                print("Invalid OTP entered.")  # Debugging print
-                log_fail('login','Invalid OTP entered')
-                return self._render_error(request, "Invalid OTP. Please try again.", template=self.otp_template_name)
+                log_fail('login', 'Invalid OTP entered')
+                return self.render_error(error_message="Invalid OTP. Please try again.", template=self.otp_template_name)
 
         # Process the login form
         form = self.form_class(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            print(f"Authenticated user: {user.username}")  # Debugging print
             request.session['username'] = form.cleaned_data.get('username')
             request.session['password'] = form.cleaned_data.get('password')
+            request.session['email'] = user.email  # Store email in session
             otp = self.generate_otp()
             request.session['otp'] = otp
             request.session['otp_sent'] = True
             self.send_otp_via_email(user.email, otp)
-            print(f"OTP sent to: {user.email}")  # Debugging print
             return render(request, self.otp_template_name)
         else:
-            print("Invalid form submission.")  # Debugging print
-            log_fail('login','Invalid form submission')
-            print("Form errors:", form.errors)  # Print form errors for debugging
-            return render(request, self.template_name, {'form': form})
+            log_fail('login', 'Invalid form submission')
+            return self.render_error(form=form)
+
 
     def _redirect_user(self, user):
         """Redirects user based on their group."""
@@ -191,21 +205,7 @@ class CustomLoginView(View):
         from_email = 'raysanchari930@gmail.com'
         send_mail(subject, message, from_email, [email], fail_silently=False)
 
-
-
 ############################# Dividing Groups #########################################################
-@login_required
-@user_passes_test(is_User_or_Advisor)
-def group_list(request):
-    groups = Group.objects.all()
-    return render(request, 'accounts/group_list.html', {'groups': groups})
-
-@login_required
-@user_passes_test(is_Admin)
-def group_list_Admin(request):
-    groups = Group.objects.all()
-    return render(request, 'accounts/group_list.html', {'groups': groups})
-
 def group_selection(request):
     if request.method == 'POST':
         form = GroupSelectionForm(request.POST)
@@ -241,7 +241,7 @@ def send_otp_via_email(email, otp):
     """Sends OTP to the given email."""
     subject = 'Your OTP for Account Verification'
     message = f'Your OTP code is {otp}'
-    from_email = settings.DEFAULT_FROM_EMAIL
+    from_email = 'raysanchari930@gmail.com'
     send_mail(subject, message, from_email, [email], fail_silently=False)
 
 def signup(request):
@@ -382,18 +382,31 @@ def verify_otp_view(request):
     if request.method == 'POST':
         if 'resend_otp' in request.POST:
             # Resend OTP logic
-            email = User.objects.get(id=request.session.get('user_id')).email
-            otp = ''.join(random.choices(string.digits, k=6))  # Generate a new OTP
-            send_mail(
-                'Your OTP for Password Reset',
-                f'Your new OTP is: {otp}',
-                settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
-            )
-            request.session['otp'] = otp  # Update the stored OTP in session
+            try:
+                user_id = request.session.get('user_id')
+                if user_id is None:
+                    print('otp_resend', 'User ID is not available in session.')
+                    return render(request, 'accounts/otp.html', {'form': OTPForm(), 'error_message': 'User ID not found. Please try logging in again.'})
+                
+                email = User.objects.get(id=user_id).email
+                otp = ''.join(random.choices(string.digits, k=6))  # Generate a new OTP
+                send_mail(
+                    'Your resent OTP for Password Reset',
+                    f'Your new OTP is: {otp}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+                request.session['otp'] = otp  # Update the stored OTP in session
 
-            return render(request, 'accounts/verify_otp.html', {'form': OTPForm(), 'message': 'OTP has been resent.'})
+                log_it(f"OTP resent successfully to {email}.")
+                return render(request, 'accounts/otp.html', {'form': OTPForm(), 'message': 'OTP has been resent.'})
+            except User.DoesNotExist:
+                log_fail('otp_resend', 'User does not exist in the database.')
+                return render(request, 'accounts/otp.html', {'form': OTPForm(), 'error_message': 'User does not exist.'})
+            except Exception as e:
+                log_fail('otp_resend', f'Unexpected error occurred: {str(e)}')
+                return render(request, 'accounts/otp.html', {'form': OTPForm(), 'error_message': 'An error occurred while resending the OTP. Please try again.'})
 
         otp_form = OTPForm(request.POST)
         if otp_form.is_valid():
@@ -402,11 +415,11 @@ def verify_otp_view(request):
                 return redirect('set_new_password')  # Redirect to set new password page
             else:
                 otp_form.add_error('otp', 'Invalid OTP. Please try again.')
+                log_fail('otp_validation', 'Entered OTP is invalid.')
     else:
         otp_form = OTPForm()
 
-    return render(request, 'accounts/verify_otp.html', {'form': otp_form})
-
+    return render(request, 'accounts/otp.html', {'form': otp_form})
 
 
 
