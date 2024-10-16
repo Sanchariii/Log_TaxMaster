@@ -32,5 +32,6 @@ urlpatterns = [
     path('verify-otp/', verify_otp_view, name='verify_otp'),
     path('set-new-password/', set_new_password_view, name='set_new_password'),
     path('group-selection/', group_selection, name='group_selection'),
-    path('verify-signup-otp/', verify_signup_otp, name='verify_signup_otp')
+    path('verify-signup-otp/', verify_signup_otp, name='verify_signup_otp'),
+    # path('otp/', OTPVerificationView.as_view(), name='otp'),
 ]

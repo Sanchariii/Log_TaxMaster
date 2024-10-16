@@ -80,7 +80,14 @@ class ForgotPasswordForm(forms.Form):
 
 ##################################          ###############################################
 class OTPForm(forms.Form):
-    otp = forms.CharField(max_length=6, required=True, help_text='Enter the OTP sent to your email.')
+    otp = forms.CharField(max_length=6, required=False, help_text='Enter the OTP sent to your email.')
+    resend_otp = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
+
+    def clean_otp(self):
+        otp = self.cleaned_data.get('otp')
+        if otp and len(otp) != 6:  # Assuming the OTP is a 6-digit code
+            raise forms.ValidationError('OTP must be 6 digits.')
+        return otp
 
 
 ##################################          ################################################
