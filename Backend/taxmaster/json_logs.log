@@ -215,3 +215,33 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:19:31.614161+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": -13, "deduction": 0, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:19:46.626612+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1300000, "deduction": 0, "regime": "New Regime", "saving": 70200.0}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:19:48.644639+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:32:49.855384+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:33:12.897768+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:34:39.501369+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:35:00.576460+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:35:41.229395+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:36:02.454942+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:39:18.268252+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:39:32.716336+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:39:41.598794+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "evening"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:40:34.862425+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "60 to 79", "income": 7000000, "deduction": 210000, "regime": "New Regime", "saving": 19448.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:40:44.346115+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:50:03.599640+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:50:25.487692+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:52:19.978272+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:52:38.690406+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:53:09.023471+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "60 to 79", "income": 8000000, "deduction": 260000, "regime": "New Regime", "saving": 2288.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:53:13.337454+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:54:37.664038+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:54:52.735810+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:55:02.308248+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Sejal", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:55:07.456316+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Sejal", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:56:49.396471+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:57:21.722549+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:57:23.750949+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:58:11.977376+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:59:20.826577+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:59:48.689112+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:59:53.050568+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T21:00:10.988732+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T21:00:15.566396+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anurag", "slot": "afternoon"}}
