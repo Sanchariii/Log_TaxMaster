@@ -27,8 +27,75 @@ from .forms import UsernamePasswordResetForm, OTPForm, SetNewPasswordForm
 from django.contrib.auth.decorators import login_required,user_passes_test
 from .forms import SignUpForm, UsernamePasswordResetForm, OTPForm, SetNewPasswordForm, LoginForm, GroupSelectionForm
 
+#########################################################################################################
+# from taxmaster.logging_config import logger
+from logs.logging_config import logger
 
+# Log messages with the fixed JSON structure
+def log_it(message):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        'values': {
+            'iserrorlog':0,
+            'message': message
+        }
+    })
+def log_fail(whatfailed,reason):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        'values': {
+            'iserrorlog':1,
+            'whatfailed': whatfailed,
+            'reason': reason
+        }
+    })
+def log_registration(type):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Registration Successful',
+            'type': type
+        }
+    })
+def log_calculated(age,income,deduction,regime,saving):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Calculation Successful',
+            'age': age,
+            'income': income,
+            'deduction': deduction,
+            'regime': regime,
+            'saving': saving
+        }
+    })
+def log_appointment(id,slot):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Appointment Booked',
+            'id': id,
+            'slot': slot
+        }
+    })
 
+#########################################################################################################
 @login_required
 def check_session(request):
     return JsonResponse({'status': 'ok'})
@@ -66,6 +133,7 @@ class CustomLoginView(View):
             print(f"OTP entered: {otp}")  # Debugging print
             print(f"Stored OTP: {request.session.get('otp')}")  # Debugging print
             if otp and otp == request.session.get('otp'):
+                log_it("login successful")
                 user = authenticate(username=request.session.pop('username'), password=request.session.pop('password'))
                 if user:
                     auth_login(request, user)
@@ -77,6 +145,7 @@ class CustomLoginView(View):
                     return self._render_error(request, "User authentication failed. Please try again.")
             else:
                 print("Invalid OTP entered.")  # Debugging print
+                log_fail('login','Invalid OTP entered')
                 return self._render_error(request, "Invalid OTP. Please try again.", template=self.otp_template_name)
 
         # Process the login form
@@ -94,6 +163,7 @@ class CustomLoginView(View):
             return render(request, self.otp_template_name)
         else:
             print("Invalid form submission.")  # Debugging print
+            log_fail('login','Invalid form submission')
             print("Form errors:", form.errors)  # Print form errors for debugging
             return render(request, self.template_name, {'form': form})
 
@@ -111,6 +181,7 @@ class CustomLoginView(View):
 
     def generate_otp(self):
         """Generates a 6-digit OTP."""
+        log_it("otp sent")
         return str(random.randint(100000, 999999))
 
     def send_otp_via_email(self, email, otp):
@@ -146,8 +217,10 @@ def group_selection(request):
 
             # Redirect based on the group the user selected
             if selected_group.name == 'Tax Advisor':
+                log_registration('tax advisor')
                 return redirect('tax_advisor_profile', user_id=user.id)
             elif selected_group.name == 'Individual User':
+                log_registration('user')
                 return redirect('tax_calculator')
     else:
         form = GroupSelectionForm()
@@ -161,6 +234,7 @@ User = get_user_model()
 
 def generate_otp():
     """Generates a random 6-digit OTP."""
+    log_it("otp sent")
     return ''.join(random.choices(string.digits, k=6))
 
 def send_otp_via_email(email, otp):
@@ -179,6 +253,7 @@ def signup(request):
             
             if User.objects.filter(email=email).exists():
                 form.add_error('email', 'A user with this email already exists.')
+                log_fail('signup','A user with this email already exists')
             else:
                 # Generate OTP and send it to the user's email
                 otp = generate_otp()
@@ -198,6 +273,7 @@ def signup(request):
                 return redirect('verify_signup_otp')
         else:
             messages.error(request, 'Please correct the errors below.')
+            log_fail('signup','Invalid form submission')
 
     else:
         form = SignUpForm()
@@ -226,13 +302,16 @@ def verify_signup_otp(request):
                     auth_login(request, user)
 
                     # Clear session data after successful signup
-                    del request.session['signup_data']
-                    del request.session['otp']
+                    if 'signup_data' in request.session:
+                        del request.session['signup_data']
+                    if 'otp' in request.session:
+                        del request.session['otp']
                     
                     # Redirect to group selection page
                     return redirect('group_selection')
             else:
                 form.add_error('otp', 'Invalid OTP. Please try again.')
+                log_fail('signup','Invalid OTP entered')
 
     else:
         form = OTPForm()
@@ -269,6 +348,7 @@ def forgot_password_view(request):
             try:
                 user = User.objects.get(email=email)
                 otp = ''.join(random.choices(string.digits, k=6))  # Generate a random 6-digit OTP
+                log_it("otp sent")
                 
                 # Send OTP via email
                 send_mail(
@@ -355,3 +435,8 @@ def set_new_password_view(request):
 
 
 # ################################## THE-END #########################################################
+
+
+
+
+

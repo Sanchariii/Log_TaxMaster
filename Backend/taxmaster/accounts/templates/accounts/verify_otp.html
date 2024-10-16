@@ -57,6 +57,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
+            <input type="hidden" name="form_type" value="verify_otp">
             <button type="submit" class="btn btn-custom btn-block">Verify OTP</button>
         </form>
 

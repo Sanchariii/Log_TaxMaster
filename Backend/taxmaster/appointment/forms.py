@@ -41,7 +41,7 @@ class AppointmentForm(forms.ModelForm):
         if selected_slot and selected_time:
             start_time, end_time = slot_time_ranges[selected_slot]
             if not (start_time <= selected_time <= end_time):
-                raise forms.ValidationError(f"The selected time is not within the {selected_slot} slot range.")
+                raise forms.ValidationError(f"The selected time {selected_time} is not within the {selected_slot} slot range ({start_time} - {end_time}).")
 
         return selected_time
 
@@ -56,28 +56,32 @@ class AvailabilityCheckForm(forms.Form):
     )
 
 class AppointmentRequestForm(forms.ModelForm):
-    
+
     SLOT_CHOICES = [
         ('morning', 'Morning (9:00 AM - 12:00 PM)'),
         ('afternoon', 'Afternoon (12:30 PM - 3:30 PM)'),
         ('evening', 'Evening (4:00 PM - 6:00 PM)'),
     ]
-    
+
     requested_date = forms.DateField(
-        widget=forms.SelectDateWidget(),  # Only show dates, no time
-        label='Requested Appointment Date'
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),  # Ensure correct date input type
+        label='Requested Appointment Date',
+        input_formats=['%Y-%m-%d']  # Ensure the date format is correct
     )
+    
     slot = forms.ChoiceField(
         choices=SLOT_CHOICES, 
-        widget=forms.RadioSelect,  # Use radio buttons for slot selection
+        widget=forms.RadioSelect(),  # Use radio buttons for slot selection
         label="Select Time Slot"
     )
+    
     time = forms.TimeField(
         widget=forms.TimeInput(attrs={'type': 'time'}),
         label="Select Specific Time"
     )
+    
     notes = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4}),
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Enter any additional notes'}),
         required=False,
         label='Additional Notes (Optional)'
     )
@@ -108,6 +112,6 @@ class AppointmentRequestForm(forms.ModelForm):
         if selected_slot and selected_time:
             start_time, end_time = slot_time_ranges[selected_slot]
             if not (start_time <= selected_time <= end_time):
-                raise forms.ValidationError(f"The selected time is not within the {selected_slot} slot range.")
+                raise forms.ValidationError(f"The selected time {selected_time} is not within the {selected_slot} slot range ({start_time} - {end_time}).")
 
         return selected_time

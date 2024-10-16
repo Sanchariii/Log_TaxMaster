@@ -87,12 +87,8 @@
                   <td>{{ request.date }}</td>
                   <td>{{ request.slot }}</td>
                   <td>
-                     <a href="{% url 'approve_request'
-                        request.id
-                        %}" class="btn btn-success btn-sm">Approve</a>
-                     <a href="{% url 'reject_request'
-                        request.id
-                        %}" class="btn btn-danger btn-sm">Reject</a>
+                     <a href="{% url 'approve_request' request.id %}" class="btn btn-success btn-sm">Approve</a>
+                     <a href="{% url 'reject_request' request.id %}" class="btn btn-danger btn-sm">Reject</a>
                   </td>
                </tr>
                {% endfor %}
@@ -107,4 +103,4 @@
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
    </body>
-   {% endblock %}
+{% endblock %}

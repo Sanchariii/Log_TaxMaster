@@ -17,9 +17,15 @@ class UserRequest(models.Model):
     
     
 class TaxAdvisorProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="tax_advisor_profile")
-    license_serial = models.CharField(max_length=50, unique=True)
+    GENDER_CHOICES = [
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('not_specified', 'Prefer not to specify'),
+    ]
+    user = models.OneToOneField(User, on_delete=models.CASCADE )#, related_name="tax_advisor_profile")
+    license_serial = models.CharField(max_length=100, unique=True)
     years_of_experience = models.PositiveIntegerField()
+    gender = models.CharField(max_length=30,choices=GENDER_CHOICES, default='Not specified')
 
     def __str__(self):
         return f"{self.user.username} - License: {self.license_serial}"

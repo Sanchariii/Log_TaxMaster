@@ -11,6 +11,74 @@ from datetime import timedelta, datetime
 from django.contrib.auth.models import User
 
 
+#########################################################################################################
+from logs.logging_config import logger
+# Log messages with the fixed JSON structure
+def log_it(message):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        'values': {
+            'iserrorlog':0,
+            'message': message
+        }
+    })
+def log_fail(whatfailed,reason):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        'values': {
+            'iserrorlog':1,
+            'whatfailed': whatfailed,
+            'reason': reason
+        }
+    })
+def log_registration(type):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Registration Successful',
+            'type': type
+        }
+    })
+def log_calculated(age,income,deduction,regime,saving):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Calculation Successful',
+            'age': age,
+            'income': income,
+            'deduction': deduction,
+            'regime': regime,
+            'saving': saving
+        }
+    })
+def log_appointment(id,slot):
+    logger.info('', extra={
+        'username': 'sanchari',
+        'log_id': 1,
+        
+        
+        'values': {
+            'iserrorlog':0,
+            'message': 'Appointment Booked',
+            'id': id,
+            'slot': slot
+        }
+    })
+
+#########################################################################################################
+
 
 @login_required
 def available_dates_view(request):
@@ -69,10 +137,10 @@ def book_appointment(request):
             appointment = form.save(commit=False)
             appointment.user_request = request.user.requests.first()  # Assuming a single user request
             appointment.save()
+            log_it("appointment requested")
             return render(request, 'appointment/appointment_success.html', {'appointment': appointment})
     else:
         form = AppointmentForm()
-
     return render(request, 'appointment/book_appointment.html', {'form': form})
 
 @login_required
@@ -147,7 +215,8 @@ def request_appointment(request, advisor_id):
             appointment.tax_advisor = advisor
             appointment.user = request.user  # Associate the appointment with the logged-in user
             appointment.appointment_date = form.cleaned_data['requested_date']  # Assign the requested date
-            appointment.slot = form.cleaned_data['slot']  # Assign the requested slot (make sure form has this field)
+            appointment.slot = form.cleaned_data['slot']  # Assign the requested slot
+            appointment.time = form.cleaned_data['time']  # Assign the specific time
 
             # Create a new UserRequest entry
             user_request = UserRequest.objects.create(
@@ -197,7 +266,7 @@ def approve_request(request, request_id):
     user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
     user_request.approved = True
     user_request.save()
-
+    log_appointment(user_request.tax_advisor.first_name, user_request.slot)
     send_mail(
             'Your Appointment Request Has Been Approved',
             f'Hello {user_request.first_name},\n\nYour appointment request with {user_request.tax_advisor.first_name} {user_request.tax_advisor.last_name} has been approved. Please check your account for more details.',
@@ -214,6 +283,7 @@ def reject_request(request, request_id):
     user_request = get_object_or_404(UserRequest, id=request_id, tax_advisor=request.user)
     user_request.rejected = True
     user_request.save()
+    log_it("appointment rejected")
 
     send_mail(
         'Your Appointment Request Has Been Rejected',

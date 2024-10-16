@@ -10,13 +10,13 @@ def available_advisors_view(request):
     # Filter only advisors who belong to the 'Tax Advisor' group and have license and experience
     advisors = User.objects.filter(
         groups__name='Tax Advisor', 
-        tax_advisor_profile__isnull=False,  # Ensures a related profile exists
-        tax_advisor_profile__license_serial__isnull=False,
-        tax_advisor_profile__years_of_experience__isnull=False
+        taxadvisorprofile__isnull=False,  # Ensures a related profile exists
+        taxadvisorprofile__license_serial__isnull=False,
+        taxadvisorprofile__years_of_experience__isnull=False
     ).exclude(
-        tax_advisor_profile__license_serial='',  # Exclude advisors with an empty license serial
-        tax_advisor_profile__years_of_experience=0  # Exclude advisors with zero years of experience
-    )
+        taxadvisorprofile__license_serial='',  # Exclude advisors with an empty license serial
+        taxadvisorprofile__years_of_experience=0  # Exclude advisors with zero years of experience
+    ).select_related('taxadvisorprofile')
 
     
     return render(request, 'advisor/available_advisors.html', {'advisors': advisors})
@@ -37,17 +37,47 @@ def advisor_requests(request):
     
 
 
+# def tax_advisor_profile(request, user_id):
+#     user = get_object_or_404(User, id=user_id)  # Fetch the user based on user_id
+
+#     if request.method == 'POST':
+#         form = TaxAdvisorProfileForm(request.POST, instance=user.taxadvisorprofile)
+#         if form.is_valid():
+#             profile = form.save(commit=False)
+#             profile.user = user  # Associate with the fetched user
+#             profile.save()
+#             return redirect('advisor_requests')  # Redirect to success page
+#     else:
+#         form = TaxAdvisorProfileForm()
+
+#     return render(request, 'advisor/tax_advisor_profile.html', {'form': form, 'user': user})
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import Group, User
+from django.http import HttpResponse
+from .models import UserRequest, TaxAdvisorProfile
+from .forms import TaxAdvisorProfileForm
+
 def tax_advisor_profile(request, user_id):
-    user = get_object_or_404(User, id=user_id)  # Fetch the user based on user_id
+    user = get_object_or_404(User, id=user_id)
+
+    # Check if the TaxAdvisorProfile exists, if not, create one with default values
+    profile, created = TaxAdvisorProfile.objects.get_or_create(
+        user=user,
+        defaults={
+            'license_serial': '',
+            'years_of_experience': 0,
+            'gender': 'not_specified'
+        }
+    )
 
     if request.method == 'POST':
-        form = TaxAdvisorProfileForm(request.POST)
+        form = TaxAdvisorProfileForm(request.POST, instance=profile)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = user  # Associate with the fetched user
-            profile.save()
-            return redirect('advisor_requests')  # Redirect to success page
+            form.save()
+            return redirect('advisor_requests')
     else:
-        form = TaxAdvisorProfileForm()
+        form = TaxAdvisorProfileForm(instance=profile)
 
     return render(request, 'advisor/tax_advisor_profile.html', {'form': form, 'user': user})

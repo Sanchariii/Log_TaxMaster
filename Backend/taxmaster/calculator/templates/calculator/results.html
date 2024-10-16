@@ -92,7 +92,8 @@
         <!-- Display income, deductions, regime, and total tax -->
         <div class="tax-details">
             <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income }}</p>
-            <p><strong>Standard Deduction:</strong> ₹{{ form.cleaned_data.standard_deduction }}</p>
+            <p><strong>Standard Deduction(Old Regime):</strong> ₹{{ standard_deduction_old }}</p>
+            <p><strong>Standard Deduction(New Regime):</strong> ₹{{ standard_deduction_new }}</p>
             <div class="deduction-details">
                 <p class="deduction-title">Other Deductions:</p>
                 <p><strong>80C:</strong> ₹{{ form.cleaned_data.deduction_80c }}</p>
@@ -125,7 +126,8 @@
             {% csrf_token %}
             <input type="hidden" name="annual_income" value="{{ form.annual_income.value }}">
             <input type="hidden" name="age_group" value="{{ form.age_group.value }}">
-            <input type="hidden" name="standard_deduction" value="{{ form.standard_deduction.value }}">
+            <input type="hidden" name="standard_deduction_old" value="{{standard_deduction_old }}">
+            <input type="hidden" name="standard_deduction_new" value="{{standard_deduction_new }}">
             <input type="hidden" name="deduction_80c" value="{{ form.cleaned_data.deduction_80c }}">
             <input type="hidden" name="deduction_80d" value="{{ form.cleaned_data.deduction_80d }}">
             <input type="hidden" name="deduction_80e" value="{{ form.cleaned_data.deduction_80e }}">

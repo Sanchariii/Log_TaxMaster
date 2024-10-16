@@ -107,6 +107,44 @@
             margin-right: 10px;
             vertical-align: middle;
         }
+        /* Define keyframes for the fade-in/fade-out animation */
+@keyframes fadeShadowIn {
+    0% {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+@keyframes fadeShadowOut {
+    0% {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0);
+    }
+}
+/* Add the animation to the header */
+.header {
+    background-color: #E5E4E2;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    z-index: 999;
+    animation: fadeShadowIn 3s ease-in-out;
+}
+/* Hover effect to fade out the shadow */
+.header:hover {
+    animation: fadeShadowOut 3s ease-in-out;
+}
     </style>
 </head>
 <body>
