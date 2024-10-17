@@ -2,7 +2,7 @@ from django import forms
 from .models import Appointment
 from django.contrib.auth.models import User
 from django.utils import timezone
-from datetime import time
+from datetime import time, timedelta
 
 class AppointmentForm(forms.ModelForm):
     SLOT_CHOICES = [
@@ -10,6 +10,20 @@ class AppointmentForm(forms.ModelForm):
         ('afternoon', 'Afternoon (12:30 PM - 3:30 PM)'),
         ('evening', 'Evening (4:00 PM - 6:00 PM)'),
     ]
+
+    today = timezone.now().date()
+    one_year_from_now = today + timedelta(days=365)
+
+    requested_date = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'type': 'date', 
+            'class': 'form-control',
+            'min': today.strftime('%Y-%m-%d'),
+            'max': one_year_from_now.strftime('%Y-%m-%d')
+        }),  # Ensure correct date input type
+        label='Requested Appointment Date',
+        input_formats=['%Y-%m-%d']  # Ensure the date format is correct
+    )
 
     slot = forms.ChoiceField(
         choices=SLOT_CHOICES, 
@@ -21,12 +35,25 @@ class AppointmentForm(forms.ModelForm):
         label="Select Specific Time"
     )
 
+    notes = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Enter any additional notes'}),
+        required=False,
+        label='Additional Notes (Optional)'
+    )
+
     class Meta:
         model = Appointment
-        fields = ['tax_advisor', 'appointment_date', 'slot', 'time', 'notes']
-        widgets = {
-            'appointment_date': forms.DateInput(attrs={'type': 'date'}),  # Only a date input, no time
-        }
+        fields = ['requested_date', 'slot', 'time', 'notes']
+        
+    def clean_requested_date(self):
+        requested_date = self.cleaned_data.get('requested_date')
+        today = timezone.now().date()
+        one_year_from_now = today + timedelta(days=365)
+
+        if requested_date > one_year_from_now:
+            raise forms.ValidationError(f"Date must not be more than one year from today ({one_year_from_now}).")
+
+        return requested_date
 
     def clean_time(self):
         selected_slot = self.cleaned_data.get('slot')

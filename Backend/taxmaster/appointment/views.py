@@ -202,7 +202,9 @@ def request_appointment(request, advisor_id):
 
     # Get available future dates for the advisor (e.g., next 30 days)
     available_dates = get_available_dates(advisor)
-    future_dates = [date for date in available_dates if date > timezone.now().date()]
+    today = timezone.now().date()
+    one_year_from_now = today + timedelta(days=365)
+    future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
 
     form = AppointmentRequestForm(request.POST or None)
 

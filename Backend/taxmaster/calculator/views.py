@@ -141,20 +141,20 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
    def new_regime_tax():
        taxable_income = income - standard_deduction_new  # Only standard deduction applies in the new regime
        tax = Decimal('0.0')
-       if taxable_income <= 250000:
+       if taxable_income <= 300000:
            tax = Decimal('0.0')
-       elif taxable_income <= 500000:
-           tax = Decimal('0.05') * (taxable_income - 250000)
-       elif taxable_income <= 750000:
-           tax = Decimal('12500') + Decimal('0.1') * (taxable_income - 500000)
-       elif taxable_income <= 1000000:
-           tax = Decimal('37500') + Decimal('0.15') * (taxable_income - 750000)
-       elif taxable_income <= 1250000:
-           tax = Decimal('75000') + Decimal('0.2') * (taxable_income - 1000000)
+       elif taxable_income <= 600000:
+           tax = Decimal('0.05') * (taxable_income - 300000)
+       elif taxable_income <= 900000:
+           tax = Decimal('15000') + Decimal('0.1') * (taxable_income - 600000)
+       elif taxable_income <= 1200000:
+           tax = Decimal('45000') + Decimal('0.15') * (taxable_income - 900000)
        elif taxable_income <= 1500000:
-           tax = Decimal('125000') + Decimal('0.25') * (taxable_income - 1250000)
+           tax = Decimal('90000') + Decimal('0.2') * (taxable_income - 1200000)
        else:
-           tax = Decimal('187500') + Decimal('0.3') * (taxable_income - 1500000)
+           tax = Decimal('150000') + Decimal('0.3') * (taxable_income - 1500000)
+
+   
        surcharge = calculate_surcharge(taxable_income, tax)
        tax += surcharge
        cess = Decimal('0.04') * tax

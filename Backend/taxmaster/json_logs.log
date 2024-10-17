@@ -245,3 +245,82 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T20:59:53.050568+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T21:00:10.988732+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-16T21:00:15.566396+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anurag", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:03:15.659674+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:03:43.928515+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:11:02.686676+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:11:42.844432+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:12:34.235722+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:12:55.481988+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:14:15.199735+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:15:29.363505+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:17:17.024186+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:17:33.569859+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:18:18.168519+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T07:24:26.531678+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:26:07.133855+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:26:42.121638+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:26:55.488122+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:26:58.437994+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:01.354523+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:02.283024+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:03.008920+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:03.781967+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:04.136056+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:04.480142+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:04.517752+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:04.770064+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:05.103131+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:05.467240+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:05.796537+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:06.118625+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:06.446347+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:06.798081+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:07.111757+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:07.456057+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:07.804765+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:08.118639+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:08.487696+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:08.872864+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:27:09.317914+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:39:27.395962+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:44:06.401514+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T08:44:37.329718+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:28:45.134891+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:29:58.803391+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:31:26.899355+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 800000, "deduction": 108000, "regime": "New Regime", "saving": 6136.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:32:53.190287+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:36:42.057883+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:36:45.660173+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:37:42.845318+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:37:50.442694+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Akarsh", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:39:32.380874+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T11:39:58.640299+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T13:56:15.350094+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T13:56:46.655531+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T13:58:09.531595+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T13:58:24.156031+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:23:34.187456+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:24:05.003271+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:36:22.653078+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:36:41.720463+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:58:06.900945+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:58:24.700000+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:58:30.796436+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:58:52.692646+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:59:13.918885+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T14:59:52.944108+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:00:55.499322+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:01:55.259587+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:03:53.889453+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:06:49.978500+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:07:13.754918+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:17:22.022183+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:17:44.622184+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:17:51.499789+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:21:41.476561+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:21:57.220135+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:23:10.213376+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:23:36.205433+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:23:44.965775+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:25:30.334573+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:25:49.226432+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
