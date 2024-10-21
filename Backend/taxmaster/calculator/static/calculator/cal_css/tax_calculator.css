@@ -1,0 +1,135 @@
+.tax-calculator body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f0f4f7, #d9e2ec);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tax-calculator .container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for glass effect */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Glass effect */
+    text-align: center;
+}
+
+.tax-calculator h1 {
+    color: #1e3a8a; /* Aesthetic blue */
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.tax-calculator form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tax-calculator label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.tax-calculator input[type="number"], .tax-calculator button {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 100%;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.tax-calculator input[type="number"]:focus {
+    border-color: #2563eb; /* Aesthetic blue */
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.tax-calculator button[type="submit"] {
+    background: rgba(37, 99, 235, 0.6); /* Darker glass effect with aesthetic blue */
+    color: #ffffff; /* Ensure text is visible */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 40%; /* Reduced length */
+    margin: 0 auto; /* Center the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Glass effect */
+}
+
+.tax-calculator button[type="submit"]:hover {
+    background-color: rgba(37, 99, 235, 0.7); /* Darker glass effect on hover */
+    transform: scale(1.05);
+}
+
+.tax-calculator .services {
+    margin-top: 30px;
+}
+
+.tax-calculator .services h2 {
+    color: #000000; /* Black color */
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+.tax-calculator .services .service-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tax-calculator .services .service-buttons a {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 10px;
+    color: #ffffff; /* Ensure text is visible */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Glass effect */
+    width: 30%; /* Reduced length */
+}
+
+.tax-calculator .services .service-buttons a:hover {
+    transform: scale(1.05);
+}
+
+.tax-calculator .services .service-buttons .check-tax-schemes,
+.tax-calculator .services .service-buttons .generate-pdf,
+.tax-calculator .services .service-buttons .contact-consultants {
+    background: #00308F; /* Updated color */
+}
+
+.tax-calculator .footer-buttons {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.tax-calculator .footer-buttons button {
+    background: rgba(37, 99, 235, 0.6); /* Darker glass effect with aesthetic blue */
+    color: #ffffff; /* Ensure text is visible */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Glass effect */
+}
+
+.tax-calculator .footer-buttons button:hover {
+    background-color: rgba(37, 99, 235, 0.7); /* Darker glass effect on hover */
+    transform: scale(1.05);
+}

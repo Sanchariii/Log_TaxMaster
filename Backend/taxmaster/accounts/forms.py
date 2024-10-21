@@ -80,7 +80,7 @@ class ForgotPasswordForm(forms.Form):
 
 ##################################          ###############################################
 class OTPForm(forms.Form):
-    otp = forms.CharField(max_length=6, required=False, help_text='Enter the OTP sent to your email.')
+    otp = forms.CharField(max_length=6, required=False)
     resend_otp = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
     def clean_otp(self):

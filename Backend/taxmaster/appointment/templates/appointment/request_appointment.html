@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Appointment</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f0f4f7;
@@ -19,33 +20,82 @@
             margin-top: 50px;
         }
         h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: white; /* Text color */
+            background-color: #5f9ea0; /* New background color */
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            font-size: 1.5rem; /* Reduced text size */
+            margin-bottom: 20px; /* Added space below heading */
+        }
+        .subheading {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            color: #2c3e50;
+            font-weight: bold;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group label .fa {
+            margin-right: 5px;
+        }
+        .form-control {
+            border-radius: 30px;
+            border: 1px solid #ced4da;
+            flex: 1;
+        }
+        .btn-primary {
+            background-color: #317873; /* New background color */
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 30px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            margin-top: 20px; /* Added space above button */
+        }
+        .btn-primary:hover {
+            background-color: #255d56; /* Darker shade for hover effect */
+            transform: scale(1.05);
         }
         .alert {
             text-align: center;
             margin-top: 20px;
         }
-        .btn-primary {
-            background-color: #007BFF;
-            border: none;
-            transition: background-color 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Request an Appointment with {{ advisor.username }}</h2>
+        <p class="subheading">Please select the below details for our service.</p>
         
         <form method="POST" action="{% url 'request_appointment' advisor.id %}">
             {% csrf_token %}
             
             <div class="form-group">
-                <label for="requested_date">Select a Date:</label>
+                <label for="requested_date"><i class="fa fa-calendar-alt"></i> Select a Date:</label>
                 <input type="date" id="requested_date" name="requested_date" class="form-control" required>
                 {% if form.requested_date.errors %}
                     <div class="text-danger">{{ form.requested_date.errors }}</div>
@@ -53,7 +103,7 @@
             </div>
             
             <div class="form-group">
-                <label for="slot">Select a Time Slot:</label>
+                <label for="slot"><i class="fa fa-clock"></i> Select a Time Slot:</label>
                 <select id="slot" name="slot" class="form-control" required>
                     <option value="">-- Choose a time slot --</option>
                     <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
@@ -66,17 +116,16 @@
             </div>
             
             <div class="form-group">
-                <label for="time">Select Specific Time:</label>
+                <label for="time"><i class="fa fa-clock"></i> Select Specific Time:</label>
                 <input type="time" id="time" name="time" class="form-control" required>
                 {% if form.time.errors %}
                     <div class="text-danger">{{ form.time.errors }}</div>
                 {% endif %}
             </div>
             
-            <div>
-                <label for="notes">{{ form.notes.label }}</label>
-                {{form.notes}}
-                {% comment %} {{ form.notes|as_widget(attrs={'class': 'form-control', 'placeholder': 'Enter any additional notes'}) }} {% endcomment %}
+            <div class="form-group">
+                <label for="notes"><i class="fa fa-sticky-note"></i> {{ form.notes.label }}</label>
+                {{ form.notes }}
             </div>
             
             <button type="submit" class="btn btn-primary btn-block">Request Appointment</button>

@@ -1,54 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify OTP</title>
+    <title>Verification</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        .btn-custom {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn-custom:hover {
-            background-color: #2980b9;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-        .message {
-            color: green;
-            margin-top: 10px;
-        }
-    </style>
+    <link href="{% static 'accounts/AccountsCss/verify_otp.css' %}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Verify OTP</h1>
+        <h1>Verification</h1>
+        <p>A 6-digit PIN has been sent to your registered e-mail, enter it below to continue.</p>
 
         {% if message %}
             <p class="message">{{ message }}</p>
@@ -58,14 +21,14 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input type="hidden" name="form_type" value="verify_otp">
-            <button type="submit" class="btn btn-custom btn-block">Verify OTP</button>
+            <button type="submit" class="btn btn-custom btn-block" aria-label="Verify OTP">Verify OTP</button>
         </form>
 
         <!-- Resend OTP Button -->
         <form method="POST" style="display:inline;">
             {% csrf_token %}
             <input type="hidden" name="resend_otp" value="true">
-            <button type="submit" class="btn btn-secondary btn-block mt-2">Resend OTP</button>
+            <button type="submit" class="btn btn-secondary btn-block mt-2" aria-label="Resend OTP">Resend OTP</button>
         </form>
 
         {% if form.non_field_errors %}

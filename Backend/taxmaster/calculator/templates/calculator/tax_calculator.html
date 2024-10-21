@@ -4,103 +4,7 @@
 Tax Calculator
 {% endblock %} 
 {% block individual_style %}
-<style>
-    .tax-calculator body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    }
-    .tax-calculator .container {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .tax-calculator h1 {
-    color: #673AB7;
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 20px;
-    }
-    .tax-calculator form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    }
-    .tax-calculator label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    }
-    .tax-calculator input[type="number"], button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100%;
-    }
-    .tax-calculator button[type="submit"] {
-    background-color: #d7bde2;
-    color: black;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .tax-calculator button[type="submit"]:hover {
-    background-color: #5e35b1;
-    transform: scale(1.05);
-    }
-    .tax-calculator .services {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-    }
-    .tax-calculator .services button {
-    background-color: #D1C4E9;
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .tax-calculator .services button:hover {
-    background-color: #B39DDB;
-    transform: scale(1.05);
-    }
-    .tax-calculator .footer-buttons {
-    margin-top: 50px;
-    text-align: center;
-    }
-    .tax-calculator .footer-buttons button {
-    background-color: #d7bde2;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .tax-calculator x.footer-buttons button:hover {
-    background-color: #5e35b1;
-    transform: scale(1.05);
-    }
-    .tax-calculator a.hero-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color:#d65cad; /* Bootstrap btn-primary background */
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-        text-align: center;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .tax-calculator a.hero-button:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-        transform: scale(1.05);
-    }
-</style>
+<link href="{% static 'calculator/cal_css/tax_calculator.css' %}" rel="stylesheet">
 {% endblock %}  
 {% block content %}
    <div class="tax-calculator">
@@ -124,10 +28,12 @@ Tax Calculator
       <hr>
       <!-- Additional Services -->
       <div class="services">
-        <a href="{% url 'tax_slabs' %}" class="hero-button explore-more">Check Tax Schemes</a>
-         {% comment %} <button type="button" onclick="showTaxSchemes()">Check Tax Schemes</button> {% endcomment %}
-        <a href="{% url 'tax_calculator_pdf' %}" class="hero-button explore-more">Generate PDF</a>
-        <a href="{% url 'available_advisors_view' %}" class="hero-button explore-more">Contact Tax Consultants</a>
+        <h2>You can also check our other Services Below !</h2>
+        <div class="service-buttons">
+          <a href="{% url 'tax_slabs' %}" class="check-tax-schemes">Check Tax Schemes</a>
+          <a href="{% url 'tax_calculator_pdf' %}" class="generate-pdf">Generate PDF</a>
+          <a href="{% url 'available_advisors_view' %}" class="contact-consultants">Contact Tax Consultants</a>
+        </div>
       </div>
    </div>
    <script>

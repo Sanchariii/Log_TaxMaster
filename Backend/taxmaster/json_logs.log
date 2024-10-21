@@ -333,3 +333,67 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:43:37.014521+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:43:56.849901+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:56:26.832524+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:19:35.565789+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:21:47.357353+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:22:31.180959+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "80 and above", "income": 900000, "deduction": 26078, "regime": "New Regime", "saving": 28375.776}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:23:00.634744+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "80 and above", "income": 789, "deduction": 78, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:24:34.284036+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:24:58.641426+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:25:14.587591+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anisha", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:25:21.044046+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anisha", "slot": "evening"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:25:45.639914+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:26:04.793952+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:26:42.240419+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:27:31.780098+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:28:44.020233+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T07:29:04.038369+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T10:51:10.506104+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:11:36.024676+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:11:51.656726+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:14:29.882837+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:15:04.437726+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:21:57.765688+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:22:18.855557+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:23:33.181429+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:24:00.473440+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:34:57.755818+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:35:27.491180+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:37:34.598653+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:37:54.842719+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:40:19.075670+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:40:34.738775+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:41:19.765850+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:41:43.781561+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:43:49.749742+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:44:06.679161+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:47:37.087470+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T11:48:26.706149+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:30:11.245444+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:32:27.493776+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:32:58.892383+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:34:30.686415+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:38:13.908273+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:40:09.353131+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T12:58:40.146728+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:17:19.627336+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:18:18.329832+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:20:57.638605+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:21:18.265507+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:22:06.461790+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:25:54.266652+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:27:14.133252+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5959, "deduction": 256, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:27:42.961928+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:30:41.884146+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:33:40.986269+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:33:48.594606+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:35:46.543324+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:35:49.467845+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:38:37.431999+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:38:39.333892+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:41:29.905929+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:42:43.337268+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:42:44.576574+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:43:57.355408+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:43:58.960874+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:45:17.661035+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:45:18.946937+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}

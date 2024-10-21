@@ -12,9 +12,14 @@
          }
          h1, h2 {
          color: #4b0082;
+         text-shadow: 2px 2px 4px #aaa;
+         }
+         p.text-center {
+         font-size: 1.2em;
+         color: #4b0082;
          }
          .btn-custom {
-         background-color: #D8BFD8;
+         background-color: #5b9bd5;
          color: white;
          border: none;
          padding: 10px 24px;
@@ -27,7 +32,7 @@
          border-radius: 12px;
          }
          .btn-custom:hover {
-         background-color: #DA70D6;
+         background-color: #1f4e79;
          }
          .footer {
          text-align: center;
@@ -45,7 +50,7 @@
          justify-content: space-between;
          }
          .pretty-button {
-         background-color: #DA70D6;
+         background-color: #5b9bd5;
          border: none;
          color: white;
          padding: 10px 20px;
@@ -57,14 +62,29 @@
          border-radius: 12px;
          }
          .pretty-button:hover {
-         background-color: #9932CC;
+         background-color: #1f4e79;
+         }
+         .card {
+         border: none;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         }
+         .card-body {
+         padding: 20px;
+         }
+         .card-title {
+         color: #4b0082;
+         font-weight: bold;
+         }
+         .card-text {
+         color: #333;
          }
       </style>
    </head>
    <body>
       <div class="container mt-5">
-         <h1 class="text-center">Available Tax Advisors</h1>
-         <p class="text-center">Please select an advisor to book an appointment:</p>
+         <h1 class="text-center">Meet the Experts!</h1>
+         <p class="text-center">Here is the list of tax advisors.Feel free to take consultation from our Tax Advisors.</p>
          <div class="row">
             <!-- Check if advisors are available -->
             {% if advisors %}
@@ -79,7 +99,7 @@
                         Gender: {{ advisor.taxadvisorprofile.gender }}
                      </p>
                      <a href="{% url 'request_appointment' advisor.id %}" class="btn btn-custom">Request Appointment</a>
-                    </div>
+                  </div>
                </div>
             </div>
             {% endfor %}
