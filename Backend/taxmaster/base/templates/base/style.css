@@ -1,0 +1,91 @@
+/* Sidebar styling */
+.sidebar {
+   position: fixed;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 250px;
+   background-color: #E5E4E2;
+   display: flex;
+   align-items: center;
+}
+.sidebar .navbar {
+   width: 100%;
+   padding-top: 100px;
+}
+.sidebar .navbar ul {
+   list-style: none;
+   padding-left: 0;
+}
+.sidebar .navbar ul li {
+   margin: 20px 0;
+}
+.sidebar .navbar ul li a {
+   color: #4a4a4a;
+   font-weight: 500;
+   font-size: 18px;
+   text-decoration: none;
+}
+.sidebar .navbar ul li a:hover {
+   color: #BF40BF;
+}
+/* Header styling */
+.header {
+   background-color: #E5E4E2;
+   padding: 10px 50px;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   position: fixed;
+   top: 0;
+   left: 250px;
+   width: calc(100% - 250px);
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+   z-index: 999;
+}
+.cta-buttons .cta-button {
+   padding: 10px 20px;
+   margin-left: 10px;
+   border-radius: 25px;
+   font-size: 16px;
+   font-weight: 500;
+   text-decoration: none;
+}
+.cta-buttons .signup {
+   background-color: black;
+   color: white;
+}
+.cta-buttons .login {
+   background-color: transparent;
+   color: black;
+}
+/* Main content padding */
+body {
+   padding-left: 250px;
+   padding-top: 80px;
+}
+/* Hero section */
+.hero {
+   display: flex;
+   justify-content: space-between;
+   padding: 50px;
+}
+.hero-text {
+   max-width: 600px;
+}
+.hero-text h1 {
+   font-size: 48px;
+}
+.hero-image {
+   width: 400px;
+}
+.responsive-hero-image {
+   width: 100%;
+   height: auto;
+}
+/* Other sections */
+.container {
+   margin-left: 250px;
+   padding: 20px;
+   width: calc(100% - 250px);
+}

@@ -2,7 +2,8 @@ from django import forms
 from .models import Appointment
 from django.contrib.auth.models import User
 from django.utils import timezone
-from datetime import time, timedelta
+from datetime import time, timedelta,date
+from django.core.exceptions import ValidationError
 
 class AppointmentForm(forms.ModelForm):
     SLOT_CHOICES = [
@@ -44,6 +45,12 @@ class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = ['requested_date', 'slot', 'time', 'notes']
+    
+    def clean_appointment_date(self):
+       appointment_date = self.cleaned_data.get('appointment_date')
+       if appointment_date >= date(2026, 1, 1):
+           raise ValidationError("Appointments cannot be booked for dates in or after the year 2026.")
+       return appointment_date
         
     def clean_requested_date(self):
         requested_date = self.cleaned_data.get('requested_date')
@@ -81,6 +88,11 @@ class AvailabilityCheckForm(forms.Form):
         widget=forms.DateInput(attrs={'type': 'date'}),  # Only a date input, no time
         label="Select Date"
     )
+    def clean_date(self):
+       date = self.cleaned_data.get('date')
+       if date >= date(2026, 1, 1):
+           raise ValidationError("Appointments cannot be checked for dates in or after the year 2026.")
+       return date
 
 class AppointmentRequestForm(forms.ModelForm):
 
@@ -108,7 +120,7 @@ class AppointmentRequestForm(forms.ModelForm):
     )
     
     notes = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Enter any additional notes'}),
+        widget=forms.Textarea(attrs={'rows': 4,'cols':40, 'placeholder': 'Enter any additional notes'}),
         required=False,
         label='Additional Notes (Optional)'
     )

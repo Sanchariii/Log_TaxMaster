@@ -8,92 +8,86 @@
     <style>
         body {
             background-color: #f0f4f7;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            max-width: 400px;
-            margin-top: 80px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-        .header-container {
-            background-color: #E6E6FA;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            max-width: 360px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+        .header-container {
+            margin-bottom: 30px;
+        }
         .header-container h1 {
-            color: #4A5568;
-            font-size: 30px;
-            font-weight: bold;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
             margin: 0;
         }
         .form-control {
-            border: 1px solid #ddd;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            width: 100%;
-            margin-bottom: 15px;
+            border: 1px solid #dcdfe3;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: none;
             transition: border-color 0.3s;
         }
         .form-control:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            border-color: #3498db;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
         }
         .btn-custom {
-            background-color: #007BFF;
+            background-color: #3498db;
             color: white;
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
+            border-radius: 8px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s;
             margin-top: 10px;
-            transition: background-color 0.3s, transform 0.2s;
         }
         .btn-custom:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
             transform: translateY(-2px);
         }
         .footer-container {
-            background-color: #f7f9fc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .footer-container p {
-            margin: 0;
+            margin-top: 30px;
             font-size: 14px;
-            color: #666;
+            color: #7f8c8d;
+        }
+        .footer-container form {
+            display: inline;
         }
         a {
-            color: #007BFF;
+            color: #3498db;
             text-decoration: none;
             transition: color 0.3s;
         }
         a:hover {
             text-decoration: underline;
-            color: #0056b3;
         }
         /* Custom error message styling */
         .error-message {
-            color: red;
+            color: #e74c3c;
             font-size: 14px;
-            text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         /* Custom success message styling */
         .success-message {
-            color: green;
+            color: #2ecc71;
             font-size: 14px;
-            text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -123,15 +117,15 @@
 
         <form method="post">
             {% csrf_token %}
-            <p class="text-center">An OTP has been sent to your email. Please enter it below:</p>
-            <input type="text" class="form-control" name="otp" placeholder="Enter OTP">
+            <p class="text-center mb-4">An OTP has been sent to your email. Please enter it below:</p>
+            <input type="text" class="form-control" name="otp" placeholder="Enter OTP" required>
             <button type="submit" class="btn btn-custom">Verify OTP</button>
         </form>
         <div class="footer-container">
             <p>If you didn't receive the OTP, 
                 <form method="post" style="display: inline;">
                     {% csrf_token %}
-                    <button type="submit" name="resend_otp" class="btn btn-link" formmethod="post">Resend OTP</button>
+                    <button type="submit" name="resend_otp" class="btn btn-link p-0" formmethod="post">Resend OTP</button>
                 </form>
             </p>
         </div>

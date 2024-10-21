@@ -324,3 +324,12 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:23:44.965775+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:25:30.334573+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-17T15:25:49.226432+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T07:17:19.377662+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T07:17:51.010389+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T07:42:58.958707+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T07:43:22.642702+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T07:44:45.487225+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 2000, "deduction": 16, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-18T10:53:33.722538+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:43:37.014521+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:43:56.849901+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T04:56:26.832524+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}

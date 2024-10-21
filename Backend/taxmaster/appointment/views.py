@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime,date
 from django.contrib.auth.models import User
 
 
@@ -181,6 +181,9 @@ def get_available_dates(advisor):
     # Check the availability for the next 30 days from today
     for i in range(1, 31):  # Start from tomorrow (i=1), check for the next 30 days
         date_to_check = today + timedelta(days=i)
+
+        if date_to_check >= date(2026, 1, 1):  # Add the validation here
+            continue
         
         # Find appointments for the tax advisor on the date_to_check
         appointments = Appointment.objects.filter(
@@ -197,54 +200,44 @@ def get_available_dates(advisor):
 
     
 def request_appointment(request, advisor_id):
-    advisor = get_object_or_404(User, id=advisor_id)
-    print(f"Advisor ID: {advisor.id}, Username: {advisor.username}")
-
-    # Get available future dates for the advisor (e.g., next 30 days)
-    available_dates = get_available_dates(advisor)
-    today = timezone.now().date()
-    one_year_from_now = today + timedelta(days=365)
-    future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
-
-    form = AppointmentRequestForm(request.POST or None)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            print("Form is valid")
-
-            # Create appointment but don't commit yet
-            appointment = form.save(commit=False)
-            appointment.tax_advisor = advisor
-            appointment.user = request.user  # Associate the appointment with the logged-in user
-            appointment.appointment_date = form.cleaned_data['requested_date']  # Assign the requested date
-            appointment.slot = form.cleaned_data['slot']  # Assign the requested slot
-            appointment.time = form.cleaned_data['time']  # Assign the specific time
-
-            # Create a new UserRequest entry
-            user_request = UserRequest.objects.create(
-                user=request.user,
-                tax_advisor=advisor,
-                first_name=request.user.first_name,
-                last_name=request.user.last_name,
-                email=request.user.email,
-                slot=appointment.slot,  # Add slot to UserRequest model
-                date=appointment.appointment_date  # Add date to UserRequest model
-            )
-
-            # Associate the appointment with the user request
-            appointment.user_request = user_request
-            appointment.save()
-
-            print("Appointment saved, redirecting...")
-            return redirect('appointment_request_sent')  # Ensure this URL name is defined
-        else:
-            print("Form errors:", form.errors)  # Print validation errors
-
-    return render(request, 'appointment/request_appointment.html', {
-        'form': form,
-        'advisor': advisor,
-        'available_dates': future_dates,
-    })
+   advisor = get_object_or_404(User, id=advisor_id)
+   # Get available future dates for the advisor (e.g., next 30 days)
+   available_dates = get_available_dates(advisor)
+   today = timezone.now().date()
+   one_year_from_now = today + timedelta(days=365)
+   future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
+   form = AppointmentRequestForm(request.POST or None)
+   if request.method == 'POST':
+       if form.is_valid():
+           requested_date = form.cleaned_data['requested_date']
+           if requested_date >= date(2026, 1, 1):  # Add the validation here
+               form.add_error('requested_date', "Appointments cannot be booked for dates in or after the year 2026.")
+           else:
+               # Proceed with saving the appointment
+               appointment = form.save(commit=False)
+               appointment.tax_advisor = advisor
+               appointment.user = request.user  # Associate the appointment with the logged-in user
+               appointment.appointment_date = requested_date
+               appointment.slot = form.cleaned_data['slot']  # Assign the requested slot
+               # Create a new UserRequest entry
+               user_request = UserRequest.objects.create(
+                   user=request.user,
+                   tax_advisor=advisor,
+                   first_name=request.user.first_name,
+                   last_name=request.user.last_name,
+                   email=request.user.email,
+                   slot=appointment.slot,  # Add slot to UserRequest model
+                   date=appointment.appointment_date  # Add date to UserRequest model
+               )
+               # Associate the appointment with the user request
+               appointment.user_request = user_request
+               appointment.save()
+               return redirect('appointment_request_sent')
+   return render(request, 'appointment/request_appointment.html', {
+       'form': form,
+       'advisor': advisor,
+       'available_dates': future_dates,
+   })
     
 def appointment_request_already_submitted(request):
     return render(request, 'appointment/appointment_request_already_submitted.html')
