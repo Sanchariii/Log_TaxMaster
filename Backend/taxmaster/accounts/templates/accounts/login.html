@@ -89,6 +89,27 @@
         <div class="header-container">
             <h1>Log In</h1>
         </div>
+
+        <!-- Error message display -->
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
         <form method="post">
             {% csrf_token %}
             <input type="text" class="form-control" placeholder="Username" name="username" required autocomplete="off">

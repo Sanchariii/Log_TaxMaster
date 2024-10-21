@@ -25,11 +25,11 @@
         </form>
 
         <!-- Resend OTP Button -->
-        <form method="POST" style="display:inline;">
+        <form method="POST" action="{% url 'resend_signup_otp' %}">
             {% csrf_token %}
-            <input type="hidden" name="resend_otp" value="true">
             <button type="submit" class="btn btn-secondary btn-block mt-2" aria-label="Resend OTP">Resend OTP</button>
         </form>
+        
 
         {% if form.non_field_errors %}
             <div class="error">

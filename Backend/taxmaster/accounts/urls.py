@@ -14,7 +14,8 @@ from .views import (
     verify_otp_view,
     verify_signup_otp,
     set_new_password_view,
-    group_selection
+    group_selection,
+    resend_signup_otp,
 )
 
 urlpatterns = [
@@ -33,5 +34,7 @@ urlpatterns = [
     path('set-new-password/', set_new_password_view, name='set_new_password'),
     path('group-selection/', group_selection, name='group_selection'),
     path('verify-signup-otp/', verify_signup_otp, name='verify_signup_otp'),
+        path('resend-signup-otp/', resend_signup_otp, name='resend_signup_otp'),
+
     # path('otp/', OTPVerificationView.as_view(), name='otp'),
 ]
