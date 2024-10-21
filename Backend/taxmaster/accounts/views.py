@@ -128,6 +128,8 @@ class CustomLoginView(View):
 
     def render_error(self, form=None, error_message=None, template=None):
         """Render form with error message."""
+        print(f"Error Message: {error_message}")  # Debugging line
+
         context = {'form': form} if form else {}
         if error_message:
             context['error_message'] = error_message
@@ -164,6 +166,7 @@ class CustomLoginView(View):
                 log_fail('login', 'Invalid OTP entered')
                 return self.render_error(error_message="Invalid OTP. Please try again.", template=self.otp_template_name)
 
+        
         # Process the login form
         form = self.form_class(request, data=request.POST)
         if form.is_valid():
@@ -178,6 +181,8 @@ class CustomLoginView(View):
             return render(request, self.otp_template_name)
         else:
             log_fail('login', 'Invalid form submission')
+            print(form.errors)  # Debugging line for form errors
+
             return self.render_error(form=form)
 
 
@@ -279,6 +284,34 @@ def signup(request):
         form = SignUpForm()
 
     return render(request, 'accounts/signup.html', {'form': form})
+
+def resend_signup_otp(request):
+    """View for resending the OTP during signup."""
+    if request.method == 'POST':
+        signup_data = request.session.get('signup_data')
+        if signup_data:
+            email = signup_data.get('email')
+            if email:
+                # Generate a new OTP and send it to the email
+                new_otp = generate_otp()
+                send_otp_via_email(email, new_otp)
+
+                # Update the OTP in the session
+                request.session['otp'] = new_otp
+
+                # Display a message confirming that the OTP has been resent
+                messages.success(request, 'A new OTP has been sent to your registered email.')
+            else:
+                messages.error(request, 'Unable to resend OTP. No email found.')
+        else:
+            messages.error(request, 'Unable to resend OTP. Signup data not found.')
+
+        # Redirect back to the OTP verification page
+        return redirect('verify_signup_otp')
+
+    return redirect('signup')
+
+
 
 def verify_signup_otp(request):
     """View for verifying the OTP after signup."""

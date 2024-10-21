@@ -397,3 +397,32 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:43:58.960874+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:45:17.661035+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 90000000000, "deduction": 1005789, "regime": "Old Regime", "saving": 258938.45016}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T14:45:18.946937+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:20:36.998894+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:21:05.690115+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:21:12.211449+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:31:44.928518+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:31:52.552951+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:32:14.565778+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:32:33.369992+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:34:34.153543+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:34:47.708712+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:35:14.952258+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:35:24.529556+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:36:13.957802+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:36:43.364283+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:37:24.100484+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:37:31.788719+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:40:18.489591+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:40:21.221238+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:40:38.139223+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:40:56.608635+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:44:25.178527+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:47:31.380676+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:47:36.929372+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:50:10.740185+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:50:15.861845+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:52:51.168112+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T18:53:04.658430+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:00:22.791175+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:00:44.288407+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:01:53.999725+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}

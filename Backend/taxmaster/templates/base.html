@@ -70,7 +70,11 @@
                             <a class="nav-link nav-link-custom" href="{% url 'manage_requests' %}">Requests</a>
                         </li>
                     {% endif %}
-
+                    {% if is_taxadvisor %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="{% url 'manage_requests' %}">Tax Advisor Profile  </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom" href="{% url 'tax_slabs' %}">Tax Slabs  </a>
                     </li>
