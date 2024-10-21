@@ -426,3 +426,28 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:00:22.791175+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:00:44.288407+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:01:53.999725+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:40:55.925920+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:42:41.568670+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T19:42:46.930982+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:01:14.529759+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:02:54.616802+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:03:18.811751+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:05:08.436658+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:05:56.330540+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:06:15.079766+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:06:36.378329+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:17:05.852577+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:41:37.251250+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:44:25.203675+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:45:37.798050+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:46:56.770121+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:48:41.284550+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:49:08.144280+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:49:17.864115+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:49:44.816445+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:58:11.424729+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T20:58:28.630547+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:06:48.402269+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:07:46.598131+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:17:42.867417+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:18:15.924290+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}

@@ -6,71 +6,76 @@
 
 {% block individual_style %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            body {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
             background-color: #f7f9fc;
             font-family: 'Arial', sans-serif;
-            }
-            .container {
+        }
+        .container {
             background-color: white;
             padding: 30px;
             margin-top: 50px;
             border-radius: 15px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
-            }
-            h2 {
+        }
+        h2 {
             color: #4a4a4a;
             text-align: center;
             margin-bottom: 30px;
             font-weight: bold;
-            }
-            table {
+            font-size: 24px; /* Reduced font size */
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
             margin-top: 20px;
             width: 100%;
             border-collapse: collapse;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-            th {
-            background-color: #007bff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #359aca;
             color: white;
             font-weight: bold;
             padding: 12px;
             text-align: center;
             border: 1px solid #dee2e6;
-            }
-            td {
+        }
+        td {
             padding: 12px;
             text-align: center;
             border: 1px solid #dee2e6;
-            }
-            tbody tr:hover {
+        }
+        tbody tr:hover {
             background-color: #f1f1f1;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            }
-            .alert {
+        }
+        .alert {
             text-align: center;
             padding: 20px;
             margin-top: 20px;
             border-radius: 10px;
-            }
-            @keyframes fadeIn {
+        }
+        @keyframes fadeIn {
             from {
-            opacity: 0;
+                opacity: 0;
             }
             to {
-            opacity: 1;
+                opacity: 1;
             }
-            }
-        </style>        
+        }
+    </style>        
 {% endblock %}  
-
 
 {% block content %}
    <body>
       <div class="container">
-         <h2>Your Seen Appointment Requests</h2>
+         <h2>Requests History of Users</h2>
          {% if requests %}
          <table class="table table-striped table-bordered">
             <thead>

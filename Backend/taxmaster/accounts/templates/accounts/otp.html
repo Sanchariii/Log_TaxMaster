@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             background-color: #f0f4f7;
@@ -22,6 +23,10 @@
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
         }
         .header-container {
             margin-bottom: 30px;
@@ -29,8 +34,9 @@
         .header-container h1 {
             font-size: 24px;
             font-weight: 600;
-            color: #2c3e50;
+            color: #1a237e;
             margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         .form-control {
             border: 1px solid #dcdfe3;
@@ -39,14 +45,14 @@
             border-radius: 8px;
             margin-bottom: 20px;
             box-shadow: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+            border-color: #1a237e;
+            box-shadow: 0 0 8px rgba(26, 35, 126, 0.2);
         }
         .btn-custom {
-            background-color: #3498db;
+            background-color: #1a237e;
             color: white;
             padding: 12px;
             font-size: 16px;
@@ -56,10 +62,30 @@
             width: 100%;
             transition: background-color 0.3s ease, transform 0.2s;
             margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .btn-custom:hover {
-            background-color: #2980b9;
+            background-color: #151b6b;
             transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            color: white; /* Ensure text color remains white */
+        }
+        .btn-light-blue {
+            background-color: #e3f2fd;
+            color: #1a237e;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .btn-light-blue:hover {
+            background-color: #bbdefb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
         }
         .footer-container {
             margin-top: 30px;
@@ -70,12 +96,25 @@
             display: inline;
         }
         a {
-            color: #3498db;
+            color: #1a237e;
             text-decoration: none;
             transition: color 0.3s;
         }
         a:hover {
             text-decoration: underline;
+        }
+        .input-icon {
+            position: relative;
+        }
+        .input-icon input {
+            padding-left: 40px;
+        }
+        .input-icon .fa {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a237e;
         }
         /* Custom error message styling */
         .error-message {
@@ -118,14 +157,17 @@
         <form method="post">
             {% csrf_token %}
             <p class="text-center mb-4">An OTP has been sent to your email. Please enter it below:</p>
-            <input type="text" class="form-control" name="otp" placeholder="Enter OTP" required>
+            <div class="input-icon">
+                <i class="fa fa-key"></i>
+                <input type="text" class="form-control" name="otp" placeholder="Enter OTP" required>
+            </div>
             <button type="submit" class="btn btn-custom">Verify OTP</button>
         </form>
         <div class="footer-container">
-            <p>If you didn't receive the OTP, 
+            <p>Problem with the OTP?
                 <form method="post" style="display: inline;">
                     {% csrf_token %}
-                    <button type="submit" name="resend_otp" class="btn btn-link p-0" formmethod="post">Resend OTP</button>
+                    <button type="submit" name="resend_otp" class="btn btn-light-blue">Resend OTP</button>
                 </form>
             </p>
         </div>

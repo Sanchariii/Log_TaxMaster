@@ -14,30 +14,39 @@
         .nav-item {
             margin-right: 30px; 
         }
-        .nav-item {
-            margin-right: 30px; 
-        }
         .nav-link {
             color: #eea0f2;
         }
         .nav-link-custom {
-            background-color: #ebb9ed; /* Background color */
-            color: #ffffff; /* Text color */
+            background-color: rgba(26, 35, 126, 0.8); /* Deep blue with transparency for glass effect */
+            color: #ffffff !important; /* Ensure text color is white */
             padding: 10px 15px; /* Padding to mimic button */
-            border-radius: 0.25rem; /* Rounded corners */
-            transition: background-color 0.2s ease; /* Smooth transition */
+            border-radius: 50px; /* Oval shape */
+            transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
             font-weight: bold; /* Bold text */
-
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            backdrop-filter: blur(10px); /* Glass effect */
         }
         .nav-link-custom:hover {
-            background-color: #d593e4; /* Slightly darker shade on hover */
-            color: #ffffff; /* Ensure text color remains white */
+            background-color: rgba(21, 27, 107, 0.8); /* Slightly darker shade on hover */
+            color: #ffffff !important; /* Ensure text color remains white */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
         }
         .btn-danger {
-            color: #ffffff; /* Ensure text color for btn-danger is white */
+            background-color: rgba(26, 35, 126, 0.8); /* Deep blue with transparency for glass effect */
+            color: #ffffff !important; /* Ensure text color for btn-danger is white */
+            border: none;
+            border-radius: 50px; /* Oval shape */
+            padding: 10px 15px;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            backdrop-filter: blur(10px); /* Glass effect */
         }
-
-
+        .btn-danger:hover {
+            background-color: rgba(21, 27, 107, 0.8); /* Slightly darker shade on hover */
+            color: #ffffff !important; /* Ensure text color remains white */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
     </style>
 </head>
 <body>

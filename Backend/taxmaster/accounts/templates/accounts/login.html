@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             background-color: #f0f4f7;
@@ -16,12 +17,21 @@
             margin: 0;
         }
         .container {
-            max-width: 360px;
+            max-width: 800px;
             background-color: #ffffff;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .login-container, .welcome-container {
+            flex: 1;
             text-align: center;
+        }
+        .login-container {
+            margin-right: 20px;
         }
         .header-container {
             margin-bottom: 30px;
@@ -29,8 +39,9 @@
         .header-container h1 {
             font-size: 24px;
             font-weight: 600;
-            color: #2c3e50;
+            color: #1a237e;
             margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         .form-control {
             border: 1px solid #dcdfe3;
@@ -39,14 +50,14 @@
             border-radius: 8px;
             margin-bottom: 20px;
             box-shadow: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+            border-color: #1a237e;
+            box-shadow: 0 0 8px rgba(26, 35, 126, 0.2);
         }
         .btn-custom {
-            background-color: #3498db;
+            background-color: #1a237e;
             color: #fff;
             padding: 12px;
             font-size: 16px;
@@ -54,11 +65,13 @@
             border: none;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
             margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .btn-custom:hover {
-            background-color: #2980b9;
+            background-color: #151b6b;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
         }
         .forgot-password-container {
             text-align: right;
@@ -76,54 +89,90 @@
             color: #7f8c8d;
         }
         a {
-            color: #3498db;
+            color: #1a237e;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
+        .input-icon {
+            position: relative;
+        }
+        .input-icon input {
+            padding-left: 40px;
+        }
+        .input-icon .fa {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a237e;
+        }
+        .welcome-container {
+            text-align: left;
+        }
+        .welcome-container h2 {
+            font-size: 28px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .welcome-container p {
+            font-size: 18px;
+            color: #4a4a4a;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header-container">
-            <h1>Log In</h1>
+        <div class="welcome-container">
+            <h2>Welcome to <strong>Taxmaster</strong>!</h2>
+            <p>We are happy to help you.</p>
         </div>
+        <div class="login-container">
+            <div class="header-container">
+                <h1>Log In</h1>
+            </div>
 
-        <!-- Error message display -->
-        {% if error_message %}
-        <div class="alert alert-danger" role="alert">
-            {{ error_message }}
-        </div>
-        {% endif %}
+            <!-- Error message display -->
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
 
-        {% if form.errors %}
-            <div class="alert alert-danger">
-                <ul>
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <li>{{ error }}</li>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
 
-
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" class="form-control" placeholder="Username" name="username" required autocomplete="off">
-            <input type="password" class="form-control" placeholder="Password" name="password" required autocomplete="new-password">
-            <div class="forgot-password-container">
-                <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    <input type="text" class="form-control" placeholder="Username" name="username" required autocomplete="off">
+                </div>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required autocomplete="new-password">
+                </div>
+                <div class="forgot-password-container">
+                    <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+                </div>
+                <div class="custom-checkbox">
+                    <input type="checkbox" name="remember_me"> Remember me
+                </div>
+                <button type="submit" class="btn btn-custom">Log in</button>
+            </form>
+            <div class="footer-container">
+                <p>Not an Existing User? <a href="{% url 'signup' %}">Create an account</a></p>
             </div>
-            <div class="custom-checkbox">
-                <input type="checkbox" name="remember_me"> Remember me
-            </div>
-            <button type="submit" class="btn btn-custom">Log in</button>
-        </form>
-        <div class="footer-container">
-            <p>Not an Existing User? <a href="{% url 'signup' %}">Create an account</a></p>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
