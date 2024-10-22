@@ -451,3 +451,5 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:07:46.598131+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:17:42.867417+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:18:15.924290+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-22T07:22:58.881881+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-22T07:23:25.496396+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
