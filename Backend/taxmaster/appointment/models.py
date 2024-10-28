@@ -11,6 +11,12 @@ class Appointment(models.Model):
         ('evening', 'Evening'),
     ]
     
+    MEETING_TYPE_CHOICES = [
+        ('in_person', 'In Person'),
+        ('online', 'Online'),
+    ]
+
+    
     user = models.ForeignKey(
         User, 
         on_delete=models.CASCADE, 
@@ -31,6 +37,7 @@ class Appointment(models.Model):
     )
     appointment_date = models.DateField()
     slot = models.CharField(max_length=10, choices=SLOT_CHOICES, null=True)
+    meeting_type = models.CharField(max_length=10, choices=MEETING_TYPE_CHOICES, default='online')
     notes = models.TextField(blank=True, null=True)
     confirmed = models.BooleanField(default=False)
 

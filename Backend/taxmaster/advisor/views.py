@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from .models import UserRequest, TaxAdvisorProfile
 import accounts.views as av
 from .forms import TaxAdvisorProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+
 
 
 def available_advisors_view(request):
@@ -81,3 +84,32 @@ def tax_advisor_profile(request, user_id):
         form = TaxAdvisorProfileForm(instance=profile)
 
     return render(request, 'advisor/tax_advisor_profile.html', {'form': form, 'user': user})
+
+
+
+class TaxAdvisorProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            profile = TaxAdvisorProfile.objects.get(user=request.user)
+        except TaxAdvisorProfile.DoesNotExist:
+            return redirect('advisor:create_profile')  # Redirect if profile doesn't exist
+
+        return render(request, 'advisor/tax_advisor_profile_view.html', {'profile': profile})
+
+class TaxAdvisorProfileEditView(LoginRequiredMixin, View):
+    def get(self, request):
+        try:
+            profile = TaxAdvisorProfile.objects.get(user=request.user)
+        except TaxAdvisorProfile.DoesNotExist:
+            return redirect('advisor:create_profile')  # Redirect if profile doesn't exist
+
+        form = TaxAdvisorProfileForm(instance=profile)
+        return render(request, 'advisor/edit_tax_advisor_profile.html', {'form': form})
+
+    def post(self, request):
+        profile = TaxAdvisorProfile.objects.get(user=request.user)
+        form = TaxAdvisorProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('advisor:profile')  # Redirect to profile view after save
+        return render(request, 'advisor/edit_tax_advisor_profile.html', {'form': form})
