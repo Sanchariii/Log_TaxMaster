@@ -2,245 +2,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaxMaster - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Basic Styling */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        h1, h2, p {
-            margin: 0;
-        }
-        /* Navbar Styling */
-        .navbar {
-            background-color: #2c3e50;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar .navbar-brand {
-            font-weight: 700;
-            font-size: 24px;
-            color: #ecf0f1;
-            text-decoration: none;
-        }
-        .navbar-nav {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 20px;
-        }
-        .navbar-nav .nav-item a {
-            color: #ecf0f1;
-            font-weight: 500;
-            font-size: 16px;
-            text-decoration: none;
-        }
-        .navbar-nav .nav-item a:hover {
-            color: #3498db;
-        }
-        .cta-buttons {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .cta-button {
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        .cta-button.register {
-            background-color: #3498db;
-            color: #fff;
-        }
-        .cta-button.login {
-            background-color: transparent;
-            color: #ecf0f1;
-            border: 2px solid #ecf0f1;
-        }
-        .cta-button:hover {
-            background-color: #2980b9;
-            color: #fff;
-        }
-        /* Hero Section Styling */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            padding: 60px 30px;
-            background: linear-gradient(145deg, #f7f7f7, #e0e0e0);
-            margin-top: 60px; /* Adjusted for fixed navbar */
-        }
-        .hero-content {
-            max-width: 600px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        .hero p {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #666;
-        }
-        .cta-buttons {
-            margin-top: 10px;
-        }
-        .cta-buttons a {
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 16px;
-            margin-right: 15px;
-            transition: transform 0.2s;
-        }
-        .cta-buttons .get-started {
-            background-color: #3498db;
-            color: #fff;
-        }
-        .cta-buttons .explore-more {
-            background-color: transparent;
-            color: #3498db;
-            border: 2px solid #3498db;
-        }
-        .cta-buttons a:hover {
-            transform: translateY(-5px);
-        }
-        /* Image Styling */
-        .hero img {
-            width: 50%;
-            border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-        /* Section Styling */
-        .section {
-            padding: 80px 30px;
-            text-align: center;
-        }
-        .section h2 {
-            font-size: 36px;
-            color: #333;
-        }
-        .section p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 16px;
-            color: #777;
-        }
-        /* Animation */
-        .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaxMaster - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+       /* Basic Styling */
+       body, html {
+           margin: 0;
+           padding: 0;
+           width: 100%;
+           font-family: 'Poppins', sans-serif;
+           background-color: #f7f7f7;
+           color: #333;
+           scroll-behavior: smooth;
+       }
+       h1, h2, p {
+           margin: 0;
+       }
+       /* Navbar Styling */
+       .navbar {
+           background-color: #2c3e50;
+           padding: 15px 30px;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           position: fixed;
+           width: 100%;
+           top: 0;
+           z-index: 1000;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+       }
+       .navbar .navbar-brand {
+           font-weight: 700;
+           font-size: 24px;
+           color: #ecf0f1;
+           text-decoration: none;
+       }
+       .navbar-nav {
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+           gap: 20px;
+       }
+       .navbar-nav .nav-item a {
+           color: #ecf0f1;
+           font-weight: 500;
+           font-size: 16px;
+           text-decoration: none;
+       }
+       .navbar-nav .nav-item a:hover {
+           color: #3498db;
+       }
+       .cta-buttons {
+           display: flex;
+           align-items: center;
+           gap: 15px;
+       }
+       .cta-button {
+           padding: 8px 20px;
+           border-radius: 20px;
+           font-size: 14px;
+           text-decoration: none;
+           font-weight: 500;
+           transition: background-color 0.3s ease;
+       }
+       .cta-button.register {
+           background-color: #3498db;
+           color: #fff;
+       }
+       .cta-button.login {
+           background-color: transparent;
+           color: #ecf0f1;
+           border: 2px solid #ecf0f1;
+       }
+       .cta-button:hover {
+           background-color: #2980b9;
+           color: #fff;
+       }
+       /* Hero Section Styling with Effects */
+       .hero {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           min-height: 100vh;
+           padding: 60px 30px;
+           background: linear-gradient(145deg, #f7f7f7, #e0e0e0);
+           margin-top: 60px; /* Adjusted for fixed navbar */
+           flex-wrap: wrap; /* Ensure the layout is responsive */
+           opacity: 0;
+           animation: fadeIn 2s ease-in-out forwards;
+       }
+       @keyframes fadeIn {
+           from {
+               opacity: 0;
+           }
+           to {
+               opacity: 1;
+           }
+       }
+       .hero-content {
+           max-width: 600px;
+           margin-right: 20px;
+           text-align: left;
+       }
+       .hero h1 {
+           font-size: 48px;
+           font-weight: 700;
+           color: #2c3e50;
+       }
+       .hero p {
+           margin-top: 20px;
+           font-size: 18px;
+           color: #666;
+       }
+       .cta-buttons {
+           margin-top: 10px;
+       }
+       .cta-buttons a {
+           padding: 12px 25px;
+           border-radius: 30px;
+           text-decoration: none;
+           font-size: 16px;
+           margin-right: 15px;
+           transition: transform 0.2s;
+       }
+       .cta-buttons .get-started {
+           background-color: #3498db;
+           color: #fff;
+       }
+       .cta-buttons .explore-more {
+           background-color: transparent;
+           color: #3498db;
+           border: 2px solid #3498db;
+       }
+       .cta-buttons a:hover {
+           transform: translateY(-5px);
+       }
+       .hero img {
+           max-width: 45%; /* Limit image width */
+           height: auto;
+           border-radius: 15px;
+           margin-left: auto;
+           margin-right: auto;
+           display: block;
+           opacity: 0;
+           animation: fadeIn 2s ease-in-out forwards 0.5s;
+       }
+       /* Why Use TaxMaster Section Styling */
+       .why-section {
+           background-color: #034694;
+           color: #fff;
+           padding: 80px 30px;
+           text-align: center;
+           position: relative;
+           overflow: hidden;
+           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+           border-radius: 15px;
+           animation: fadeIn 2s ease-in-out;
+       }
+       .why-section h2 {
+           font-size: 42px;
+           margin-bottom: 20px;
+       }
+       .why-section p {
+           max-width: 800px;
+           margin: 0 auto;
+           font-size: 18px;
+           color: #fff;
+           opacity: 0.8;
+       }
+       .why-section::before {
+           content: '';
+           position: absolute;
+           top: -100px;
+           left: -100px;
+           width: 200px;
+           height: 200px;
+           background-color: rgba(255, 255, 255, 0.2);
+           border-radius: 50%;
+           animation: floating 6s infinite;
+       }
+       @keyframes floating {
+           0% {
+               transform: translateY(0);
+           }
+           50% {
+               transform: translateY(-20px);
+           }
+           100% {
+               transform: translateY(0);
+           }
+       }
+       /* Contact Section Styling (White Background) */
+       .contact-section {
+           background-color: #fff;
+           color: #333;
+           padding: 60px 30px;
+           text-align: center;
+           border-radius: 15px;
+           margin-top: 50px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           animation: fadeIn 2s ease-in-out 1s forwards;
+       }
+       .contact-section h2 {
+           font-size: 36px;
+           margin-bottom: 20px;
+       }
+       .contact-section p {
+           font-size: 18px;
+           margin-bottom: 20px;
+       }
+       .contact-section a {
+           color: #3498db;
+           font-weight: 500;
+           font-size: 20px;
+           text-decoration: underline;
+           transition: color 0.3s ease;
+       }
+       .contact-section a:hover {
+           color: #2980b9;
+       }
+       /* Footer Styling */
+       footer {
+           background-color: #2c3e50;
+           color: #ecf0f1;
+           padding: 20px;
+           text-align: center;
+           margin-top: 50px;
+       }
+       footer p {
+           margin: 0;
+           font-size: 14px;
+       }
+       footer a {
+           color: #3498db;
+           text-decoration: none;
+           font-weight: 500;
+       }
+       footer a:hover {
+           color: #2980b9;
+       }
+</style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a class="navbar-brand" href="#">TaxMaster</a>
-        <div class="navbar-nav">
-            <div class="nav-item"><a href="#home">Home</a></div>
-            <div class="nav-item"><a href="#why">Why Us?</a></div>
-            <div class="nav-item"><a href="#contact">Contact</a></div>
-            <div class="nav-item"><a href="#learn-more">Learn More</a></div>
-        </div>
-        <div class="cta-buttons">
-            <a href="{% url 'signup' %}" class="cta-button register">Register</a>
-            <a href="{% url 'login' %}" class="cta-button login">Log In</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="hero" id="home">
-        <div class="hero-content fade-in">
-            <h1>Welcome to TaxMaster</h1>
-            <p>Simplify your taxes with our easy-to-use tools and maximize your returns with expert guidance.</p>
-            <div class="cta-buttons">
-                <a href="#get-started" class="get-started">Get Started</a>
-                <a href="#explore" class="explore-more">Learn More</a>
-            </div>
-        </div>
-        {% comment %} <img src="https://media.istockphoto.com/id/1364117721/vector/online-tax-filing-concept-businessman-filling-tax-form-documents-online-vector-illustration.jpg?s=612x612&w=0&k=20&c=ode3rxpIjUSBD-zROmt7pf5rmYX6FwLakG3jGzKhMwk=" alt="Hero Image" class="fade-in"> {% endcomment %}
-        <img src="{% static 'base/homeImage.png' %}" alt="Favicon2" class="firewall"/>
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="#" class="navbar-brand">TaxMaster</a>
+    <ul class="navbar-nav">
+        <li class="nav-item"><a href="#why" class="nav-link">Why Us</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="cta-buttons">
+        <a href="{% url 'signup' %}" class="cta-button register">Register</a>
+        <a href="{% url 'login' %}" class="cta-button login">Login</a>
     </div>
+</nav>
 
-    <!-- Why Use Section -->
-    <div class="section why-section" id="why">
-        <div class="why-container">
-            <h2>Why Use TaxMaster?</h2>
-            <p class="highlight-text">
-                <strong>Tax!!!</strong> What's the first thing that comes to your mind when you hear the word "TAX"? Money, right? But how much?
-                <span class="read-more" onclick="toggleReadMore()">Read More</span>
-            </p>
-            <div class="more-content" id="moreContent">
-                <p>This is a complicated question. To know how much, you need to study the Indian Government Income Tax rules and deal with a number of lengthy calculations.</p>
-                <p class="emphasis-text">Well, don't be intimidated by those lengthy calculations because <strong>TaxMaster</strong> is here for the rescue!</p>
-                <p>TaxMaster is a web-based portal for tax calculation that allows users of any age group to calculate their taxes based on their income without facing complexity.</p>
-                <ul class="features-list" style="list-style-type: none;">
-                    <li ><span class="feature-icon">✔️</span> Accurate tax calculations</li>
-                    <li><span class="feature-icon">✔️</span> Solutions to minimize your taxes</li>
-                    <li><span class="feature-icon">✔️</span> Maximum privacy and security</li>
-                </ul>
-                <p class="final-text">TaxMaster is here to simplify your tax experience!</p>
-            </div>
-        </div>
-    </div>
-    <!-- Contact Section -->
-    <div class="section" id="contact">
-        <h2>Contact Us</h2>
-        <p>Reach out for more information: <strong>sanchari.ray@rockwellautomation.com</strong></p>
-        <p> We are always here to help you!</p>
-    </div>
-
-    <script>
-        // Add scroll effect for navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        function toggleReadMore() {
-            const moreContent = document.getElementById("moreContent");
-            const readMoreText = document.querySelector(".read-more");
-            if (moreContent.style.display === "none" || moreContent.style.display === "") {
-                moreContent.style.display = "block";
-                readMoreText.style.display = "none"; // Hide "Read More" after expanding
-            }
-        }
-    </script>
+<!-- Hero Section -->
+<div class="hero">
+<div class="hero-content">
+<h1>Hey! Welcome to TaxMaster</h1>
+<p>Simplify your taxes with our easy-to-use tools and maximize your returns with expert guidance.</p>
+<div class="cta-buttons">
+<a href="/get-started" class="cta-button get-started">Get Started</a>
+<a href="#why" class="cta-button explore-more">Explore More</a>
+</div>
+</div>
+<img src="{% static 'base/homeImage.png' %}" alt="Tax Master Hero">
+</div>
+<!-- Why Use TaxMaster Section -->
+<section id="why" class="why-section">
+<h2>Why Use TaxMaster?</h2>
+<p>We simplify the tax filing process by providing an easy-to-use platform, expert assistance, and secure document storage to ensure your taxes are done right every time.</p>
+</section>
+<!-- Contact Section (White Background) -->
+<section id="contact" style="text-align: center; padding: 60px 30px;">
+    <h2>Contact Us</h2>
+    <p>For any inquiries, feel free to reach us at:</p>
+    <a href="mailto:youremail@example.com">sanchari.ray@rockwellautomation.com</a>
+</section>
+<!-- Footer -->
+<footer>
+    <p>© 2024 TaxMaster. All Rights Reserved. | Designed by <strong>Sanchari Ray</strong></p>
+</footer>
 </body>
 </html>
+

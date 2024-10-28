@@ -453,3 +453,36 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-21T21:18:15.924290+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-22T07:22:58.881881+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-22T07:23:25.496396+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-27T17:51:49.829651+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-27T17:52:44.016397+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-27T17:53:16.152017+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-27T17:53:22.896514+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-27T17:53:47.428250+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T07:07:34.100073+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T07:08:38.625748+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T07:25:58.227263+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T07:26:31.882244+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 2000, "regime": "New Regime", "saving": 3796.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T07:28:12.991160+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 200, "regime": "New Regime", "saving": 3889.6}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:32:09.632205+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 200, "regime": "New Regime", "saving": 3889.6}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:32:33.789954+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 0, "regime": "New Regime", "saving": 3900.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:33:04.319305+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 7899, "deduction": 20, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:33:28.782541+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 800000, "deduction": 15000, "regime": "New Regime", "saving": 33280.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:33:53.222685+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1300000, "deduction": 0, "regime": "New Regime", "saving": 96200.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:35:06.247335+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 500, "regime": "New Regime", "saving": 3874.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:37:35.396350+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1000000, "deduction": 200000, "regime": "New Regime", "saving": 14300.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:38:57.297855+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:39:25.501389+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:40:44.296485+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1000000, "deduction": 200000, "regime": "New Regime", "saving": 14300.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T08:44:48.527845+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1000000, "deduction": 175000, "regime": "New Regime", "saving": 19500.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T13:51:09.863830+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1200000, "deduction": 325000, "regime": "Old Regime", "saving": 1300.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T13:55:42.786754+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:03:52.843939+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 34475, "deduction": 57084, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:04:13.033633+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:07:26.036341+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 34475, "deduction": 57084, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:07:51.012444+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1200000, "deduction": 148566, "regime": "New Regime", "saving": 35547.408}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:19:50.604499+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1200000, "deduction": 325000, "regime": "Old Regime", "saving": 1300.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:19:56.826789+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:23:57.915810+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:24:27.189203+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T14:47:34.240279+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T15:14:13.478168+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
