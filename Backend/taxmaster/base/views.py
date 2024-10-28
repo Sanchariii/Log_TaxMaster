@@ -62,3 +62,8 @@ def home_view(request):
 
     return render(request, 'base/home.html')
 
+
+
+def learn_more(request):
+    return render(request, 'base/learn_more.html')
+

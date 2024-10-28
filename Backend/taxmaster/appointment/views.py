@@ -198,7 +198,7 @@ def get_available_dates(advisor):
     return available_dates
 
 
-    
+@login_required
 def request_appointment(request, advisor_id):
    advisor = get_object_or_404(User, id=advisor_id)
    # Get available future dates for the advisor (e.g., next 30 days)

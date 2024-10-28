@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from .models import UserRequest, TaxAdvisorProfile
 import accounts.views as av
 from .forms import TaxAdvisorProfileForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def available_advisors_view(request):
     # Filter only advisors who belong to the 'Tax Advisor' group and have license and experience
     advisors = User.objects.filter(
