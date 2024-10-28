@@ -75,7 +75,7 @@ class ForgotPasswordForm(forms.Form):
     email = forms.EmailField(
         required=True,
         label='Email Address',
-        help_text='Enter your registered email address.'
+        # help_text='Enter your registered email address.'
     )
 
 ##################################          ###############################################

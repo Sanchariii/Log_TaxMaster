@@ -105,7 +105,7 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
    standard_deduction_old = Decimal('50000')
    standard_deduction_new = Decimal('75000')
    
-   def old_regime_tax():
+   def old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
        taxable_income = income - standard_deduction_old - deduction_80c - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
        tax = Decimal('0.0')
        if age_group == 1:  # Below 60 years
@@ -138,7 +138,7 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
        cess = Decimal('0.04') * tax
        return tax + cess
    
-   def new_regime_tax():
+   def new_regime_tax(income, standard_deduction_new):
        taxable_income = income - standard_deduction_new  # Only standard deduction applies in the new regime
        tax = Decimal('0.0')
        if taxable_income <= 300000:
@@ -159,9 +159,40 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
        tax += surcharge
        cess = Decimal('0.04') * tax
        return tax + cess
-   tax_old_regime = old_regime_tax()
-   tax_new_regime = new_regime_tax()
+   tax_old_regime = old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
+   tax_new_regime = new_regime_tax(income, standard_deduction_new)
    return tax_old_regime, tax_new_regime
+
+
+
+def generate_suggestions(income, deductions):
+    suggestions = []
+    
+    if income < 500000:
+        suggestions.append("Consider investing in PPF or ELSS to maximize your 80C deductions.")
+        suggestions.append("Utilize 80D deductions for health insurance premiums to save more.")
+    elif income < 1000000:
+        suggestions.append("Maximize your 80C deductions by investing in NSC or life insurance.")
+        suggestions.append("Look into 80E deductions if you have an education loan.")
+        suggestions.append("Don't forget about 80G deductions for charitable donations.")
+    else:
+        suggestions.append("Invest in tax-saving bonds and instruments outside the deduction realm.")
+        suggestions.append("Ensure your salary structure is tax-efficient with components like HRA and LTA.")
+        suggestions.append("Consider 80EEA deductions if you have a home loan.")
+
+    if deductions['80c'] < 150000:
+        suggestions.append("You can still invest more in 80C options to save up to Rs. 1.5 lakh.")
+    if deductions['80d'] < 50000:
+        suggestions.append("Increase your health insurance coverage to maximize 80D deductions.")
+    if deductions['80e'] == 0:
+        suggestions.append("Check if you are eligible for 80E deductions for education loans.")
+    if deductions['80eea'] == 0:
+        suggestions.append("Look into 80EEA deductions if you have a home loan.")
+    if deductions['80g'] == 0:
+        suggestions.append("Consider making charitable donations to avail 80G deductions.")
+
+    return suggestions
+
 
 
 
@@ -172,29 +203,27 @@ def tax_calculator_view(request):
         if form.is_valid():
             age_group = int(form.cleaned_data['age_group'])
             income = form.cleaned_data['annual_income']
-            deduction_80c = form.cleaned_data.get('deduction_80c', 0)
-            deduction_80d = form.cleaned_data.get('deduction_80d', 0)
-            deduction_80e = form.cleaned_data.get('deduction_80e', 0)
-            deduction_80eea = form.cleaned_data.get('deduction_80eea', 0)
-            deduction_80g = form.cleaned_data.get('deduction_80g', 0)
+            deductions = {
+                '80c': form.cleaned_data.get('deduction_80c', 0) or 0,
+                '80d': form.cleaned_data.get('deduction_80d', 0) or 0,
+                '80e': form.cleaned_data.get('deduction_80e', 0) or 0,
+                '80eea': form.cleaned_data.get('deduction_80eea', 0) or 0,
+                '80g': form.cleaned_data.get('deduction_80g', 0) or 0
+            }
             selected_scheme = request.POST.get('selected_scheme', 'both')
-            tax_old_regime, tax_new_regime = calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
+            tax_old_regime, tax_new_regime = calculate_tax_view(income, deductions['80c'], deductions['80d'], deductions['80e'], deductions['80eea'], deductions['80g'], age_group)
             standard_deduction_old = 50000
             standard_deduction_new = 75000
 
             # Determine the best regime
             if tax_old_regime < tax_new_regime:
                 best_regime = "Old Regime"
-                suggestions = [
-                    "Maximize your 80C deductions (up to Rs. 1.5 lakh) by investing in PPF, ELSS, NSC, or insurance.",
-                    "Use 80D deduction for health insurance premiums (up to Rs. 50,000 for senior citizens).",
-                    "Check eligibility for other deductions like 80E (education loan), 80EEA (home loan interest), and 80G (charitable donations)."
-                ]
+                suggestions = generate_suggestions(income, deductions)
             elif tax_old_regime > tax_new_regime:
                 best_regime = "New Regime"
                 suggestions = [
-                    "Since no deductions are allowed in the new regime, ensure your salary structure is tax-efficient.",
-                    "Plan for the future by investing in tax-free bonds or tax-saving instruments outside the deduction realm."
+                    "Since the new regime doesn't allow deductions, focus on making your salary structure tax-efficient. Consider components like HRA, LTA, and food coupons.",
+                    "Invest in tax-free bonds or other tax-saving instruments that aren't dependent on deductions. This can help you plan for the future while saving on taxes."
                 ]
             else:
                 best_regime = "Both Regimes yield the same tax amount."
@@ -211,7 +240,7 @@ def tax_calculator_view(request):
             # Happy message if no suggestions are needed
             happy_message = "Great news 🎉! You don't need to pay any tax this Year!"
 
-            log_calculated(age_slab,int(income),int((deduction_80c or 0) + (deduction_80d or 0) + (deduction_80e or 0) + (deduction_80eea or 0) + (deduction_80g or 0)),best_regime,float(abs(tax_old_regime - tax_new_regime)))
+            log_calculated(age_slab, int(income), int(sum(deductions.values())), best_regime, float(abs(tax_old_regime - tax_new_regime)))
 
             return render(request, 'calculator/results.html', {
                 'form': form,
@@ -227,11 +256,10 @@ def tax_calculator_view(request):
                 'standard_deduction_new': standard_deduction_new,
                 'thank_you_message': "Thank you for using TaxMaster!"
             })
-            
-     
     else:
         form = TaxCalculatorForm()
     return render(request, 'calculator/tax_calculator.html', {'form': form})
+
 
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -270,11 +298,13 @@ def tax_calculator_pdf_view(request):
         # Determine the best regime
         if tax_old_regime < tax_new_regime:
             best_regime = "Old Regime"
-            suggestions = [
-                "Maximize your 80C deductions (up to Rs. 1.5 lakh) by investing in PPF, ELSS, NSC, or insurance.",
-                "Use 80D deduction for health insurance premiums (up to Rs. 50,000 for senior citizens).",
-                "Check eligibility for other deductions like 80E (education loan), 80EEA (home loan interest), and 80G (charitable donations)."
-            ]
+            suggestions = generate_suggestions(income, {
+                '80c': deduction_80c,
+                '80d': deduction_80d,
+                '80e': deduction_80e,
+                '80eea': deduction_80eea,
+                '80g': deduction_80g
+            })
         elif tax_old_regime > tax_new_regime:
             best_regime = "New Regime"
             suggestions = [
