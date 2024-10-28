@@ -8,7 +8,10 @@ urlpatterns = [
     path('approve-request/<int:request_id>/', av.approve_request, name='approve_request'),
     path('reject-request/<int:request_id>/', av.reject_request, name='reject_request'),
     path('manage-requests/', av.manage_requests_view, name='manage_requests'),#not working
-    path('tax-advisor-profile/<int:user_id>/', views.tax_advisor_profile, name='tax_advisor_profile')
+    path('tax-advisor-profile/<int:user_id>/', views.tax_advisor_profile, name='tax_advisor_profile'),
+    path('profile/', views.TaxAdvisorProfileView.as_view(), name='profile'),
+    path('profile/edit/', views.TaxAdvisorProfileEditView.as_view(), name='edit_profile'),
 ]
+
 
 

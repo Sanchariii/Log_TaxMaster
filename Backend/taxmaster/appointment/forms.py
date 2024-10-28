@@ -102,6 +102,12 @@ class AppointmentRequestForm(forms.ModelForm):
         ('evening', 'Evening (4:00 PM - 6:00 PM)'),
     ]
 
+    MEETING_TYPE_CHOICES = [
+        ('in_person', 'In Person'),
+        ('online', 'Online'),
+    ]
+    
+
     requested_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),  # Ensure correct date input type
         label='Requested Appointment Date',
@@ -117,6 +123,12 @@ class AppointmentRequestForm(forms.ModelForm):
     time = forms.TimeField(
         widget=forms.TimeInput(attrs={'type': 'time'}),
         label="Select Specific Time"
+    )
+
+    meeting_type = forms.ChoiceField(
+        choices=MEETING_TYPE_CHOICES,
+        widget=forms.RadioSelect,
+        label="Meeting Type"
     )
     
     notes = forms.CharField(
