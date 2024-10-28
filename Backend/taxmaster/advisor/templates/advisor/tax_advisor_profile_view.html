@@ -9,23 +9,32 @@
     <style>
         body {
             background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        .container {
+        .header, .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .header h1, .footer p {
+            margin: 0;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .profile-container {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .container:hover {
+        .profile-container:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
@@ -40,7 +49,7 @@
             color: #3498db;
         }
         .btn-custom {
-            background-color: #3498db;
+            background-color: #1a237e;
             color: white;
             padding: 10px 15px;
             border: none;
@@ -58,13 +67,23 @@
         }
     </style>
 </head>
-{% block content %}
-<h2>Tax Advisor Profile</h2>
-<div>
-    <p><strong>License Serial:</strong> {{ profile.license_serial }}</p>
-    <p><strong>Years of Experience:</strong> {{ profile.years_of_experience }}</p>
-</div>
-<a href="{% url 'edit_profile' %}">Edit Profile</a>
-{% endblock %}
-
+<body>
+    <div class="header">
+        <h1>Tax Advisor Profile</h1>
+    </div>
+    <div class="main-content">
+        <div class="profile-container">
+            <h2><i class="fas fa-user-tie icon"></i>My Profile</h2>
+            <div>
+                <p><strong><i class="fas fa-user icon"></i>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                <p><strong><i class="fas fa-id-badge icon"></i>License Serial:</strong> {{ profile.license_serial }}</p>
+                <p><strong><i class="fas fa-briefcase icon"></i>Years of Experience:</strong> {{ profile.years_of_experience }}</p>
+            </div>
+            <a href="{% url 'edit_profile' %}" class="btn btn-custom"><i class="fas fa-edit icon"></i>Edit Profile</a>
+        </div>
+    </div>
+    {% comment %} <div class="footer">
+        <p>© 2024 Tax Advisor Portal. All rights reserved.</p>
+    </div> {% endcomment %}
+</body>
 </html>
