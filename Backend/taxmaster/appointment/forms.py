@@ -107,7 +107,7 @@ class AppointmentRequestForm(forms.ModelForm):
 
     MEETING_TYPE_CHOICES = [
         ('in_person', 'In Person'),
-        ('online', 'Online'),
+        ('online_meeting', 'Online Meeting'),
     ]
     
 
@@ -134,15 +134,10 @@ class AppointmentRequestForm(forms.ModelForm):
         label="Meeting Type"
     )
     
-    notes = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4,'cols':40, 'placeholder': 'Enter any additional notes'}),
-        required=False,
-        label='Additional Notes (Optional)'
-    )
 
     class Meta:
         model = Appointment
-        fields = ['requested_date', 'slot', 'time', 'notes']
+        fields = ['requested_date', 'slot', 'time',  'meeting_type']
         
     def clean_requested_date(self):
         requested_date = self.cleaned_data.get('requested_date')

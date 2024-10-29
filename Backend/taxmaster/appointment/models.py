@@ -13,7 +13,7 @@ class Appointment(models.Model):
     
     MEETING_TYPE_CHOICES = [
         ('in_person', 'In Person'),
-        ('online', 'Online'),
+        ('online_meeting', 'Online Meeting'),
     ]
 
     
@@ -37,7 +37,7 @@ class Appointment(models.Model):
     )
     appointment_date = models.DateField()
     slot = models.CharField(max_length=10, choices=SLOT_CHOICES, null=True)
-    meeting_type = models.CharField(max_length=10, choices=MEETING_TYPE_CHOICES, default='online')
+    meeting_type = models.CharField(max_length=20, choices=MEETING_TYPE_CHOICES, default='online')
     notes = models.TextField(blank=True, null=True)
     confirmed = models.BooleanField(default=False)
 
