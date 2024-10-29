@@ -148,19 +148,41 @@ class AppointmentRequestForm(forms.ModelForm):
         
         return requested_date
 
+    # def clean_time(self):
+    #     selected_slot = self.cleaned_data.get('slot')
+    #     selected_time = self.cleaned_data.get('time')
+
+    #     slot_time_ranges = {
+    #         'morning': (time(9, 0), time(12, 0)),
+    #         'afternoon': (time(12, 30), time(15, 30)),
+    #         'evening': (time(16, 0), time(18, 0)),
+    #     }
+
+    #     if selected_slot and selected_time:
+    #         start_time, end_time = slot_time_ranges[selected_slot]
+    #         if not (start_time <= selected_time <= end_time):
+    #             raise forms.ValidationError(f"The selected time {selected_time} is not within the {selected_slot} slot range ({start_time} - {end_time}).")
+
+    #     return selected_time
+    
     def clean_time(self):
         selected_slot = self.cleaned_data.get('slot')
         selected_time = self.cleaned_data.get('time')
 
+        # Define slot time ranges
         slot_time_ranges = {
             'morning': (time(9, 0), time(12, 0)),
             'afternoon': (time(12, 30), time(15, 30)),
             'evening': (time(16, 0), time(18, 0)),
         }
 
+        # Validate selected time within slot range
         if selected_slot and selected_time:
             start_time, end_time = slot_time_ranges[selected_slot]
             if not (start_time <= selected_time <= end_time):
-                raise forms.ValidationError(f"The selected time {selected_time} is not within the {selected_slot} slot range ({start_time} - {end_time}).")
-
+                raise forms.ValidationError(
+                    f"The selected time {selected_time.strftime('%H:%M:%S')} is not within the {selected_slot} slot range "
+                    f"({start_time.strftime('%H:%M:%S')} - {end_time.strftime('%H:%M:%S')})."
+                )
         return selected_time
+

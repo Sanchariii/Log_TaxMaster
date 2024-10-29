@@ -3,12 +3,15 @@ from django.utils import timezone
 from .models import Appointment
 from .forms import AppointmentForm, AvailabilityCheckForm, AppointmentRequestForm
 from advisor.models import UserRequest
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta, datetime,date
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 
 ################################################# Logs #######################################################
@@ -198,42 +201,58 @@ def get_available_dates(advisor):
 
 ############################# View for requesting an appointment ####################################################### 
 
-@login_required
 def request_appointment(request, advisor_id):
     advisor = get_object_or_404(User, id=advisor_id)
-    # Get available future dates for the advisor (e.g., next 30 days)
     available_dates = get_available_dates(advisor)
     today = timezone.now().date()
     one_year_from_now = today + timedelta(days=365)
     future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
     form = AppointmentRequestForm(request.POST or None)
+
     if request.method == 'POST':
         if form.is_valid():
             requested_date = form.cleaned_data['requested_date']
-            if requested_date >= date(2026, 1, 1):  # Add the validation here
+            if requested_date >= date(2026, 1, 1):
                 form.add_error('requested_date', "Appointments cannot be booked for dates in or after the year 2026.")
             else:
-                # Proceed with saving the appointment
                 appointment = form.save(commit=False)
                 appointment.tax_advisor = advisor
-                appointment.user = request.user  # Associate the appointment with the logged-in user
+                appointment.user = request.user
                 appointment.appointment_date = requested_date
-                appointment.slot = form.cleaned_data['slot']  # Assign the requested slot
-                appointment.meeting_type = form.cleaned_data['meeting_type']  # Assign the meeting type
-                # Create a new UserRequest entry
+                appointment.slot = form.cleaned_data['slot']
+                appointment.meeting_type = form.cleaned_data['meeting_type']
+
                 user_request = UserRequest.objects.create(
                     user=request.user,
                     tax_advisor=advisor,
                     first_name=request.user.first_name,
                     last_name=request.user.last_name,
                     email=request.user.email,
-                    slot=appointment.slot,  # Add slot to UserRequest model
-                    date=appointment.appointment_date  # Add date to UserRequest model
+                    slot=appointment.slot,
+                    date=appointment.appointment_date
                 )
-                # Associate the appointment with the user request
                 appointment.user_request = user_request
                 appointment.save()
-                return redirect('appointment/appointment_request_sent')
+
+                # Render email content using an HTML template
+                subject = "Appointment Request Confirmation"
+                html_message = render_to_string('appointment/appointment_confirmation.html', {
+                    'user': request.user,
+                    'advisor': advisor,
+                    'appointment_date': appointment.appointment_date,
+                    'slot': appointment.slot,
+                    'meeting_type': appointment.meeting_type,
+                })
+                plain_message = strip_tags(html_message)
+                from_email = 'your_email@example.com'
+                to_email = request.user.email
+
+                email = EmailMessage(subject, html_message, from_email, [to_email])
+                email.content_subtype = 'html'  # Use HTML format for the email
+                email.send()
+
+            return redirect('appointment_request_sent')
+
     return render(request, 'appointment/request_appointment.html', {
         'form': form,
         'advisor': advisor,
