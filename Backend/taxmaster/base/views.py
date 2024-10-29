@@ -11,6 +11,9 @@ from django.db import models
 from decimal import Decimal
 from calculator.views import calculate_tax_view
 
+
+############################# Home Page ####################################################### 
+
 def home_view(request):
     return render(request, 'base/home.html')
 

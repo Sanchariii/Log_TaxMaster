@@ -1,6 +1,8 @@
 from django import forms
 from .models import TaxAdvisorProfile
 
+
+############################# Tax Advisor Profile Form ######################################################
 class TaxAdvisorProfileForm(forms.ModelForm):
     class Meta:
         model = TaxAdvisorProfile
@@ -10,7 +12,7 @@ class TaxAdvisorProfileForm(forms.ModelForm):
             'years_of_experience': forms.NumberInput(attrs={'placeholder': 'Years of Experience'}),
             'gender': forms.Select(choices=TaxAdvisorProfile.GENDER_CHOICES),
             }
-
+############################# Validations ######################################################
     def clean(self):
         cleaned_data = super().clean()
         license_serial = cleaned_data.get('license_serial')

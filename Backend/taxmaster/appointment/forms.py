@@ -5,6 +5,9 @@ from django.utils import timezone
 from datetime import time, timedelta,date
 from django.core.exceptions import ValidationError
 
+
+############################# Appointment Form ####################################################### 
+
 class AppointmentForm(forms.ModelForm):
     SLOT_CHOICES = [
         ('morning', 'Morning (9:00 AM - 12:00 PM)'),

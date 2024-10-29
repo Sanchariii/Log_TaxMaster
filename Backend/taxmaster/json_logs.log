@@ -510,3 +510,5 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T19:40:31.154106+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T19:42:39.300852+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-28T19:44:33.518930+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T08:49:28.754565+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T08:50:02.671949+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requests")
     tax_advisor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="advisor_requests")
@@ -16,6 +17,7 @@ class UserRequest(models.Model):
         return f"{self.first_name} {self.last_name} to {self.tax_advisor.username}"
     
     
+
 class TaxAdvisorProfile(models.Model):
     GENDER_CHOICES = [
         ('Male', 'Male'),

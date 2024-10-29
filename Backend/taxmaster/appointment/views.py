@@ -11,7 +11,7 @@ from datetime import timedelta, datetime,date
 from django.contrib.auth.models import User
 
 
-#########################################################################################################
+################################################# Logs #######################################################
 from logs.logging_config import logger
 # Log messages with the fixed JSON structure
 def log_it(message):
@@ -77,9 +77,7 @@ def log_appointment(id,slot):
         }
     })
 
-#########################################################################################################
-
-
+#################################### Available dates for Appointment ###########################################################
 @login_required
 def available_dates_view(request):
     # Check if the user is in the 'Tax Advisor' group
@@ -129,7 +127,7 @@ def check_availability(request):
         'available_slots': available_slots,
     })
     
-# View for booking an appointment
+############################# View for booking an appointment ####################################################### 
 def book_appointment(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
@@ -198,6 +196,8 @@ def get_available_dates(advisor):
     return available_dates
 
 
+############################# View for requesting an appointment ####################################################### 
+
 @login_required
 def request_appointment(request, advisor_id):
    advisor = get_object_or_404(User, id=advisor_id)
@@ -232,20 +232,25 @@ def request_appointment(request, advisor_id):
                # Associate the appointment with the user request
                appointment.user_request = user_request
                appointment.save()
-               return redirect('appointment_request_sent')
+               return redirect('appointment/appointment_request_sent')
    return render(request, 'appointment/request_appointment.html', {
        'form': form,
        'advisor': advisor,
        'available_dates': future_dates,
    })
-    
+
+
+############################# View for submiting an appointment ####################################################### 
+
 def appointment_request_already_submitted(request):
     return render(request, 'appointment/appointment_request_already_submitted.html')
 
+############################# View for request sent ####################################################### 
 
 def appointment_request_sent(request):
     return render(request, 'appointment/appointment_request_sent.html')
-    
+
+############################# View for manage requests #######################################################
 def manage_requests_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():
         requests = UserRequest.objects.filter(tax_advisor=request.user, approved=False, rejected=False)
@@ -253,10 +258,12 @@ def manage_requests_view(request):
     else:
         return redirect('not_authorized')
 
+############################# View for approved requests #######################################################
 def approved_requests(request):
     requests = UserRequest.objects.filter(user=request.user, approved=True)
     return render(request, 'appointment/approved_requests.html', {'requests': requests})
 
+############################# View for approve request sent to mail #######################################################
 def approve_request(request, request_id):
     user_request = UserRequest.objects.get(id=request_id, tax_advisor=request.user)
     user_request.approved = True
@@ -273,6 +280,7 @@ def approve_request(request, request_id):
     return redirect('manage_requests')
 
     
+############################# View for rejecting a requests ####################################################### 
 
 def reject_request(request, request_id):
     user_request = get_object_or_404(UserRequest, id=request_id, tax_advisor=request.user)
@@ -290,6 +298,7 @@ def reject_request(request, request_id):
 
     return redirect('manage_requests')
 
+############################# View for advisor side appointments ####################################################### 
 
 def advisor_appointments_view(request):
     if request.user.groups.filter(name='Tax Advisor').exists():
@@ -298,6 +307,8 @@ def advisor_appointments_view(request):
     else:
         return redirect('not_authorized')
 
+
+############################# View for user side appointments ####################################################### 
 
 def user_appointments(request):
     if request.user.is_authenticated:

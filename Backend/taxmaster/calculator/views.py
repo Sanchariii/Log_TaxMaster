@@ -11,7 +11,7 @@ from django.http import HttpResponseBadRequest
 import logging
 from logs.logging_config import logger
 
-#########################################################################################################
+############################################### Logs ##########################################################
 
 # Log messages with the fixed JSON structure
 def log_it(message):
@@ -77,7 +77,7 @@ def log_appointment(id,slot):
         }
     })
 
-#########################################################################################################
+################################## Surcharge Calculation #####################################################
 
 def calculate_surcharge(taxable_income, tax):
    """Calculate surcharge based on income thresholds."""
@@ -92,6 +92,7 @@ def calculate_surcharge(taxable_income, tax):
        surcharge = Decimal('0.37') * tax
    return surcharge
 
+############################# Calculation of old and new regime taxes ####################################################### 
 
 def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
    """Calculate tax for both regimes and apply surcharge and cess."""
@@ -164,6 +165,7 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
    return tax_old_regime, tax_new_regime
 
 
+############################# Suggestions generation ####################################################### 
 
 def generate_suggestions(income, deductions):
     suggestions = []
@@ -195,6 +197,7 @@ def generate_suggestions(income, deductions):
 
 
 
+############################# The Result Page ####################################################### 
 
 @login_required
 def tax_calculator_view(request):
@@ -266,6 +269,9 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
+
+
+############################# PDF view ####################################################### 
 
 @login_required
 def tax_calculator_pdf_view(request):
@@ -355,6 +361,9 @@ def tax_calculator_pdf_view(request):
         return response
     else:
         return HttpResponseBadRequest("Invalid request")
+
+
+############################# Tax Slabs View ####################################################### 
 
 def tax_slabs_view(request):
     return render(request, 'calculator/tax_slabs.html')

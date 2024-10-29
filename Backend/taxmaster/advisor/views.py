@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
-
+############################# Available Advisors View ######################################################
 @login_required
 def available_advisors_view(request):
     # Filter only advisors who belong to the 'Tax Advisor' group and have license and experience
@@ -26,7 +26,7 @@ def available_advisors_view(request):
     return render(request, 'advisor/available_advisors.html', {'advisors': advisors})
 
 
-
+############################# Request to Advisor ######################################################
 def advisor_requests(request):
     if request.user.groups.filter(name='Tax Advisor').exists():  # Check if user belongs to the 'Tax Advisor' group
         # Show only requests where the current user is the tax advisor and either approved or rejected
@@ -38,23 +38,6 @@ def advisor_requests(request):
         'requests': requests,
     })
 
-    
-
-
-# def tax_advisor_profile(request, user_id):
-#     user = get_object_or_404(User, id=user_id)  # Fetch the user based on user_id
-
-#     if request.method == 'POST':
-#         form = TaxAdvisorProfileForm(request.POST, instance=user.taxadvisorprofile)
-#         if form.is_valid():
-#             profile = form.save(commit=False)
-#             profile.user = user  # Associate with the fetched user
-#             profile.save()
-#             return redirect('advisor_requests')  # Redirect to success page
-#     else:
-#         form = TaxAdvisorProfileForm()
-
-#     return render(request, 'advisor/tax_advisor_profile.html', {'form': form, 'user': user})
 
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -63,6 +46,8 @@ from django.http import HttpResponse
 from .models import UserRequest, TaxAdvisorProfile
 from .forms import TaxAdvisorProfileForm
 
+
+############################# Tax Advisor Profile ######################################################
 def tax_advisor_profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
 
@@ -88,7 +73,7 @@ def tax_advisor_profile(request, user_id):
 
 
 
-
+############################# Tax Advisor Profile View ######################################################
 class TaxAdvisorProfileView(LoginRequiredMixin, View):
     def get(self, request):
         try:
@@ -98,6 +83,8 @@ class TaxAdvisorProfileView(LoginRequiredMixin, View):
 
         return render(request, 'advisor/tax_advisor_profile_view.html', {'profile': profile, 'user': request.user})
 
+
+############################# Editing Tax Advisor Profile ######################################################
 class TaxAdvisorProfileEditView(LoginRequiredMixin, View):
     def get(self, request):
         try:
