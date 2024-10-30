@@ -516,3 +516,34 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T17:26:21.299919+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T18:24:53.511216+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T18:25:40.798762+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T19:12:07.889863+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T19:12:31.988199+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T19:14:27.771130+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T19:14:47.102900+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-29T19:14:58.537905+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Hydra", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T07:24:37.119011+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T07:25:18.623354+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T08:15:46.192480+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "60 to 79", "income": 696640, "deduction": 0, "regime": "New Regime", "saving": 23050.56}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:03:24.147097+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 500000, "deduction": 0, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:04:05.539387+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 800000, "deduction": 10000, "regime": "New Regime", "saving": 34320.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:06:31.959346+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 700000, "deduction": 10000, "regime": "New Regime", "saving": 42120.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:07:21.060670+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 690000, "deduction": 0, "regime": "New Regime", "saving": 42120.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:12:00.470336+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1300000, "deduction": 30000, "regime": "New Regime", "saving": 86840.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:13:27.663933+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 450000, "deduction": 0, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:15:28.009642+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 775000, "deduction": 0, "regime": "New Regime", "saving": 59800.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:15:56.561481+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 650000, "deduction": 0, "regime": "New Regime", "saving": 33800.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:16:04.093286+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:16:59.677690+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 5000000, "deduction": 250000, "regime": "New Regime", "saving": 46800.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:17:04.996415+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:18:19.894148+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:18:57.832631+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:19:07.293385+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Priyanka", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:20:41.592539+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:29:02.023297+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:29:14.678364+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:29:31.863310+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:38:03.646045+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:38:13.149426+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:46:34.701204+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:46:52.981663+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-10-30T16:47:01.260825+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}

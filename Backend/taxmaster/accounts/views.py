@@ -126,7 +126,7 @@ class CustomLoginView(View):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
-    def render_error(self, form=None, error_message=None, template=None):
+    def render_error(self, request, form=None, error_message=None, template=None):
         """Render form with error message."""
         print(f"Error Message: {error_message}")  # Debugging line
 
@@ -134,7 +134,7 @@ class CustomLoginView(View):
         if error_message:
             context['error_message'] = error_message
         template = template if template else self.template_name
-        return render(self.request, template, context)
+        return render(request, template, context)
 
     def post(self, request):
         # Check if OTP has been sent
@@ -149,7 +149,7 @@ class CustomLoginView(View):
                     request.session.modified = True  # Mark the session as modified
                     return render(request, self.otp_template_name, {'message': 'A new OTP has been sent to your email.'})
                 else:
-                    return self.render_error(error_message="Email not found in session.", template=self.otp_template_name)
+                    return self.render_error(request, error_message="Email not found in session.", template=self.otp_template_name)
 
             otp = request.POST.get('otp')
             if otp and otp == request.session.get('otp'):
@@ -161,12 +161,11 @@ class CustomLoginView(View):
                     request.session['otp_verified'] = True
                     return self._redirect_user(user)
                 else:
-                    return self.render_error(error_message="User authentication failed. Please try again.", template=self.otp_template_name)
+                    return self.render_error(request, error_message="User authentication failed. Please try again.", template=self.otp_template_name)
             else:
                 log_fail('login', 'Invalid OTP entered')
-                return self.render_error(error_message="Invalid OTP. Please try again.", template=self.otp_template_name)
+                return self.render_error(request, error_message="Invalid OTP. Please try again.", template=self.otp_template_name)
 
-        
         # Process the login form
         form = self.form_class(request, data=request.POST)
         if form.is_valid():
@@ -183,8 +182,7 @@ class CustomLoginView(View):
             log_fail('login', 'Invalid form submission')
             print(form.errors)  # Debugging line for form errors
 
-            return self.render_error(form=form)
-
+            return self.render_error(request, form=form)
 
     def _redirect_user(self, user):
         """Redirects user based on their group."""
@@ -209,6 +207,7 @@ class CustomLoginView(View):
         message = f'Your OTP code is {otp}'
         from_email = 'raysanchari930@gmail.com'
         send_mail(subject, message, from_email, [email], fail_silently=False)
+
 
 ############################# Dividing Groups #########################################################
 def group_selection(request):

@@ -7,12 +7,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # Populate TaxScheme data
         tax_schemes = [
-            {'regime': 'old', 'slab': 'Upto ₹ 3 lakh', 'rate': 0},
-            {'regime': 'old', 'slab': '₹ 3 lakh - ₹ 6 lakh', 'rate': 5},
-            {'regime': 'old', 'slab': '₹ 6 lakh - ₹ 9 lakh', 'rate': 10},
-            {'regime': 'old', 'slab': '₹ 9 lakh - ₹ 12 lakh', 'rate': 15},
-            {'regime': 'old', 'slab': '₹ 12 lakh - ₹ 15 lakh', 'rate': 20},
-            {'regime': 'old', 'slab': 'More than ₹ 15 lakh', 'rate': 30},
+            {'regime': 'old', 'slab': 'Upto ₹ 2.5 lakh', 'rate': 0},
+            {'regime': 'old', 'slab': '₹ 2.5 lakh - ₹ 5 lakh', 'rate': 5},
+            {'regime': 'old', 'slab': '₹ 5 lakh - ₹ 10 lakh', 'rate': 20},
+            {'regime': 'old', 'slab': 'More than ₹ 10 lakh', 'rate': 30},
             {'regime': 'new', 'slab': 'Upto ₹ 3 lakh', 'rate': 0},
             {'regime': 'new', 'slab': '₹ 3 lakh - ₹ 7 lakh', 'rate': 5},
             {'regime': 'new', 'slab': '₹ 7 lakh - ₹ 10 lakh', 'rate': 10},

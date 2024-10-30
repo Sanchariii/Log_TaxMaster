@@ -77,92 +77,114 @@ def log_appointment(id,slot):
         }
     })
 
-################################## Surcharge Calculation #####################################################
-
+################################################### Surcharge Calculation #################################################################
 def calculate_surcharge(taxable_income, tax):
-   """Calculate surcharge based on income thresholds."""
-   surcharge = Decimal('0.0')
-   if taxable_income > 5000000 and taxable_income <= 10000000:
-       surcharge = Decimal('0.1') * tax
-   elif taxable_income > 10000000 and taxable_income <= 20000000:
-       surcharge = Decimal('0.15') * tax
-   elif taxable_income > 20000000 and taxable_income <= 50000000:
-       surcharge = Decimal('0.25') * tax
-   elif taxable_income > 50000000:
-       surcharge = Decimal('0.37') * tax
-   return surcharge
+    """Calculate surcharge based on income thresholds."""
+    surcharge = Decimal('0.0')
+    if taxable_income > 5000000 and taxable_income <= 10000000:
+        surcharge = Decimal('0.1') * tax
+    elif taxable_income > 10000000 and taxable_income <= 20000000:
+        surcharge = Decimal('0.15') * tax
+    elif taxable_income > 20000000 and taxable_income <= 50000000:
+        surcharge = Decimal('0.25') * tax
+    elif taxable_income > 50000000:
+        surcharge = Decimal('0.37') * tax
+    return surcharge
 
-############################# Calculation of old and new regime taxes ####################################################### 
-
+######################################################### Calculation of old and new regime taxes #######################################################################
 def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
-   """Calculate tax for both regimes and apply surcharge and cess."""
-   income = Decimal(income)
-   deduction_80c = Decimal(deduction_80c or 0)
-   deduction_80d = Decimal(deduction_80d or 0)
-   deduction_80e = Decimal(deduction_80e or 0)
-   deduction_80eea = Decimal(deduction_80eea or 0)
-   deduction_80g = Decimal(deduction_80g or 0)
-   # Fixed standard deduction amounts for old and new regime
-   standard_deduction_old = Decimal('50000')
-   standard_deduction_new = Decimal('75000')
-   
-   def old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
-       taxable_income = income - standard_deduction_old - deduction_80c - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
-       tax = Decimal('0.0')
-       if age_group == 1:  # Below 60 years
-           if taxable_income <= 250000:
-               tax = Decimal('0.0')
-           elif taxable_income <= 500000:
-               tax = Decimal('0.05') * (taxable_income - 250000)
-           elif taxable_income <= 1000000:
-               tax = Decimal('12500') + Decimal('0.2') * (taxable_income - 500000)
-           else:
-               tax = Decimal('112500') + Decimal('0.3') * (taxable_income - 1000000)
-       elif age_group == 2:  # Between 60 and 80 years
-           if taxable_income <= 300000:
-               tax = Decimal('0.0')
-           elif taxable_income <= 500000:
-               tax = Decimal('0.05') * (taxable_income - 300000)
-           elif taxable_income <= 1000000:
-               tax = Decimal('10000') + Decimal('0.2') * (taxable_income - 500000)
-           else:
-               tax = Decimal('110000') + Decimal('0.3') * (taxable_income - 1000000)
-       elif age_group == 3:  # Above 80 years
-           if taxable_income <= 500000:
-               tax = Decimal('0.0')
-           elif taxable_income <= 1000000:
-               tax = Decimal('0.2') * (taxable_income - 500000)
-           else:
-               tax = Decimal('100000') + Decimal('0.3') * (taxable_income - 1000000)
-       surcharge = calculate_surcharge(taxable_income, tax)
-       tax += surcharge
-       cess = Decimal('0.04') * tax
-       return tax + cess
-   
-   def new_regime_tax(income, standard_deduction_new):
-       taxable_income = income - standard_deduction_new  # Only standard deduction applies in the new regime
-       tax = Decimal('0.0')
-       if taxable_income <= 300000:
-           tax = Decimal('0.0')
-       elif taxable_income <= 600000:
-           tax = Decimal('0.05') * (taxable_income - 300000)
-       elif taxable_income <= 900000:
-           tax = Decimal('15000') + Decimal('0.1') * (taxable_income - 600000)
-       elif taxable_income <= 1200000:
-           tax = Decimal('45000') + Decimal('0.15') * (taxable_income - 900000)
-       elif taxable_income <= 1500000:
-           tax = Decimal('90000') + Decimal('0.2') * (taxable_income - 1200000)
-       else:
-           tax = Decimal('150000') + Decimal('0.3') * (taxable_income - 1500000)
+    """Calculate tax for both regimes and apply surcharge and cess, including rebates."""
+    income = Decimal(income)
+    deduction_80c = Decimal(deduction_80c or 0)
+    deduction_80d = Decimal(deduction_80d or 0)
+    deduction_80e = Decimal(deduction_80e or 0)
+    deduction_80eea = Decimal(deduction_80eea or 0)
+    deduction_80g = Decimal(deduction_80g or 0)
+    # Fixed standard deduction amounts for old and new regime
+    standard_deduction_old = Decimal('50000')
+    standard_deduction_new = Decimal('75000')
+    
+    def old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
+        taxable_income = income - standard_deduction_old - deduction_80c - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
+        tax = Decimal('0.0')
+        
+        # Age-based slab calculation
+        if age_group == 1:  # Below 60 years
+            if taxable_income <= 250000:
+                tax = Decimal('0.0')
+            elif taxable_income <= 500000:
+                tax = Decimal('0.05') * (taxable_income - 250000)
+            elif taxable_income <= 1000000:
+                tax = Decimal('12500') + Decimal('0.2') * (taxable_income - 500000)
+            else:
+                tax = Decimal('112500') + Decimal('0.3') * (taxable_income - 1000000)
+        elif age_group == 2:  # Between 60 and 80 years
+            if taxable_income <= 300000:
+                tax = Decimal('0.0')
+            elif taxable_income <= 500000:
+                tax = Decimal('0.05') * (taxable_income - 300000)
+            elif taxable_income <= 1000000:
+                tax = Decimal('10000') + Decimal('0.2') * (taxable_income - 500000)
+            else:
+                tax = Decimal('110000') + Decimal('0.3') * (taxable_income - 1000000)
+        elif age_group == 3:  # Above 80 years
+            if taxable_income <= 500000:
+                tax = Decimal('0.0')
+            elif taxable_income <= 1000000:
+                tax = Decimal('0.2') * (taxable_income - 500000)
+            else:
+                tax = Decimal('100000') + Decimal('0.3') * (taxable_income - 1000000)
+        
+        # Apply rebate for old regime if applicable
+        if taxable_income <= 500000:
+            tax = max(Decimal('0.0'), tax - Decimal('12500'))
+        
+        # Surcharge and cess
+        surcharge = calculate_surcharge(taxable_income, tax)
+        tax += surcharge
+        
+        # Apply cess only if tax is greater than zero
+        if tax > 0:
+            cess = Decimal('0.04') * tax
+            tax += cess
+        return tax
+    
+    def new_regime_tax(income, standard_deduction_new):
+        taxable_income = income - standard_deduction_new  # Only standard deduction applies in the new regime
+        tax = Decimal('0.0')
+        
+        # Tax slab calculation for new regime
+        if taxable_income <= 300000:
+            tax = Decimal('0.0')
+        elif taxable_income <= 700000:
+            tax = Decimal('0.05') * (taxable_income - 300000)
+        elif taxable_income <= 1000000:
+            tax = Decimal('15000') + Decimal('0.1') * (taxable_income - 600000)
+        elif taxable_income <= 1200000:
+            tax = Decimal('45000') + Decimal('0.15') * (taxable_income - 900000)
+        elif taxable_income <= 1500000:
+            tax = Decimal('90000') + Decimal('0.2') * (taxable_income - 1200000)
+        else:
+            tax = Decimal('150000') + Decimal('0.3') * (taxable_income - 1500000)
+        
+        # Apply rebate for new regime if applicable
+        if taxable_income <= 700000:
+            tax = max(Decimal('0.0'), tax - Decimal('25000'))
+        
+        # Surcharge and cess
+        surcharge = calculate_surcharge(taxable_income, tax)
+        tax += surcharge
+        
+        # Apply cess only if tax is greater than zero
+        if tax > 0:
+            cess = Decimal('0.04') * tax
+            tax += cess
+        return tax
 
-   
-       surcharge = calculate_surcharge(taxable_income, tax)
-       tax += surcharge
-       cess = Decimal('0.04') * tax
-       return tax + cess
-   tax_old_regime = old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
-   tax_new_regime = new_regime_tax(income, standard_deduction_new)
-   return tax_old_regime, tax_new_regime
+    # Calculating tax under both regimes
+    tax_old_regime = old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
+    tax_new_regime = new_regime_tax(income, standard_deduction_new)
+    return tax_old_regime, tax_new_regime
 
 
 ############################# Suggestions generation ####################################################### 
