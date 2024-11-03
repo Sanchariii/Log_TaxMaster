@@ -137,9 +137,9 @@
         </div>
 
         <!-- Display Error Message if OTP is wrong -->
-        {% comment %} {% if error_message %}
+        {% if error_message %}
             <div class="error-message">{{ error_message }}</div>
-        {% endif %} {% endcomment %}
+        {% endif %}
 
         <!-- Display Success Message if OTP is resent -->
         {% if message %}
