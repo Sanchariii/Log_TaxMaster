@@ -55,14 +55,6 @@ def get_base64_image(image_path):
         return base64.b64encode(img_file.read()).decode()
 
 def home_view(request):
-    # favicon_path = "C:/Users/SRay5/OneDrive - Rockwell Automation, Inc/Desktop/TaxMaster/Frontend/tax_favicon.jpg"
-    # favicon_base64 = get_base64_image(favicon_path)
-
-    # # Pass favicon_base64 to the template context
-    # context = {
-    #     'favicon_base64': favicon_base64,
-    # }
-
     return render(request, 'base/home.html')
 
 
@@ -70,3 +62,6 @@ def home_view(request):
 def learn_more(request):
     return render(request, 'base/learn_more.html')
 
+
+def how_our_site_works(request):
+    return render(request, 'base/how_our_site_works.html')
