@@ -163,6 +163,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'accounts', 'static'),
     os.path.join(BASE_DIR, 'base', 'static'),
     os.path.join(BASE_DIR, 'calculator', 'static'),
+    os.path.join(BASE_DIR, 'static'),
     # Add paths for more apps as needed
 ]
 
