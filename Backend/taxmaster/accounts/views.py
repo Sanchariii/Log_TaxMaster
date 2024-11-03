@@ -113,7 +113,7 @@ def is_Admin(user):
     return user.is_superuser
 
 
-############################# Built-In Django View ######################################################
+############################# Login Page ######################################################
 class CustomLoginView(View):
     form_class = AuthenticationForm
     template_name = 'accounts/login.html'
@@ -207,6 +207,7 @@ class CustomLoginView(View):
         message = f'Your OTP code is {otp}'
         from_email = 'raysanchari930@gmail.com'
         send_mail(subject, message, from_email, [email], fail_silently=False)
+
 
 
 ############################# Dividing Groups #########################################################
