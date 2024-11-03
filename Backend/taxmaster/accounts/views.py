@@ -178,6 +178,7 @@ class CustomLoginView(View):
             request.session['otp'] = otp
             request.session['otp_sent'] = True
             self.send_otp_via_email(user.email, otp)
+            print("Context for OTP rendering:", {'error_message': 'error_message' in request.POST})
             return render(request, self.otp_template_name)
         else:
             log_fail('login', 'Invalid form submission')
