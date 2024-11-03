@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'taxmaster.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'mssql',
-#         'NAME': 'TaxMaster',
+#         'NAME': 'Tax_Master',
 #         'USER': '',  # Leave empty if using trusted connection
 #         'PASSWORD': '',  # Leave empty if using trusted connection
 #         'HOST': 'D7KJ7G3',  # Your SQL Server host
