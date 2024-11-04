@@ -1,95 +1,225 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Registration</title>
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-      <link href="{% static 'accounts/AccountsCss/signup.css' %}" rel="stylesheet">
-   </head>
-   <body>
-      <div class="container form-container">
-         <h1>New User Registration</h1>
-         <div class="row">
-            <div class="col-md-8 signup-form">
-               {% if messages %}
-               <div class="alert alert-danger">
-                  <ul>
-                     {% for message in messages %}
-                     <li>{{ message }}</li>
-                     {% endfor %}
-                  </ul>
-               </div>
-               {% endif %}
-               <form method="post" action="{% url 'signup' %}">
-                  {% csrf_token %}
-                  <h2 class="aesthetic-text">To Register, Please Fill In Your Details!</h2>
-                  <div class="form-group">
-                     <label for="first_name"><i class="fas fa-user"></i> First Name</label>
-                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your first name" required autocomplete="off">
-                     {% if form.first_name.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.first_name.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <div class="form-group">
-                     <label for="last_name"><i class="fas fa-user"></i> Last Name</label>
-                     <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your last name" required autocomplete="off">
-                     {% if form.last_name.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.last_name.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <div class="form-group">
-                     <label for="username"><i class="fas fa-user"></i> Username</label>
-                     <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required autocomplete="off">
-                     {% if form.username.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.username.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <div class="form-group">
-                     <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required autocomplete="off">
-                     {% if form.email.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.email.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <div class="form-group">
-                     <label for="password1"><i class="fas fa-lock"></i> Password</label>
-                     <input type="password" class="form-control" id="password1" name="password1" placeholder="Choose a strong password" required autocomplete="new-password">
-                     {% if form.password1.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.password1.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <div class="form-group">
-                     <label for="password2"><i class="fas fa-key"></i> Repeat Password</label>
-                     <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat your password" required autocomplete="new-password">
-                     {% if form.password2.errors %}
-                     <div class="alert alert-danger">
-                        {{ form.password2.errors }}
-                     </div>
-                     {% endif %}
-                  </div>
-                  <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</button>
-               </form>
-               <div class="already-member-container">
-                  <p class="already-member"><i class="fas fa-sign-in-alt"></i> Already a member? <a href="{% url 'login' %}">Log In</a></p>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <img src="{% static 'Register.jpg' %}" alt="Register and become a member!" class="img-fluid">
-            </div>
-         </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New User Registration</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+       body {
+           background-color: #f0f8ff;
+           font-family: 'Arial', sans-serif;
+       }
+       .register {
+           background: linear-gradient(to right, #3931af, #00c6ff);
+           margin-top: 3%;
+           padding: 3%;
+           border-radius: 15px;
+       }
+       .register-left {
+           text-align: center;
+           color: #fff;
+           padding: 20px;
+       }
+       .register-left h3 {
+           font-size: 1.8em;
+       }
+       .register-left p {
+           margin-top: 10px;
+           font-size: 1em;
+       }
+       .register-left .welcome-text {
+           margin-bottom: 120px; /* Adds space below the welcome message */
+       }
+       .register-left a {
+           display: inline-block;
+           border: none;
+           border-radius: 20px;
+           padding: 10px 20px;
+           width: 60%;
+           background: #f8f9fa;
+           font-weight: bold;
+           color: #383d41;
+           text-align: center;
+           text-decoration: none;
+           cursor: pointer;
+       }
+       .register-right {
+           background: #f8f9fa;
+           border-radius: 15px;
+           padding: 20px;
+       }
+       .register-heading {
+           text-align: center;
+           margin-top: 8%;
+           margin-bottom: 2%;
+           font-size: 1.5em;
+           color: #495057;
+       }
+       .form-control {
+           border-radius: 10px;
+       }
+       .btnRegister {
+           margin-top: 10%;
+           border: none;
+           border-radius: 20px;
+           padding: 10px;
+           background: #0062cc;
+           color: #fff;
+           font-weight: bold;
+           width: 50%;
+           cursor: pointer;
+       }
+       .input-group-text {
+           background-color: #0062cc;
+           color: white;
+           border: none;
+       }
+       .login-text {
+           color: #fff;
+           font-size: 1em;
+           margin-bottom: 5px;
+       }
+</style>
+</head>
+<body>
+<div class="container register">
+<div class="row">
+<div class="col-md-3 register-left">
+<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+<h3>Hi! Welcome to TaxMaster</h3>
+<p class="welcome-text">Register now to access our services!</p>
+<p class="login-text">Already a user?</p>
+<a href="{% url 'login' %}">Login</a><br/>
+</div>
+<div class="col-md-9 register-right">
+<h3 class="register-heading">New User Registration</h3>
+{% if messages %}
+<div class="alert alert-danger">
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+<div class="row register-form">
+<div class="col-md-6">
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-user"></i></span>
+</div>
+<input type="text" class="form-control" name="first_name" placeholder="First Name *" required autocomplete="off" />
+</div>
+{% if form.first_name.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.first_name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-user"></i></span>
+</div>
+<input type="text" class="form-control" name="last_name" placeholder="Last Name *" required autocomplete="off" />
+</div>
+{% if form.last_name.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.last_name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-user-circle"></i></span>
+</div>
+<input type="text" class="form-control" name="username" placeholder="Username *" required autocomplete="off" />
+</div>
+{% if form.username.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.username.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+</div>
+<input type="email" class="form-control" name="email" placeholder="Email *" required autocomplete="off" />
+</div>
+{% if form.email.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.email.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-lock"></i></span>
+</div>
+<input type="password" class="form-control" name="password1" placeholder="Password *" required autocomplete="new-password" />
+</div>
+{% if form.password1.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.password1.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-prepend">
+<span class="input-group-text"><i class="fas fa-lock"></i></span>
+</div>
+<input type="password" class="form-control" name="password2" placeholder="Confirm Password *" required autocomplete="new-password" />
+</div>
+{% if form.password2.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in form.password2.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+<input type="submit" class="btnRegister" value="Register"/>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

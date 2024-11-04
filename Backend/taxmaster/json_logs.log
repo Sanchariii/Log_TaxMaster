@@ -601,3 +601,14 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T20:03:06.586401+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T21:10:33.720375+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T21:10:52.490471+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T07:17:27.543043+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T07:18:00.860169+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:45:45.510640+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:46:01.880168+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:48:10.596760+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:50:29.106213+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:51:09.818528+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:52:00.636387+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:52:35.393027+00:00", "Values": {"iserrorlog": 1, "whatfailed": "signup", "reason": "Invalid form submission"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:53:10.511511+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-04T10:53:40.595797+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "tax advisor"}}
