@@ -599,3 +599,6 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T20:02:34.986370+00:00", "Values": {"iserrorlog": 0, "message": "Registration Successful", "type": "user"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T20:02:54.374302+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 60000, "deduction": 15000, "regime": "Both Regimes yield the same tax amount.", "saving": 0.0}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-03T20:03:06.586401+00:00", "Values": {"iserrorlog": 0, "message": "pdf generated"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-05T16:00:16.217823+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-05T16:01:41.185414+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-05T16:14:09.070027+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "Below 60", "income": 1200000, "deduction": 0, "regime": "New Regime", "saving": 81900.0}}

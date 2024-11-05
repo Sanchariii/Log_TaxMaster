@@ -1,5 +1,5 @@
 from .forms import TaxCalculatorForm
-from .models import TaxScheme, SurchargeRate
+from .models import TaxCalculation, UserInput, TaxResults
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from xhtml2pdf import pisa
@@ -264,6 +264,23 @@ def tax_calculator_view(request):
 
             # Happy message if no suggestions are needed
             happy_message = "Great news 🎉! You don't need to pay any tax this Year!"
+            
+            user_input = UserInput.objects.create(
+                user=request.user,
+                age_group=age_group,
+                annual_income=income,
+                standard_deduction=50000,  # Example standard deduction
+                other_deductions=sum(deductions.values())
+            )
+            TaxResults.objects.create(
+                user=request.user,
+                user_input=user_input,
+                old_regime_tax=tax_old_regime,
+                new_regime_tax=tax_new_regime,
+                best_regime=best_regime
+            )
+
+
 
             log_calculated(age_slab, int(income), int(sum(deductions.values())), best_regime, float(abs(tax_old_regime - tax_new_regime)))
 
@@ -284,6 +301,14 @@ def tax_calculator_view(request):
     else:
         form = TaxCalculatorForm()
     return render(request, 'calculator/tax_calculator.html', {'form': form})
+
+
+
+@login_required
+def past_calculations_view(request):
+    calculations = TaxResults.objects.filter(user=request.user).order_by('-calculated_at')
+    return render(request, 'calculator/past_calculations.html', {'calculations': calculations})
+
 
 
 from django.http import HttpResponse
@@ -389,3 +414,5 @@ def tax_calculator_pdf_view(request):
 
 def tax_slabs_view(request):
     return render(request, 'calculator/tax_slabs.html')
+
+

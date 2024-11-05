@@ -1,0 +1,34 @@
+<!-- calculator/past_calculations.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Your Past Calculations</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Old Regime Tax</th>
+                    <th scope="col">New Regime Tax</th>
+                    <th scope="col">Best Regime</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for calc in calculations %}
+                <tr>
+                    <td>{{ calc.calculated_at }}</td>
+                    <td>{{ calc.old_regime_tax }}</td>
+                    <td>{{ calc.new_regime_tax }}</td>
+                    <td>{{ calc.best_regime }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No past calculations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
