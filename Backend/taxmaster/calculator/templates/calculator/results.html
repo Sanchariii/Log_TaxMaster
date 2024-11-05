@@ -104,6 +104,7 @@
             <div class="deduction-details">
                 <p class="deduction-title">Other Deductions:</p>
                 <p><strong>80C:</strong> ₹{{ form.cleaned_data.deduction_80c|default:0 }}</p>
+                <p><strong>80CCD1B:</strong> ₹{{ form.cleaned_data.deduction_80ccd1b|default:0 }}</p>
                 <p><strong>80D:</strong> ₹{{ form.cleaned_data.deduction_80d|default:0 }}</p>
                 <p><strong>80E:</strong> ₹{{ form.cleaned_data.deduction_80e|default:0 }}</p>
                 <p><strong>80EEA:</strong> ₹{{ form.cleaned_data.deduction_80eea|default:0 }}</p>
@@ -136,6 +137,7 @@
             <input type="hidden" name="standard_deduction_old" value="{{standard_deduction_old }}">
             <input type="hidden" name="standard_deduction_new" value="{{standard_deduction_new }}">
             <input type="hidden" name="deduction_80c" value="{{ form.cleaned_data.deduction_80c }}">
+            <input type="hidden" name="deduction_80ccd1b" value="{{ form.cleaned_data.deduction_80ccd1b }}">
             <input type="hidden" name="deduction_80d" value="{{ form.cleaned_data.deduction_80d }}">
             <input type="hidden" name="deduction_80e" value="{{ form.cleaned_data.deduction_80e }}">
             <input type="hidden" name="deduction_80eea" value="{{ form.cleaned_data.deduction_80eea }}">
@@ -148,5 +150,4 @@
         </footer>
     </div>
     </body>
-
 {% endblock %}

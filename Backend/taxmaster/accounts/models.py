@@ -25,14 +25,6 @@ class User(AbstractUser):
         verbose_name='user permissions',
     )
     
-    
-# Base = declarative_base()
-
-# class User(Base):
-#     __tablename__ = 'Individual_User'
-#     id = Column(Integer, primary_key=True)
-#     first_name = Column(String)
-#     last_name = Column(String)
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL) 
 def createAuthToken(sender, instance, created, **kwargs):

@@ -28,6 +28,8 @@ class TaxAdvisorProfile(models.Model):
     license_serial = models.CharField(max_length=100, unique=True)
     years_of_experience = models.PositiveIntegerField()
     gender = models.CharField(max_length=30,choices=GENDER_CHOICES, default='Not specified')
+    clients_attended_successfully = models.IntegerField(default=0)
+    clients_currently_attending = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username} - License: {self.license_serial}"
