@@ -92,20 +92,22 @@ def calculate_surcharge(taxable_income, tax):
     return surcharge
 
 ######################################################### Calculation of old and new regime taxes #######################################################################
-def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
+def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, deduction_80ccd1b, age_group):
     """Calculate tax for both regimes and apply surcharge and cess, including rebates."""
     income = Decimal(income)
     deduction_80c = Decimal(deduction_80c or 0)
+    deduction_80ccd1b = Decimal(deduction_80ccd1b or 0)
     deduction_80d = Decimal(deduction_80d or 0)
     deduction_80e = Decimal(deduction_80e or 0)
     deduction_80eea = Decimal(deduction_80eea or 0)
     deduction_80g = Decimal(deduction_80g or 0)
+    
     # Fixed standard deduction amounts for old and new regime
     standard_deduction_old = Decimal('50000')
     standard_deduction_new = Decimal('75000')
     
-    def old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
-        taxable_income = income - standard_deduction_old - deduction_80c - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
+    def old_regime_tax(income, deduction_80c, deduction_80ccd1b, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
+        taxable_income = income - standard_deduction_old - deduction_80c - deduction_80ccd1b - deduction_80d - deduction_80e - deduction_80eea - deduction_80g
         tax = Decimal('0.0')
         
         # Age-based slab calculation
@@ -149,8 +151,8 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
             tax += cess
         return tax
     
-    def new_regime_tax(income, standard_deduction_new):
-        taxable_income = income - standard_deduction_new  # Only standard deduction applies in the new regime
+    def new_regime_tax(income, standard_deduction_new, deduction_80ccd1b, deduction_80g):
+        taxable_income = income - standard_deduction_new - deduction_80ccd1b - deduction_80g
         tax = Decimal('0.0')
         
         # Tax slab calculation for new regime
@@ -159,13 +161,13 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
         elif taxable_income <= 700000:
             tax = Decimal('0.05') * (taxable_income - 300000)
         elif taxable_income <= 1000000:
-            tax = Decimal('15000') + Decimal('0.1') * (taxable_income - 600000)
+            tax = Decimal('20000') + Decimal('0.1') * (taxable_income - 700000)
         elif taxable_income <= 1200000:
-            tax = Decimal('45000') + Decimal('0.15') * (taxable_income - 900000)
+            tax = Decimal('50000') + Decimal('0.15') * (taxable_income - 1000000)
         elif taxable_income <= 1500000:
-            tax = Decimal('90000') + Decimal('0.2') * (taxable_income - 1200000)
+            tax = Decimal('80000') + Decimal('0.2') * (taxable_income - 1200000)
         else:
-            tax = Decimal('150000') + Decimal('0.3') * (taxable_income - 1500000)
+            tax = Decimal('140000') + Decimal('0.3') * (taxable_income - 1500000)
         
         # Apply rebate for new regime if applicable
         if taxable_income <= 700000:
@@ -179,13 +181,15 @@ def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, dedu
         if tax > 0:
             cess = Decimal('0.04') * tax
             tax += cess
-        return tax
+        
+        return tax  
+
+    
 
     # Calculating tax under both regimes
-    tax_old_regime = old_regime_tax(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
-    tax_new_regime = new_regime_tax(income, standard_deduction_new)
+    tax_old_regime = old_regime_tax(income, deduction_80c, deduction_80ccd1b, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group)
+    tax_new_regime = new_regime_tax(income, standard_deduction_new, deduction_80ccd1b, deduction_80g)
     return tax_old_regime, tax_new_regime
-
 
 ############################# Suggestions generation ####################################################### 
 
@@ -206,6 +210,8 @@ def generate_suggestions(income, deductions):
 
     if deductions['80c'] < 150000:
         suggestions.append("You can still invest more in 80C options to save up to Rs. 1.5 lakh.")
+    if deductions['80ccd1b'] < 50000:
+        suggestions.append("You can invest more in NPS under 80CCD(1B) to save up to Rs. 50,000.")
     if deductions['80d'] < 50000:
         suggestions.append("Increase your health insurance coverage to maximize 80D deductions.")
     if deductions['80e'] == 0:
@@ -214,8 +220,10 @@ def generate_suggestions(income, deductions):
         suggestions.append("Look into 80EEA deductions if you have a home loan.")
     if deductions['80g'] == 0:
         suggestions.append("Consider making charitable donations to avail 80G deductions.")
+    
 
     return suggestions
+
 
 
 
@@ -230,13 +238,25 @@ def tax_calculator_view(request):
             income = form.cleaned_data['annual_income']
             deductions = {
                 '80c': form.cleaned_data.get('deduction_80c', 0) or 0,
+                '80ccd1b': form.cleaned_data.get('deduction_80ccd1b', 0) or 0,
                 '80d': form.cleaned_data.get('deduction_80d', 0) or 0,
                 '80e': form.cleaned_data.get('deduction_80e', 0) or 0,
                 '80eea': form.cleaned_data.get('deduction_80eea', 0) or 0,
-                '80g': form.cleaned_data.get('deduction_80g', 0) or 0
+                '80g': form.cleaned_data.get('deduction_80g', 0) or 0,
             }
             selected_scheme = request.POST.get('selected_scheme', 'both')
-            tax_old_regime, tax_new_regime = calculate_tax_view(income, deductions['80c'], deductions['80d'], deductions['80e'], deductions['80eea'], deductions['80g'], age_group)
+            tax_old_regime, tax_new_regime = calculate_tax_view(
+                income,
+                deductions['80c'],
+                deductions['80ccd1b'],
+                deductions['80d'],
+                deductions['80e'],
+                deductions['80eea'],
+                deductions['80g'],
+                age_group
+            )
+            tax_old_regime = round(tax_old_regime, 2)
+            tax_new_regime = round(tax_new_regime, 2)
             standard_deduction_old = 50000
             standard_deduction_new = 75000
 
@@ -247,8 +267,11 @@ def tax_calculator_view(request):
             elif tax_old_regime > tax_new_regime:
                 best_regime = "New Regime"
                 suggestions = [
-                    "Since the new regime doesn't allow deductions, focus on making your salary structure tax-efficient. Consider components like HRA, LTA, and food coupons.",
-                    "Invest in tax-free bonds or other tax-saving instruments that aren't dependent on deductions. This can help you plan for the future while saving on taxes."
+                    "Maximize your contributions to the National Pension System (NPS) under Section 80CCD(1B) to save up to ₹50,000. This is one of the few deductions allowed in the new regime.",
+                    "Consider making charitable donations to eligible organizations. While the new regime has limited deductions, donations can still provide some tax benefits.",
+                    "Review your investment portfolio and consider tax-efficient options like Equity Linked Savings Schemes (ELSS) and Public Provident Fund (PPF) for long-term benefits.",
+                    "Utilize employer-provided benefits such as health insurance and retirement benefits to reduce your taxable income indirectly.",
+                    "Plan for future financial goals by investing in instruments that offer tax-free returns, such as certain government bonds and savings schemes."
                 ]
             else:
                 best_regime = "Both Regimes yield the same tax amount."
@@ -286,6 +309,7 @@ def tax_calculator_view(request):
     return render(request, 'calculator/tax_calculator.html', {'form': form})
 
 
+
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -305,14 +329,15 @@ def tax_calculator_pdf_view(request):
             except InvalidOperation:
                 return Decimal(0)
         
-        
         age_group = int(request.POST.get('age_group'))
         income = Decimal(request.POST.get('annual_income'))
         deduction_80c = safe_decimal(request.POST.get('deduction_80c', 0))
+        deduction_80ccd1b = safe_decimal(request.POST.get('deduction_80ccd1b', 0))
         deduction_80d = safe_decimal(request.POST.get('deduction_80d', 0))
         deduction_80e = safe_decimal(request.POST.get('deduction_80e', 0))
         deduction_80eea = safe_decimal(request.POST.get('deduction_80eea', 0))
         deduction_80g = safe_decimal(request.POST.get('deduction_80g', 0))
+       
         selected_scheme = request.POST.get('selected_scheme', 'both')
 
         standard_deduction_old = Decimal('50000')
@@ -320,24 +345,32 @@ def tax_calculator_pdf_view(request):
 
         # Calculate taxes using the same logic
         tax_old_regime, tax_new_regime = calculate_tax_view(
-            income,  deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group
+            income, deduction_80c, deduction_80ccd1b, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group
         )
+
+        # Round the tax values to 2 decimal places
+        tax_old_regime = round(tax_old_regime, 2)
+        tax_new_regime = round(tax_new_regime, 2)
 
         # Determine the best regime
         if tax_old_regime < tax_new_regime:
             best_regime = "Old Regime"
             suggestions = generate_suggestions(income, {
                 '80c': deduction_80c,
+                '80ccd1b': deduction_80ccd1b,
                 '80d': deduction_80d,
                 '80e': deduction_80e,
                 '80eea': deduction_80eea,
-                '80g': deduction_80g
+                '80g': deduction_80g,
             })
         elif tax_old_regime > tax_new_regime:
             best_regime = "New Regime"
             suggestions = [
-                "Since no deductions are allowed in the new regime, ensure your salary structure is tax-efficient.",
-                "Plan for the future by investing in tax-free bonds or tax-saving instruments outside the deduction realm."
+                "Maximize your contributions to the National Pension System (NPS) under Section 80CCD(1B) to save up to ₹50,000. This is one of the few deductions allowed in the new regime.",
+                "Consider making charitable donations to eligible organizations. While the new regime has limited deductions, donations can still provide some tax benefits.",
+                "Review your investment portfolio and consider tax-efficient options like Equity Linked Savings Schemes (ELSS) and Public Provident Fund (PPF) for long-term benefits.",
+                "Utilize employer-provided benefits such as health insurance and retirement benefits to reduce your taxable income indirectly.",
+                "Plan for future financial goals by investing in instruments that offer tax-free returns, such as certain government bonds and savings schemes."
             ]
         else:
             best_regime = "Both Regimes yield the same tax amount."
@@ -383,6 +416,8 @@ def tax_calculator_pdf_view(request):
         return response
     else:
         return HttpResponseBadRequest("Invalid request")
+
+
 
 
 ############################# Tax Slabs View ####################################################### 

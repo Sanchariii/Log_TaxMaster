@@ -70,6 +70,14 @@
         .icon {
             margin-right: 8px;
         }
+        .radio {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .radio input {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -80,7 +88,14 @@
         <div class="card-body">
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="form-group">
+                    {% for radio in form.group %}
+                        <div class="radio">
+                            {{ radio.tag }}
+                            {{ radio.choice_label }}
+                        </div>
+                    {% endfor %}
+                </div>
                 <button type="submit" class="btn btn-custom"><i class="fas fa-arrow-right icon"></i>Continue</button>
             </form>
         </div>

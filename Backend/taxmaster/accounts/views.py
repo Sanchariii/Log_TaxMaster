@@ -96,9 +96,9 @@ def log_appointment(id,slot):
     })
 
 #########################################################################################################
-@login_required
-def check_session(request):
-    return JsonResponse({'status': 'ok'})
+# @login_required
+# def check_session(request):
+#     return JsonResponse({'status': 'ok'})
 
 
 

@@ -5,9 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
 
 
-from django import forms
-from django.contrib.auth.models import Group
-
+##################################  Group Selection Form   ###############################################
 class GroupSelectionForm(forms.Form):
     group = forms.ModelChoiceField(
         queryset=Group.objects.filter(name__in=['Tax Advisor', 'Individual User']),
@@ -16,7 +14,7 @@ class GroupSelectionForm(forms.Form):
         label="Select Your Role"
     )
 
-
+##################################  Signup Form   ###############################################
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text='Required. Inform a valid email address.')
     first_name = forms.CharField(max_length=30, required=True, help_text='Required. Enter your first name.')
@@ -66,31 +64,30 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-##################################          ###############################################
+##################################   Password Reset Form    ###############################################
 class UsernamePasswordResetForm(forms.Form):
     username = forms.CharField(max_length=150, required=True, label='Username')
 
-
+################################## Forgot Password Form    ###############################################
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField(
         required=True,
         label='Email Address',
-        # help_text='Enter your registered email address.'
     )
 
-##################################          ###############################################
+##################################  OTP Form     ###############################################
 class OTPForm(forms.Form):
     otp = forms.CharField(max_length=6, required=False)
     resend_otp = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
     def clean_otp(self):
         otp = self.cleaned_data.get('otp')
-        if otp and len(otp) != 6:  # Assuming the OTP is a 6-digit code
+        if otp and len(otp) != 6:  
             raise forms.ValidationError('OTP must be 6 digits.')
         return otp
 
 
-##################################          ################################################
+##################################   Set New Password Form    ################################################
 class SetNewPasswordForm(forms.Form):
     new_password = forms.CharField(widget=forms.PasswordInput, required=True, label='New Password')
     confirm_password = forms.CharField(widget=forms.PasswordInput, required=True, label='Confirm Password')

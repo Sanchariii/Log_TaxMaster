@@ -1,144 +1,151 @@
 {% extends 'base.html' %}
-
 {% block title %}
-    Your Appointments
+   Your Appointments
 {% endblock %}
-
 {% block individual_style %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-        .main-heading {
-            padding: 20px;
-            background-color: #e3f2fd;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        .main-heading h2 {
-            color: #1a237e; /* Darker blue color */
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .sub-heading {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .list-group-item {
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .list-group-item:hover {
-            background-color: #f1f1f1;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-        .list-group-item h5 {
-            color: #359aca;
-            font-size: 22px;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .list-group-item p {
-            color: #34495e;
-            font-size: 16px;
-            margin-bottom: 0;
-        }
-        .list-group-item .advisor-label {
-            color: #359aca;
-        }
-        .alert {
-            font-size: 18px;
-            text-align: center;
-            background-color: #317873;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary {
-            background-color: #3498db;
-            border-color: #3498db;
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+       body {
+           background-color: #f8f9fa;
+           font-family: 'Arial', sans-serif;
+           margin: 0;
+           padding: 0;
+           height: 100vh;
+       }
+       .navbar {
+           position: fixed;
+           top: 0;
+           width: 100%;
+           z-index: 1000;
+       }
+       .content-wrapper {
+           margin-top: 60px; /* Space for fixed navbar */
+           overflow-y: auto;
+       }
+       .container {
+           margin: 0 auto; /* Center the container */
+           padding: 20px; /* Inner padding for content */
+           max-width: 900px; /* Restrict the width for better readability */
+           background-color: #ffffff;
+           border-radius: 10px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           transition: box-shadow 0.3s ease-in-out;
+       }
+       .main-heading {
+           padding: 20px;
+           background-color: #e3f2fd;
+           border-radius: 10px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           margin-bottom: 30px;
+       }
+       .main-heading h2 {
+           color: #1a237e;
+           text-align: center;
+           font-size: 28px;
+           font-weight: bold;
+           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+       }
+       .sub-heading {
+           color: #2c3e50;
+           margin-bottom: 20px;
+           text-align: center;
+           font-size: 22px;
+           font-weight: bold;
+           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+       }
+       .list-group-item {
+           border: 1px solid #ddd;
+           margin-bottom: 15px;
+           padding: 20px;
+           border-radius: 10px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+           transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+       }
+       .list-group-item:hover {
+           background-color: #f1f1f1;
+           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+       }
+       .list-group-item h5 {
+           color: #359aca;
+           font-size: 22px;
+           margin-bottom: 10px;
+           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+       }
+       .list-group-item p {
+           color: #34495e;
+           font-size: 16px;
+           margin-bottom: 0;
+       }
+       .list-group-item .advisor-label {
+           color: #359aca;
+       }
+       .alert {
+           font-size: 18px;
+           text-align: center;
+           background-color: #317873;
+           color: #ffffff;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+       }
+       .btn-primary {
+           background-color: #3498db;
+           border-color: #3498db;
+           transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+       }
+       .btn-primary:hover {
+           background-color: #2980b9;
+           border-color: #2980b9;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+       }
+</style>
 {% endblock %}
-
 {% block content %}
-    <div class="container">
-        <div class="main-heading">
-            <h2><i class="fas fa-calendar-alt"></i> Your Appointments</h2>
-        </div>
-
-        <!-- Approved Appointments Section -->
-        <h2 class="sub-heading"><i class="fas fa-check-circle"></i> Approved Appointments</h2>
-        <div class="list-group">
-            {% if approved_appointments %}
-                {% for appointment in approved_appointments %}
-                    <div class="list-group-item">
-                        <h5><i class="fas fa-user-tie"></i> <span class="advisor-label">Advisor:</span> {{ appointment.tax_advisor.get_full_name }}</h5>
-                        <p>
-                            <i class="fas fa-calendar-day"></i> Date: {{ appointment.date }}<br>
-                            <i class="fas fa-clock"></i> Slot: {{ appointment.slot }}<br>
-                            {% comment %} <i class="fas fa-sticky-note"></i> Notes: No additional notes <!-- You can add actual notes if available --> {% endcomment %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle"></i> You have no approved appointments.
-                </div>
-            {% endif %}
-        </div>
-
-        <!-- Requested Appointments Section -->
-        <h2 class="sub-heading"><i class="fas fa-hourglass-half"></i> Requested Appointments</h2>
-        <div class="list-group">
-            {% if requested_appointments %}
-                {% for appointment in requested_appointments %}
-                    <div class="list-group-item">
-                        <h5><i class="fas fa-user-tie"></i> <span class="advisor-label">Advisor:</span> {{ appointment.tax_advisor.get_full_name }}</h5>
-                        <p>
-                            <i class="fas fa-calendar-day"></i> Date: {{ appointment.date }}<br>
-                            <i class="fas fa-clock"></i> Slot: {{ appointment.slot }}<br>
-                            <i class="fas fa-hourglass-half"></i> Status: Pending Approval<br>
-                            {% comment %} <i class="fas fa-sticky-note"></i> Notes: No additional notes <!-- You can add actual notes if available --> {% endcomment %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="alert alert-info" style="background-color: #317873; color: #ffffff;">
-                    <i class="fas fa-info-circle"></i> You have no pending appointment requests.
-                </div>
-            {% endif %}
-        </div>
-    </div>
+<div class="content-wrapper">
+<div class="container">
+<div class="main-heading">
+<h2><i class="fas fa-calendar-alt"></i> Your Appointments</h2>
+</div>
+<!-- Approved Appointments Section -->
+<h2 class="sub-heading"><i class="fas fa-check-circle"></i> Approved Appointments</h2>
+<div class="list-group">
+               {% if approved_appointments %}
+                   {% for appointment in approved_appointments %}
+<div class="list-group-item">
+<h5><i class="fas fa-user-tie"></i> <span class="advisor-label">Advisor:</span> {{ appointment.tax_advisor.get_full_name }}</h5>
+<p>
+<i class="fas fa-calendar-day"></i> Date: {{ appointment.date }}<br>
+<i class="fas fa-clock"></i> Slot: {{ appointment.slot }}<br>
+                               {% comment %} <i class="fas fa-sticky-note"></i> Notes: No additional notes {% endcomment %}
+</p>
+</div>
+                   {% endfor %}
+               {% else %}
+<div class="alert alert-info">
+<i class="fas fa-info-circle"></i> You have no approved appointments.
+</div>
+               {% endif %}
+</div>
+<!-- Requested Appointments Section -->
+<h2 class="sub-heading"><i class="fas fa-hourglass-half"></i> Requested Appointments</h2>
+<div class="list-group">
+               {% if requested_appointments %}
+                   {% for appointment in requested_appointments %}
+<div class="list-group-item">
+<h5><i class="fas fa-user-tie"></i> <span class="advisor-label">Advisor:</span> {{ appointment.tax_advisor.get_full_name }}</h5>
+<p>
+<i class="fas fa-calendar-day"></i> Date: {{ appointment.date }}<br>
+<i class="fas fa-clock"></i> Slot: {{ appointment.slot }}<br>
+<i class="fas fa-hourglass-half"></i> Status: Pending Approval<br>
+                               {% comment %} <i class="fas fa-sticky-note"></i> Notes: No additional notes {% endcomment %}
+</p>
+</div>
+                   {% endfor %}
+               {% else %}
+<div class="alert alert-info">
+<i class="fas fa-info-circle"></i> You have no pending appointment requests.
+</div>
+               {% endif %}
+</div>
+</div>
+</div>
 {% endblock %}
