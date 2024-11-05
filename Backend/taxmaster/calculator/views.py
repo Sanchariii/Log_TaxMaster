@@ -327,7 +327,6 @@ def tax_calculator_view(request):
 
 
 
-<<<<<<< HEAD
 @login_required
 def past_calculations_view(request):
     calculations = TaxResults.objects.filter(user=request.user).order_by('-calculated_at')
@@ -335,8 +334,6 @@ def past_calculations_view(request):
 
 
 
-=======
->>>>>>> 5b761b56794d7ed2b85e4aad5b12fb770b88a93a
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
