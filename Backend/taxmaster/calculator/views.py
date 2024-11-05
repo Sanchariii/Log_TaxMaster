@@ -289,12 +289,19 @@ def tax_calculator_view(request):
             happy_message = "Great news 🎉! You don't need to pay any tax this Year!"
             
             user_input = UserInput.objects.create(
-                user=request.user,
-                age_group=age_group,
-                annual_income=income,
-                standard_deduction=50000,  # Example standard deduction
-                other_deductions=sum(deductions.values())
-            )
+            user=request.user,
+            age_group=age_group,
+            annual_income=income,
+            standard_deduction=standard_deduction_old,  # Or however you want to handle this
+            other_deductions=0,  # Set this based on your logic
+            deduction_80c=deductions['80c'],
+            deduction_80ccd1b=deductions['80ccd1b'],
+            deduction_80d=deductions['80d'],
+            deduction_80e=deductions['80e'],
+            deduction_80eea=deductions['80eea'],
+            deduction_80g=deductions['80g'],
+        )
+
             TaxResults.objects.create(
                 user=request.user,
                 user_input=user_input,
@@ -327,11 +334,76 @@ def tax_calculator_view(request):
 
 
 
+# def tax_calculator_view(request):
+#     form = TaxCalculatorForm(request.POST or None)
+#     context = {'form': form}
+
+#     if request.method == 'POST' and form.is_valid():
+#         age_group = int(form.cleaned_data['age_group'])
+#         income = form.cleaned_data['annual_income']
+#         deductions = {
+#             '80c': form.cleaned_data.get('deduction_80c', 0) or 0,
+#             '80ccd1b': form.cleaned_data.get('deduction_80ccd1b', 0) or 0,
+#             '80d': form.cleaned_data.get('deduction_80d', 0) or 0,
+#             '80e': form.cleaned_data.get('deduction_80e', 0) or 0,
+#             '80eea': form.cleaned_data.get('deduction_80eea', 0) or 0,
+#             '80g': form.cleaned_data.get('deduction_80g', 0) or 0,
+#         }
+#         selected_scheme = request.POST.get('selected_scheme', 'both')
+#         tax_old_regime, tax_new_regime = calculate_tax_view(
+#             income,
+#             deductions['80c'],
+#             deductions['80ccd1b'],
+#             deductions['80d'],
+#             deductions['80e'],
+#             deductions['80eea'],
+#             deductions['80g'],
+#             age_group
+#         )
+
+#         tax_old_regime = round(tax_old_regime, 2)
+#         tax_new_regime = round(tax_new_regime, 2)
+#         standard_deduction_old = 50000
+#         standard_deduction_new = 75000
+#         best_regime = "Old Regime" if tax_old_regime < tax_new_regime else "New Regime"
+
+#         # Suggestions and messages
+#         if tax_old_regime < tax_new_regime:
+#             suggestions = generate_suggestions(income, deductions)
+#         elif tax_old_regime > tax_new_regime:
+#             suggestions = [
+#                 "Maximize contributions to the National Pension System.",
+#                 "Consider charitable donations for tax benefits."
+#                 # ... other suggestions ...
+#             ]
+#         else:
+#             suggestions = []
+
+#         happy_message = "Great news 🎉! You don't need to pay any tax this Year!" if not suggestions else None
+
+#         context.update({
+#             'result': True,
+#             'tax_old_regime': tax_old_regime,
+#             'tax_new_regime': tax_new_regime,
+#             'best_regime': best_regime,
+#             'standard_deduction_old': standard_deduction_old,
+#             'standard_deduction_new': standard_deduction_new,
+#             'happy_message': happy_message,
+#             'suggestions': suggestions,
+#             'selected_scheme': selected_scheme,
+#         })
+
+#     return render(request, 'calculator/tax_calculator.html', context)
+
+
+
+
 @login_required
 def past_calculations_view(request):
-    calculations = TaxResults.objects.filter(user=request.user).order_by('-calculated_at')
-    return render(request, 'calculator/past_calculations.html', {'calculations': calculations})
+    # Filter calculations specific to the logged-in user
+    calculations = TaxResults.objects.filter(user=request.user).select_related('user_input')
 
+    return render(request, 'calculator/past_calculations.html', {'calculations': calculations})
 
 
 from django.http import HttpResponse

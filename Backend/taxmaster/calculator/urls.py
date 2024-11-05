@@ -4,6 +4,7 @@ urlpatterns = [
    path('', tax_calculator_view, name='tax_calculator'),
    path('tax-slabs/', tax_slabs_view, name='tax_slabs'),
    path('tax-calculator/pdf/', tax_calculator_pdf_view, name='tax_calculator_pdf'),
+
    path('past-calculations/', past_calculations_view, name='past_calculations'),
 
 

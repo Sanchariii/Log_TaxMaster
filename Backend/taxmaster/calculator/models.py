@@ -11,11 +11,17 @@ from django.utils import timezone
 
 
 class UserInput(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="inputs",default=8)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="inputs", default=8)
     age_group = models.IntegerField()
     annual_income = models.FloatField()
     standard_deduction = models.FloatField()
     other_deductions = models.FloatField()
+    deduction_80c = models.FloatField(default=0)
+    deduction_80ccd1b = models.FloatField(default=0)
+    deduction_80d = models.FloatField(default=0)
+    deduction_80e = models.FloatField(default=0)
+    deduction_80eea = models.FloatField(default=0)
+    deduction_80g = models.FloatField(default=0)
     
 def __str__(self):
     return f"User Input - Age Group: {self.age_group}, Income: {self.annual_income}"
@@ -66,7 +72,6 @@ class TaxResults(models.Model):
     old_regime_tax = models.DecimalField(max_digits=10, decimal_places=2)
     new_regime_tax = models.DecimalField(max_digits=10, decimal_places=2)
     best_regime = models.CharField(max_length=20)
-    calculated_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Tax Calculation for {self.user.username} on {self.calculated_at}"
