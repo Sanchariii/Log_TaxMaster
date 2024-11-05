@@ -1,4 +1,155 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+
+{% block title %}
+Tax Advisor Dashboard
+{% endblock %}
+
+
+{% block individual_style %}
+<style>
+
+body {
+    background-color: #f0f2f6;
+    font-family: 'Arial', sans-serif;
+}
+h1, h2 {
+    color: #4b0082;
+    text-shadow: 2px 2px 4px #aaa;
+}
+p.text-center {
+    font-size: 1.2em;
+    color: #4b0082;
+}
+.btn-custom {
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.btn-custom:hover {
+    background-color: #1f4e79;
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+.client-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+.pretty-button {
+    background-color: #5b9bd5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.pretty-button:hover {
+    background-color: #1f4e79;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    color: #4b0082;
+    font-weight: bold;
+}
+.card-text {
+    color: #333;
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Meet the Experts!</h1>
+    <p class="text-center">Here is the list of tax advisors. Feel free to take consultation from our Tax Advisors.</p>
+    <div class="row">
+        <!-- Check if advisors are available -->
+        {% if advisors %}
+        {% for advisor in advisors %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ advisor.get_full_name }}</h5>
+                    <p class="card-text">
+                        Email: {{ advisor.email }}<br>
+                        Experience: {{ advisor.taxadvisorprofile.years_of_experience }} years<br>
+                        Gender: {{ advisor.taxadvisorprofile.gender }}<br>
+                        Clients Attended Successfully: {{ advisor.taxadvisorprofile.clients_attended_successfully }}<br>
+                        Clients Currently Attending: {{ advisor.taxadvisorprofile.clients_currently_attending }}
+                    </p>
+                    <a href="{% url 'request_appointment' advisor.id %}" class="btn btn-custom">Request Appointment</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p class="text-center">No tax advisors are currently available.</p>
+        </div>
+        {% endif %}
+    </div>
+    {% comment %} <h2 class="text-center mt-5">Appointment Requests</h2> {% endcomment %}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Display appointment requests using loop -->
+            <div class="appointment-requests">
+                {% for index, request in appointment_requests %}
+                <div class="client-box">
+                    <p><strong>Client Name:</strong> {{ request.client_name }}</p>
+                    <p><strong>Date:</strong> {{ request.date }}</p>
+                    <p><strong>Time Slot:</strong> {{ request.time_slot }}</p>
+                    <p><strong>Status:</strong> {{ request.status }}</p>
+                    <div class="button-container">
+                        <a href="?accept_{{ index }}" class="pretty-button">Accept</a>
+                        <a href="?decline_{{ index }}" class="pretty-button">Decline</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <hr>
+    <small>© 2024 Tax Advisor Dashboard. All rights reserved.</small>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+{% endblock %}
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -111,7 +262,7 @@
             </div>
             {% endif %}
         </div>
-        {% comment %} <h2 class="text-center mt-5">Appointment Requests</h2> {% endcomment %}
+        <h2 class="text-center mt-5">Appointment Requests</h2>
         <div class="row">
             <div class="col-md-12">
                 <!-- Display appointment requests using loop -->
@@ -140,4 +291,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html> {% endcomment %}

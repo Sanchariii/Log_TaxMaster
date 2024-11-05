@@ -1,0 +1,54 @@
+<!-- calculator/past_calculations.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Your Past Calculations</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Age Group</th>
+                    <th scope="col">Annual Income</th>
+                    <th scope="col">Old Regime Tax</th>
+                    <th scope="col">New Regime Tax</th>
+                    <th scope="col">Best Regime</th>
+                    <th scope="col">Deduction 80C</th>
+                    <th scope="col">Deduction 80CCD1B</th>
+                    <th scope="col">Deduction 80D</th>
+                    <th scope="col">Deduction 80E</th>
+                    <th scope="col">Deduction 80EEA</th>
+                    <th scope="col">Deduction 80G</th>
+        
+                </tr>
+            </thead>
+            <tbody>
+                {% for calc in calculations %}
+                <tr>
+                    <td>{{ calc.user_input.age_group }}</td>
+                    <td>{{ calc.user_input.annual_income }}</td>
+                    <td>{{ calc.old_regime_tax }}</td>
+                    <td>{{ calc.new_regime_tax }}</td>
+                    <td>{{ calc.best_regime }}</td>
+                    <td>{{ calc.user_input.deduction_80c }}</td>
+                    <td>{{ calc.user_input.deduction_80ccd1b }}</td>
+                    <td>{{ calc.user_input.deduction_80d }}</td>
+                    <td>{{ calc.user_input.deduction_80e }}</td>
+                    <td>{{ calc.user_input.deduction_80eea }}</td>
+                    <td>{{ calc.user_input.deduction_80g }}</td>
+        
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No past calculations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

@@ -13,6 +13,7 @@ Tax Calculator
 
       <h1>Income Tax Calculator for AY 2024-25</h1>
       <form method="post">
+         
          {% csrf_token %}
          {{ form.as_p }}
          <button type="submit">Calculate Tax</button>
@@ -36,6 +37,33 @@ Tax Calculator
         </div>
       </div>
    </div>
+
+
+   {% if result %}
+   <div class="container">
+      <h2>Your Tax Calculation Result</h2>
+       <!-- Display user details and input values -->
+       <p><strong>Income:</strong> ₹{{ form.cleaned_data.annual_income|default:0 }}</p>
+       <p><strong>Standard Deduction (Old Regime):</strong> ₹{{ standard_deduction_old }}</p>
+       <p><strong>Standard Deduction (New Regime):</strong> ₹{{ standard_deduction_new }}</p>
+       <p><strong>Old Tax Regime Tax:</strong> ₹{{ tax_old_regime }}</p>
+       <p><strong>New Tax Regime Tax:</strong> ₹{{ tax_new_regime }}</p>
+       <p><strong>Best Regime:</strong> {{ best_regime }}</p>
+
+       {% if happy_message %}
+       <p class="happy-message">{{ happy_message }}</p>
+       {% endif %}
+       {% if suggestions %}
+       <h3>Suggestions:</h3>
+       <ul>
+           {% for suggestion in suggestions %}
+           <li>{{ suggestion }}</li>
+           {% endfor %}
+       </ul>
+       {% endif %}
+   </div>
+   {% endif %}
+
    <script>
       function showTaxSchemes() {
           alert('Details about various tax schemes...');
