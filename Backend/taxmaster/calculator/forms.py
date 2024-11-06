@@ -1,5 +1,4 @@
 from django import forms
-# from .models import TaxScheme, SurchargeRate, TaxCalculator
     
 class TaxCalculatorForm(forms.Form):
     AGE_GROUP_CHOICES = [

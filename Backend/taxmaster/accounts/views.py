@@ -1,31 +1,15 @@
 import random
 from django.views import View
-from datetime import timedelta
-from django.urls import reverse
 from django.conf import settings
-from django.utils import timezone
 from django.contrib import messages
-from django.http import JsonResponse
 from django.core.mail import send_mail
-from datetime import datetime, timedelta
 from django.shortcuts import render, redirect
-from django.utils.html import strip_tags
-from django.utils.encoding import force_bytes
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group, User
-from django.core.exceptions import ValidationError
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.tokens import default_token_generator
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth import get_user_model,logout,authenticate, login as auth_login
-from .forms import UsernamePasswordResetForm, OTPForm, SetNewPasswordForm
-from django.contrib.auth.decorators import login_required,user_passes_test
-from .forms import SignUpForm, UsernamePasswordResetForm, OTPForm, SetNewPasswordForm, LoginForm, GroupSelectionForm
+from django.contrib.auth import logout,authenticate, login as auth_login
+from .forms import SignUpForm, OTPForm, SetNewPasswordForm,GroupSelectionForm
 
 #########################################################################################################
 # from taxmaster.logging_config import logger
@@ -95,10 +79,7 @@ def log_appointment(id,slot):
         }
     })
 
-#########################################################################################################
-# @login_required
-# def check_session(request):
-#     return JsonResponse({'status': 'ok'})
+#######################################################################################################
 
 
 
@@ -186,7 +167,6 @@ class CustomLoginView(View):
             return self.render_error(request, form=form)
 
     def _redirect_user(self, user):
-        """Redirects user based on their group."""
         if user.is_superuser:
             next_url = '/calculator/'
         elif user.groups.filter(name='Tax Advisor').exists():
@@ -198,12 +178,10 @@ class CustomLoginView(View):
         return redirect(next_url)
 
     def generate_otp(self):
-        """Generates a 6-digit OTP."""
         log_it("otp sent")
         return str(random.randint(100000, 999999))
 
     def send_otp_via_email(self, email, otp):
-        """Sends OTP to the given email."""
         subject = 'Your OTP Code'
         message = f'Your OTP code is {otp}'
         from_email = 'raysanchari930@gmail.com'
@@ -239,12 +217,10 @@ def group_selection(request):
 User = get_user_model()
 
 def generate_otp():
-    """Generates a random 6-digit OTP."""
     log_it("otp sent")
     return ''.join(random.choices(string.digits, k=6))
 
 def send_otp_via_email(email, otp):
-    """Sends OTP to the given email."""
     subject = 'Your OTP for Account Verification'
     message = f'Your OTP code is {otp}'
     from_email = 'raysanchari930@gmail.com'
@@ -287,7 +263,6 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 def resend_signup_otp(request):
-    """View for resending the OTP during signup."""
     if request.method == 'POST':
         signup_data = request.session.get('signup_data')
         if signup_data:
@@ -315,7 +290,6 @@ def resend_signup_otp(request):
 
 
 def verify_signup_otp(request):
-    """View for verifying the OTP after signup."""
     if request.method == 'POST':
         form = OTPForm(request.POST)
         if form.is_valid():
@@ -359,20 +333,12 @@ def logout_view(request):
     logout(request)
     return redirect("/")
 
+################################## Forgot Password #########################################################
 
-
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.conf import settings
-import random
 import string
 from .forms import ForgotPasswordForm
 
 
-
-################################## Forgot Password #########################################################
 # View for requesting a password reset
 def forgot_password_view(request):
     if request.method == 'POST':

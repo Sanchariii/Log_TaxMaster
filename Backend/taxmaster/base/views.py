@@ -1,15 +1,11 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+
+from django.shortcuts import render
 from django.utils import timezone
 from appointment.models import Appointment
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import user_passes_test
 from accounts.views import is_User_or_Advisor
 from advisor.models import UserRequest
 from django.db import models
-# from .forms import UserDetailsForm
-# from .models import UserDetails
-from decimal import Decimal
-from calculator.views import calculate_tax_view
 
 
 ############################# Home Page ####################################################### 

@@ -1,5 +1,5 @@
 from .forms import TaxCalculatorForm
-from .models import TaxCalculation, UserInput, TaxResults
+from .models import  UserInput, TaxResults
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from xhtml2pdf import pisa
@@ -79,7 +79,6 @@ def log_appointment(id,slot):
 
 ################################################### Surcharge Calculation #################################################################
 def calculate_surcharge(taxable_income, tax):
-    """Calculate surcharge based on income thresholds."""
     surcharge = Decimal('0.0')
     if taxable_income > 5000000 and taxable_income <= 10000000:
         surcharge = Decimal('0.1') * tax
@@ -92,8 +91,7 @@ def calculate_surcharge(taxable_income, tax):
     return surcharge
 
 ######################################################### Calculation of old and new regime taxes #######################################################################
-def calculate_tax_view(income, deduction_80c, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, deduction_80ccd1b, age_group):
-    """Calculate tax for both regimes and apply surcharge and cess, including rebates."""
+def calculate_tax_view(income, deduction_80c, deduction_80ccd1b, deduction_80d, deduction_80e, deduction_80eea, deduction_80g, age_group):
     income = Decimal(income)
     deduction_80c = Decimal(deduction_80c or 0)
     deduction_80ccd1b = Decimal(deduction_80ccd1b or 0)
@@ -332,68 +330,6 @@ def tax_calculator_view(request):
         form = TaxCalculatorForm()
     return render(request, 'calculator/tax_calculator.html', {'form': form})
 
-
-
-# def tax_calculator_view(request):
-#     form = TaxCalculatorForm(request.POST or None)
-#     context = {'form': form}
-
-#     if request.method == 'POST' and form.is_valid():
-#         age_group = int(form.cleaned_data['age_group'])
-#         income = form.cleaned_data['annual_income']
-#         deductions = {
-#             '80c': form.cleaned_data.get('deduction_80c', 0) or 0,
-#             '80ccd1b': form.cleaned_data.get('deduction_80ccd1b', 0) or 0,
-#             '80d': form.cleaned_data.get('deduction_80d', 0) or 0,
-#             '80e': form.cleaned_data.get('deduction_80e', 0) or 0,
-#             '80eea': form.cleaned_data.get('deduction_80eea', 0) or 0,
-#             '80g': form.cleaned_data.get('deduction_80g', 0) or 0,
-#         }
-#         selected_scheme = request.POST.get('selected_scheme', 'both')
-#         tax_old_regime, tax_new_regime = calculate_tax_view(
-#             income,
-#             deductions['80c'],
-#             deductions['80ccd1b'],
-#             deductions['80d'],
-#             deductions['80e'],
-#             deductions['80eea'],
-#             deductions['80g'],
-#             age_group
-#         )
-
-#         tax_old_regime = round(tax_old_regime, 2)
-#         tax_new_regime = round(tax_new_regime, 2)
-#         standard_deduction_old = 50000
-#         standard_deduction_new = 75000
-#         best_regime = "Old Regime" if tax_old_regime < tax_new_regime else "New Regime"
-
-#         # Suggestions and messages
-#         if tax_old_regime < tax_new_regime:
-#             suggestions = generate_suggestions(income, deductions)
-#         elif tax_old_regime > tax_new_regime:
-#             suggestions = [
-#                 "Maximize contributions to the National Pension System.",
-#                 "Consider charitable donations for tax benefits."
-#                 # ... other suggestions ...
-#             ]
-#         else:
-#             suggestions = []
-
-#         happy_message = "Great news 🎉! You don't need to pay any tax this Year!" if not suggestions else None
-
-#         context.update({
-#             'result': True,
-#             'tax_old_regime': tax_old_regime,
-#             'tax_new_regime': tax_new_regime,
-#             'best_regime': best_regime,
-#             'standard_deduction_old': standard_deduction_old,
-#             'standard_deduction_new': standard_deduction_new,
-#             'happy_message': happy_message,
-#             'suggestions': suggestions,
-#             'selected_scheme': selected_scheme,
-#         })
-
-#     return render(request, 'calculator/tax_calculator.html', context)
 
 
 

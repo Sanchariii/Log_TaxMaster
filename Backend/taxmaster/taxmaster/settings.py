@@ -90,23 +90,8 @@ WSGI_APPLICATION = 'taxmaster.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-# Sanchariiiii
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'mssql',
-#         'NAME': 'Tax_Master',
-#         'USER': '',  # Leave empty if using trusted connection
-#         'PASSWORD': '',  # Leave empty if using trusted connection
-#         'HOST': 'D7KJ7G3',  # Your SQL Server host
-#         'PORT': '',  # Default port can be left empty
-#         'OPTIONS': {
-#             'driver': 'ODBC Driver 17 for SQL Server',
-#             'trusted_connection': 'yes',  # Use 'yes' for Windows Authentication
-#         },
-#     }
-# }
 
-# HIM
+
 
 DATABASES = {
     'default': {

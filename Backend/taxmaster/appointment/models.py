@@ -24,12 +24,7 @@ class Appointment(models.Model):
         null=True
     )
     
-    # user_request = models.ForeignKey(
-    #     UserRequest, 
-    #     on_delete=models.CASCADE, 
-    #     related_name="user_request_appointments",  
-    #     null=True
-    # )
+
     tax_advisor = models.ForeignKey(
         User, 
         on_delete=models.CASCADE, 
