@@ -33,7 +33,7 @@ def user_appointments_view(request):
     user = request.user
     # Filter based on the `confirmed` field, which indicates approval status
     approved_appointments = UserRequest.objects.filter(user=user, approved=True)
-    requested_appointments = UserRequest.objects.filter(user=user, approved=False)
+    requested_appointments = UserRequest.objects.filter(user=user, approved=False, rejected=False)
 
     context = {
         'approved_appointments': approved_appointments,
