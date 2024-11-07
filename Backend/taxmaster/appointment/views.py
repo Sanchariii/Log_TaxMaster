@@ -201,6 +201,9 @@ def get_available_dates(advisor):
 
 ############################# View for requesting an appointment ####################################################### 
 
+def generate_meeting_link():
+    return "https://meet.google.com/tie-inso-qdd"
+
 def request_appointment(request, advisor_id):
     advisor = get_object_or_404(User, id=advisor_id)
     available_dates = get_available_dates(advisor)
@@ -221,7 +224,7 @@ def request_appointment(request, advisor_id):
                 appointment.appointment_date = requested_date
                 appointment.slot = form.cleaned_data['slot']
                 appointment.meeting_type = form.cleaned_data['meeting_type']
-
+                
                 user_request = UserRequest.objects.create(
                     user=request.user,
                     tax_advisor=advisor,
@@ -234,6 +237,11 @@ def request_appointment(request, advisor_id):
                 appointment.user_request = user_request
                 appointment.save()
 
+                # Generate meeting link if the meeting type is online
+                meeting_link = None
+                if appointment.meeting_type == "online_meeting":
+                    meeting_link = generate_meeting_link()
+
                 # Render email content using an HTML template
                 subject = "Appointment Request Confirmation"
                 html_message = render_to_string('appointment/appointment_confirmation.html', {
@@ -242,6 +250,7 @@ def request_appointment(request, advisor_id):
                     'appointment_date': appointment.appointment_date,
                     'slot': appointment.slot,
                     'meeting_type': appointment.meeting_type,
+                    'meeting_link': meeting_link,
                 })
                 plain_message = strip_tags(html_message)
                 from_email = 'your_email@example.com'
@@ -258,7 +267,6 @@ def request_appointment(request, advisor_id):
         'advisor': advisor,
         'available_dates': future_dates,
     })
-
 
 
 ############################# View for submiting an appointment ####################################################### 
