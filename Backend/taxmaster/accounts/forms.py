@@ -58,6 +58,7 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+##################################   Login Form    ###############################################
 
 class LoginForm(forms.Form):
     username = forms.CharField()

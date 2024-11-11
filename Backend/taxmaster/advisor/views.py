@@ -37,14 +37,13 @@ def advisor_requests(request):
     })
 
 
-
+############################# Tax Advisor Profile ######################################################
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserRequest, TaxAdvisorProfile
 from .forms import TaxAdvisorProfileForm
 
 
-############################# Tax Advisor Profile ######################################################
 def tax_advisor_profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
 

@@ -332,6 +332,7 @@ def tax_calculator_view(request):
 
 
 
+############################# Calculator History ####################################################### 
 
 
 @login_required
@@ -342,14 +343,16 @@ def past_calculations_view(request):
     return render(request, 'calculator/past_calculations.html', {'calculations': calculations})
 
 
+
+
+
+############################# PDF view ####################################################### 
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
-
-############################# PDF view ####################################################### 
 
 @login_required
 def tax_calculator_pdf_view(request):
