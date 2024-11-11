@@ -781,3 +781,72 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-07T10:14:58.928322+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-07T10:55:08.319212+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-07T10:55:25.178503+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T06:57:29.848496+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T06:57:54.222638+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T06:58:08.053096+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anisha", "slot": "evening"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T07:46:08.438095+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T07:46:27.045408+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:16:19.302597+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:16:34.636898+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:17:05.542525+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Dinesh", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:21:07.626848+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:21:20.440106+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:23:24.413431+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:23:41.858795+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:23:48.756860+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Snneha", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:26:23.438156+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:26:38.824216+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:27:27.848010+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:27:42.126839+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:27:51.607480+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Mainak", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:38:41.509963+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:38:59.497204+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:40:12.830011+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:40:26.218052+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:40:37.605488+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Somali", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:41:02.660854+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Somali", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:42:14.202133+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:42:29.625788+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:42:42.505341+00:00", "Values": {"iserrorlog": 0, "message": "appointment rejected"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:43:08.523619+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:43:26.090613+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:44:04.611757+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:44:19.622155+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:47:01.300268+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:47:24.243664+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:47:42.502708+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Akarsh", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T09:48:56.180748+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "80 and above", "income": 5000000, "deduction": 410000, "regime": "New Regime", "saving": 41080.0}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:10:42.721480+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:11:00.501218+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:36:20.470507+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:36:39.096926+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:37:58.818417+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:38:13.466918+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:38:35.109085+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:38:51.959539+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:39:02.100768+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Disha", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:40:19.072493+00:00", "Values": {"iserrorlog": 0, "message": "Calculation Successful", "age": "60 to 79", "income": 1000000, "deduction": 127659, "regime": "New Regime", "saving": 38781.29}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:54:50.772671+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:55:05.698862+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:56:05.801870+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:56:18.774578+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T10:56:23.318395+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Snneha", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:00:23.970897+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:00:38.350882+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:01:18.606036+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:01:35.171083+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:01:46.512499+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Akarsh", "slot": "evening"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:03:12.448922+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:03:28.154789+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:04:02.847306+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:04:20.469850+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:04:26.585617+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Anurag", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:05:49.776789+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:06:05.033558+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:32:43.809196+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:33:04.756195+00:00", "Values": {"iserrorlog": 1, "whatfailed": "login", "reason": "Invalid OTP entered"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:33:17.285350+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:33:54.184028+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:34:08.400574+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:34:18.545207+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "evening"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T12:33:11.454526+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "morning"}}

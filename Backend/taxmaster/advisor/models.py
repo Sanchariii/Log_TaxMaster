@@ -12,6 +12,7 @@ class UserRequest(models.Model):
     rejected = models.BooleanField(default=False)
     slot = models.CharField(max_length=100, null=True)  # Store the time slot as a string (can use choices)
     date = models.DateField(null=True)  # Store the appointment date
+    meeting_type = models.CharField(max_length=20, choices=[('in_person', 'In Person'), ('online_meeting', 'Online Meeting')])
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} to {self.tax_advisor.username}"

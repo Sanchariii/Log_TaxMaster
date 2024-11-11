@@ -201,8 +201,8 @@ def get_available_dates(advisor):
 
 ############################# View for requesting an appointment ####################################################### 
 
-def generate_meeting_link():
-    return "https://meet.google.com/tie-inso-qdd"
+# def generate_meeting_link():
+#     return "https://meet.google.com/tie-inso-qdd"
 
 def request_appointment(request, advisor_id):
     advisor = get_object_or_404(User, id=advisor_id)
@@ -238,9 +238,9 @@ def request_appointment(request, advisor_id):
                 appointment.save()
 
                 # Generate meeting link if the meeting type is online
-                meeting_link = None
-                if appointment.meeting_type == "online_meeting":
-                    meeting_link = generate_meeting_link()
+                # meeting_link = None
+                # if appointment.meeting_type == "online_meeting":
+                #     meeting_link = generate_meeting_link()
 
                 # Render email content using an HTML template
                 subject = "Appointment Request Confirmation"
@@ -250,7 +250,7 @@ def request_appointment(request, advisor_id):
                     'appointment_date': appointment.appointment_date,
                     'slot': appointment.slot,
                     'meeting_type': appointment.meeting_type,
-                    'meeting_link': meeting_link,
+                    # 'meeting_link': meeting_link,
                 })
                 plain_message = strip_tags(html_message)
                 from_email = 'your_email@example.com'
@@ -298,15 +298,38 @@ def approve_request(request, request_id):
     user_request.approved = True
     user_request.save()
     log_appointment(user_request.tax_advisor.first_name, user_request.slot)
+    
+    # Debugging print statements
+    print(f"Meeting type......../////: {user_request.meeting_type}")
+
+    if user_request.meeting_type:
+        if user_request.meeting_type.strip() == "online_meeting":
+            additional_message = "\n\nThe meeting link for your appointment will be sent to you shortly."
+        else:
+            additional_message = ""
+    else:
+        additional_message = "Meeting type is not set."
+
+
+    # Debugging print statement
+    print(f"Additional message: {additional_message}")
+
+    email_content = (
+        f'Hello {user_request.first_name},\n\n'
+        f'Your appointment request with {user_request.tax_advisor.first_name} {user_request.tax_advisor.last_name} has been approved. '
+        f'Please check your account for more details.{additional_message}'
+    )
+
     send_mail(
-            'Your Appointment Request Has Been Approved',
-            f'Hello {user_request.first_name},\n\nYour appointment request with {user_request.tax_advisor.first_name} {user_request.tax_advisor.last_name} has been approved. Please check your account for more details.',
-            settings.DEFAULT_FROM_EMAIL,
-            [user_request.email],
-            fail_silently=False,
-        )
+        'Your Appointment Request Has Been Approved',
+        email_content,
+        settings.DEFAULT_FROM_EMAIL,
+        [user_request.email],
+        fail_silently=False,
+    )
 
     return redirect('manage_requests')
+
 
     
 ############################# View for rejecting a requests ####################################################### 
@@ -348,3 +371,19 @@ def user_appointments(request):
     return render(request, 'appointment/user_appointments.html', {
         'appointments': appointments
     })
+
+
+############################# View for setting the meeting type ####################################################### 
+
+def request_appointment(request):
+    if request.method == 'POST':
+        form = AppointmentRequestForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            print(f"Meeting type from form: {appointment.meeting_type}")  # Debug print
+            appointment.save()
+            print(f"Meeting type after save: {appointment.meeting_type}")  # Debug print
+            return redirect('success_page')
+    else:
+        form = AppointmentRequestForm()
+    return render(request, 'appointment_form.html', {'form': form})

@@ -59,12 +59,13 @@
                 <p><strong>Date:</strong> {{ appointment_date }}</p>
                 <p><strong>Slot:</strong> {{ slot }}</p>
                 <p><strong>Meeting Type:</strong> {{ meeting_type }}</p>
-                {% if meeting_type == "online_meeting" %}
+                {% comment %} {% if meeting_type == "online_meeting" %}
                 <p><strong>Meeting Link:</strong> <a href="{{ meeting_link }}">{{ meeting_link }}</a></p>
-                {% endif %}
+                {% endif %} {% endcomment %}
             </div>
+            <p>Thank you for requesting an appointment. Your tax advisor will review your request and get back to you shortly.</p>
             <p>If you have any questions, feel free to contact us by replying on this mail.</p>
-            <p>Thank you!</p>
+        
         </div>
         <div class="footer">
             <p>© 2024 TaxMaster. All rights reserved.</p>
