@@ -850,3 +850,6 @@
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:34:08.400574+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T11:34:18.545207+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "evening"}}
 {"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-11T12:33:11.454526+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "morning"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-12T07:11:52.521417+00:00", "Values": {"iserrorlog": 0, "message": "Appointment Booked", "id": "Arav", "slot": "afternoon"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-12T07:12:33.682085+00:00", "Values": {"iserrorlog": 0, "message": "otp sent"}}
+{"Username": "sanchari", "Log_id": 1, "Timestamp": "2024-11-12T07:12:49.498664+00:00", "Values": {"iserrorlog": 0, "message": "login successful"}}
