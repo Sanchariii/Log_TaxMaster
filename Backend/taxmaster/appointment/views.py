@@ -211,7 +211,9 @@ def request_appointment(request, advisor_id):
     one_year_from_now = today + timedelta(days=365)
     future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
     form = AppointmentRequestForm(request.POST or None)
-
+    
+    print("Advisor ID:", advisor_id)
+    
     if request.method == 'POST':
         if form.is_valid():
             requested_date = form.cleaned_data['requested_date']
@@ -377,15 +379,15 @@ def user_appointments(request):
 
 ############################# View for setting the meeting type ####################################################### 
 
-def request_appointment(request):
-    if request.method == 'POST':
-        form = AppointmentRequestForm(request.POST)
-        if form.is_valid():
-            appointment = form.save(commit=False)
-            print(f"Meeting type from form: {appointment.meeting_type}")  # Debug print
-            appointment.save()
-            print(f"Meeting type after save: {appointment.meeting_type}")  # Debug print
-            return redirect('success_page')
-    else:
-        form = AppointmentRequestForm()
-    return render(request, 'appointment_form.html', {'form': form})
+# def request_appointment(request):
+#     if request.method == 'POST':
+#         form = AppointmentRequestForm(request.POST)
+#         if form.is_valid():
+#             appointment = form.save(commit=False)
+#             print(f"Meeting type from form: {appointment.meeting_type}")  # Debug print
+#             appointment.save()
+#             print(f"Meeting type after save: {appointment.meeting_type}")  # Debug print
+#             return redirect('success_page')
+#     else:
+#         form = AppointmentRequestForm()
+#     return render(request, 'appointment_form.html', {'form': form})
