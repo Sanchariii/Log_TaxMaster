@@ -232,7 +232,9 @@ def request_appointment(request, advisor_id):
                     last_name=request.user.last_name,
                     email=request.user.email,
                     slot=appointment.slot,
-                    date=appointment.appointment_date
+                    date=appointment.appointment_date,
+                    meeting_type = appointment.meeting_type
+                    
                 )
                 appointment.user_request = user_request
                 appointment.save()
