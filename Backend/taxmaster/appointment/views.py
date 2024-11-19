@@ -211,9 +211,7 @@ def request_appointment(request, advisor_id):
     one_year_from_now = today + timedelta(days=365)
     future_dates = [date for date in available_dates if today <= date <= one_year_from_now]
     form = AppointmentRequestForm(request.POST or None)
-    
-    print("Advisor ID:", advisor_id)
-    
+
     if request.method == 'POST':
         if form.is_valid():
             requested_date = form.cleaned_data['requested_date']
@@ -232,7 +230,7 @@ def request_appointment(request, advisor_id):
                     tax_advisor=advisor,
                     first_name=request.user.first_name,
                     last_name=request.user.last_name,
-                    email=request.user.email,
+                     email=request.user.email,
                     slot=appointment.slot,
                     date=appointment.appointment_date,
                     meeting_type = appointment.meeting_type
@@ -310,7 +308,7 @@ def approve_request(request, request_id):
         if user_request.meeting_type.strip() == "online_meeting":
             additional_message = "\n\nThe meeting link for your appointment will be sent to you shortly."
         else:
-            additional_message = ""
+            additional_message = "\n\nThe details of the place will be sent to you shortly."
     else:
         additional_message = "Meeting type is not set."
 
